@@ -7,7 +7,7 @@ To guide an AI assistant in executing development tasks from structured task lis
 ## Prerequisites
 
 - A feature tag must exist for the work being performed
-- A task list must exist at `/tasks/{feature-tag}-tasks.md`
+- A task list must exist at `/ai-work/{feature-tag}-tasks.md`
 
 ## Environment Configuration
 
@@ -30,9 +30,9 @@ This flag activates the AI-specific environment configuration required for all d
 
 ### Feature Identification
 
-1. **With Feature Tag:** When given a specific feature tag (e.g., "Work on feature 01-user-auth"), use the task file at `/tasks/01-user-auth-tasks.md`
+1. **With Feature Tag:** When given a specific feature tag (e.g., "Work on feature 01-user-auth"), use the task file at `/ai-work/01-user-auth-tasks.md`
 2. **Without Feature Tag:** If no feature is specified but multiple features exist:
-   - List available feature task files in the `/tasks` directory
+   - List available feature task files in the `/ai-work` directory
    - Ask the user which feature to work on
    - Example: "I found multiple features: 01-user-auth, 02-payment-gateway. Which feature should I work on?"
 
@@ -40,7 +40,7 @@ This flag activates the AI-specific environment configuration required for all d
 
 1. **With Task Number:** When given a specific task number (e.g., "Work on task 1.2 for feature 01-user-auth"), immediately begin working on that task in the specified feature's task file.
 2. **Without Task Number:** If no task is specified:
-   - Review the task list in the `/tasks/{feature-tag}-tasks.md` file
+   - Review the task list in the `/ai-work/{feature-tag}-tasks.md` file
    - Identify the next uncompleted task (look for `- [ ]` checkboxes)
    - Present the suggested task to the user
    - **WAIT for explicit approval** before proceeding
@@ -80,7 +80,7 @@ Tasks are structured as hierarchical markdown checklists:
 
 ## Task File Location
 
-- All task files are located in the `/tasks` directory
+- All task files are located in the `/ai-work` directory
 - Naming convention: `{feature-tag}-tasks.md` (e.g., `01-user-auth-tasks.md`)
 - Each task file includes:
   - **Relevant Files:** List of files to be modified or created
@@ -116,15 +116,15 @@ When presenting information:
 
 ```
 User: "Work on task 1.1 for feature 01-user-auth"
-Agent: [Sets MARKER_JUNIE_TERMINAL=1, then proceeds to work on task 1.1 in /tasks/01-user-auth-tasks.md]
+Agent: [Sets MARKER_JUNIE_TERMINAL=1, then proceeds to work on task 1.1 in /ai-work/01-user-auth-tasks.md]
 
 User: "Start working on 01-user-auth"
 Agent: "I've reviewed the task list for feature 01-user-auth. The next uncompleted task is 2.3.1 'Define reference Lat/Long for scene origin'. Shall I proceed with this task?"
 User: "Yes"
-Agent: [Begins work on task 2.3.1 and updates /tasks/01-user-auth-tasks.md]
+Agent: [Begins work on task 2.3.1 and updates /ai-work/01-user-auth-tasks.md]
 
 User: "What features are available?"
-Agent: "I found these features in /tasks:
+Agent: "I found these features in /ai-work:
 - 01-user-auth (5 tasks remaining)
 - 02-payment-gateway (12 tasks remaining)
 Which feature would you like to work on?"

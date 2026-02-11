@@ -12,12 +12,12 @@ To guide an AI assistant in creating a detailed Product Requirements Document (P
 ## Process
 
 1.  **Identify Feature Tag:** Confirm which feature you're creating a PRD for by identifying the feature tag.
-2.  **Check for Scope File:** Look for the scope file at `tasks/{feature-tag}-scope.md`. If it exists, read it to understand the initial feature request and any pre-existing context.
+2.  **Check for Scope File:** Look for the scope file at `ai-work/{feature-tag}-scope.md`. If it exists, read it to understand the initial feature request and any pre-existing context.
 3.  **Receive Initial Prompt:** If no scope file exists, the user provides a brief description or request for a new feature or functionality.
 4.  **Ask Clarifying Questions:** Before writing the PRD, the AI *must* ask only the most essential clarifying questions needed to write a clear PRD. Limit questions to 3-5 critical gaps in understanding. The goal is to understand the "what" and "why" of the feature, not necessarily the "how" (which the developer will figure out). Make sure to provide options in letter/number lists so I can respond easily with my selections.
-5.  **Document Q&A in Scope File:** After receiving answers to the clarifying questions, append a section to the scope file (create it at `tasks/{feature-tag}-scope.md` if it doesn't exist) that documents both the questions asked and the answers received. This creates a permanent record of the decision-making process.
+5.  **Document Q&A in Scope File:** After receiving answers to the clarifying questions, append a section to the scope file (create it at `ai-work/{feature-tag}-scope.md` if it doesn't exist) that documents both the questions asked and the answers received. This creates a permanent record of the decision-making process.
 6.  **Generate PRD:** Based on the initial prompt/scope file and the user's answers to the clarifying questions, generate a PRD using the structure outlined below.
-7.  **Save PRD:** Save the generated document as `{feature-tag}-prd.md` inside the `/tasks` directory.
+7.  **Save PRD:** Save the generated document as `{feature-tag}-prd.md` inside the `/ai-work` directory.
 
 ## Clarifying Questions (Guidelines)
 
@@ -80,12 +80,12 @@ Assume the primary reader of the PRD is a **junior developer**. Therefore, requi
 
 *   **Scope File:**
     *   **Format:** Markdown (`.md`)
-    *   **Location:** `/tasks/`
+    *   **Location:** `/ai-work/`
     *   **Filename:** `{feature-tag}-scope.md` (e.g., `01-user-auth-scope.md`)
     *   **Contents:** Initial feature request, clarifying questions, and user's answers
 *   **PRD File:**
     *   **Format:** Markdown (`.md`)
-    *   **Location:** `/tasks/`
+    *   **Location:** `/ai-work/`
     *   **Filename:** `{feature-tag}-prd.md` (e.g., `01-user-auth-prd.md`)
 
 ## Final instructions

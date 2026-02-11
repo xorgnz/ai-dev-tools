@@ -24,7 +24,7 @@ A feature tag consists of two parts:
 
 ## Process
 
-1. **Check Existing Features:** Look in the `/tasks` directory for existing feature-tagged files to determine the next sequence number
+1. **Check Existing Features:** Look in the `/ai-work` directory for existing feature-tagged files to determine the next sequence number
 2. **Determine Sequence Number:** Use the next available number based on existing features (if no features exist, start with `01`)
 3. **Create Identifier:** Based on the user's initial feature request, create a short, descriptive identifier:
    - Maximum 16 characters
@@ -63,7 +63,7 @@ Once created, the feature tag is used to name all related files:
 ```
 User: "I want to add user authentication to the app"
 
-AI: "I'll create a feature tag for this. Looking at your /tasks directory, I see the last feature was '02-dashboard-widget'.
+AI: "I'll create a feature tag for this. Looking at your /ai-work directory, I see the last feature was '02-dashboard-widget'.
 
 I propose the feature tag: 03-user-auth
 

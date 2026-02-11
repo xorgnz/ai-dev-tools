@@ -16,7 +16,7 @@ To guide an AI assistant in working with the user to create a clear, high-level 
 3.  **Ask Discovery Questions:** Guide the user through a structured set of discovery questions to understand the vision, constraints, and boundaries. Use the question framework below.
 4.  **Summarize Understanding:** After receiving answers, provide a concise summary of what you understand and ask for confirmation or corrections.
 5.  **Generate Scope Document:** Create a high-level scope document using the template structure below.
-6.  **Save Scope Document:** Save the document as `{feature-tag}-scope.md` in the `/tasks` directory.
+6.  **Save Scope Document:** Save the document as `{feature-tag}-scope.md` in the `/ai-work` directory.
 
 ## Discovery Questions Framework
 
@@ -154,7 +154,7 @@ Ask 5-7 questions maximum, focusing on these key areas:
 ## Output
 
 *   **Format:** Markdown (`.md`)
-*   **Location:** `/tasks/`
+*   **Location:** `/ai-work/`
 *   **Filename:** `{feature-tag}-scope.md` (e.g., `01-user-auth-scope.md`)
 
 ## Interaction Style

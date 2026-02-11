@@ -7,25 +7,25 @@ To guide an AI assistant in creating a detailed, step-by-step task list in Markd
 ## Prerequisites
 
 - A feature tag must exist (created via rule `0-create-feature-tag.md`)
-- A PRD document should exist at `/tasks/{feature-tag}-prd.md`
+- A PRD document should exist at `/ai-work/{feature-tag}-prd.md`
 
 ## Output
 
 - **Format:** Markdown (`.md`)
-- **Location:** `/tasks/`
+- **Location:** `/ai-work/`
 - **Filename:** `{feature-tag}-tasks.md` (e.g., `01-user-auth-tasks.md`)
 
 ## Process
 
 1.  **Identify Feature Tag:** Confirm which feature you're creating tasks for by identifying the feature tag.
-2.  **Receive Requirements:** The user provides a feature request, task description, or points to existing documentation (typically the PRD at `/tasks/{feature-tag}-prd.md`)
+2.  **Receive Requirements:** The user provides a feature request, task description, or points to existing documentation (typically the PRD at `/ai-work/{feature-tag}-prd.md`)
 3.  **Analyze Requirements:** The AI analyzes the functional requirements, user needs, and implementation scope from the provided information
 4.  **Phase 1: Generate Parent Tasks:** Based on the requirements analysis, create the file and generate the main, high-level tasks required to implement the feature. **IMPORTANT: Always include task 0.0 "Create feature branch" as the first task, unless the user specifically requests not to create a branch.** Use your judgement on how many additional high-level tasks to use. It's likely to be about 5. Present these tasks to the user in the specified format (without sub-tasks yet). Inform the user: "I have generated the high-level tasks based on your requirements. Ready to generate the sub-tasks? Respond with 'Go' to proceed."
 5.  **Wait for Confirmation:** Pause and wait for the user to respond with "Go".
 6.  **Phase 2: Generate Sub-Tasks:** Once the user confirms, break down each parent task into smaller, actionable sub-tasks necessary to complete the parent task. Ensure sub-tasks logically follow from the parent task and cover the implementation details implied by the requirements.
 7.  **Identify Relevant Files:** Based on the tasks and requirements, identify potential files that will need to be created or modified. List these under the `Relevant Files` section, including corresponding test files if applicable.
 8.  **Generate Final Output:** Combine the parent tasks, sub-tasks, relevant files, and notes into the final Markdown structure.
-9.  **Save Task List:** Save the generated document in the `/tasks/` directory with the filename `{feature-tag}-tasks.md`.
+9.  **Save Task List:** Save the generated document in the `/ai-work/` directory with the filename `{feature-tag}-tasks.md`.
 
 ## Output Format
 

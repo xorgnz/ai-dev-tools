@@ -11,13 +11,13 @@ This rule should be executed **after** creating the task list (step 4) and **bef
 ## Prerequisites
 
 - A feature tag must exist (created via rule `0-create-feature-tag.md`)
-- A completed PRD document exists in `/tasks/{feature-tag}-prd.md`
-- A completed task list exists in `/tasks/{feature-tag}-tasks.md`
+- A completed PRD document exists in `/ai-work/{feature-tag}-prd.md`
+- A completed task list exists in `/ai-work/{feature-tag}-tasks.md`
 
 ## Output
 
 - **Format:** Markdown (`.md`)
-- **Location:** `/tasks/`
+- **Location:** `/ai-work/`
 - **Filename:** `{feature-tag}-techstack.md` (e.g., `01-user-auth-techstack.md`)
 
 ## Process
@@ -94,7 +94,7 @@ Format the proposal as a clear, scannable document:
 
 ### 6. Document Final Choices
 
-Once the user has made all decisions, create or update `/tasks/{feature-tag}-techstack.md` with:
+Once the user has made all decisions, create or update `/ai-work/{feature-tag}-techstack.md` with:
 
 ```markdown
 # Technology Stack: [Project/Feature Name]
@@ -155,7 +155,7 @@ Brief description of the project and its technical requirements.
 
 ### 7. Save and Confirm
 
-- Save the completed `{feature-tag}-techstack.md` file to `/tasks/`
+- Save the completed `{feature-tag}-techstack.md` file to `/ai-work/`
 - Confirm with the user that the technology stack is documented and approved
 - Note that this document should be referenced during task implementation
 
@@ -187,7 +187,7 @@ AI: [Presents formatted document with options and recommendations]
 User: "I'll go with your recommendations for everything except the database - use PostgreSQL instead of SQLite."
 
 AI: [Updates 01-user-auth-techstack.md with user's choices]
-AI: "Technology stack documented in /tasks/01-user-auth-techstack.md. Key choices:
+AI: "Technology stack documented in /ai-work/01-user-auth-techstack.md. Key choices:
 - Frontend: React 18
 - Backend: Express.js
 - Database: PostgreSQL (per your preference)
