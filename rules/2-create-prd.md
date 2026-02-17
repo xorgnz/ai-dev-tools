@@ -4,6 +4,15 @@
 
 To guide an AI assistant in creating a detailed Product Requirements Document (PRD) in Markdown format, based on an initial user prompt. The PRD should be clear, actionable, and suitable for a junior developer to understand and implement the feature.
 
+## Operating Environment
+
+**CRITICAL:** This workflow operates in a WSL (Windows Subsystem for Linux) Ubuntu environment:
+- Use Unix/Linux commands only (e.g., `ls`, `mkdir`, `cat`)
+- Use forward slashes `/` for paths (e.g., `/ai-work/`)
+- NEVER use PowerShell commands (e.g., `Get-Content`, `New-Item`)
+- NEVER use Windows CMD commands (e.g., `dir`, `type`, `md`)
+- File paths follow Linux conventions
+
 ## Prerequisites
 
 - A feature tag must exist (created via rule `0-create-feature-tag.md`)

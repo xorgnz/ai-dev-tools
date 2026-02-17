@@ -2,17 +2,25 @@
 
 ## Goal
 
-To guide an AI assistant in evaluating technical requirements from the PRD and task list, proposing appropriate technology options, facilitating user decision-making, and documenting the chosen technology stack.
+To guide an AI assistant in evaluating technical requirements from the PRD, proposing appropriate technology options, facilitating user decision-making, and documenting the chosen technology stack.
+
+## Operating Environment
+
+**CRITICAL:** This workflow operates in a WSL (Windows Subsystem for Linux) Ubuntu environment:
+- Use Unix/Linux commands only (e.g., `ls`, `cat`, `mkdir`)
+- Use forward slashes `/` for paths (e.g., `/ai-work/`)
+- NEVER use PowerShell commands (e.g., `Get-Content`, `Set-Content`)
+- NEVER use Windows CMD commands (e.g., `dir`, `type`, `copy`)
+- File paths follow Linux conventions
 
 ## When to Use
 
-This rule should be executed **after** creating the task list (step 4) and **before** beginning task implementation (step 5). It serves as step 4.5 in the development workflow.
+This rule should be executed **after** creating the PRD (step 2) and **before** creating the task list (step 4). It serves as step 3 in the development workflow.
 
 ## Prerequisites
 
 - A feature tag must exist (created via rule `0-create-feature-tag.md`)
 - A completed PRD document exists in `/ai-work/{feature-tag}-prd.md`
-- A completed task list exists in `/ai-work/{feature-tag}-tasks.md`
 
 ## Output
 
@@ -24,7 +32,7 @@ This rule should be executed **after** creating the task list (step 4) and **bef
 
 ### 1. Analyze Technical Requirements
 
-Review the PRD and task list to identify:
+Review the PRD to identify:
 - Core functionality requirements
 - Performance and scalability needs
 - Integration requirements (APIs, databases, third-party services)
@@ -161,7 +169,7 @@ Brief description of the project and its technical requirements.
 
 ## Interaction Model
 
-1. **Analysis Phase:** AI reviews PRD and tasks silently
+1. **Analysis Phase:** AI reviews PRD silently
 2. **Proposal Phase:** AI presents technology options with recommendations
 3. **Decision Phase:** User reviews and makes choices (may be iterative with discussion)
 4. **Documentation Phase:** AI documents final decisions in standard format
@@ -178,9 +186,9 @@ Brief description of the project and its technical requirements.
 ## Example Workflow
 
 ```
-User: "I've got my PRD and task list for feature 01-user-auth. Let's pick the tech stack."
+User: "I've got my PRD for feature 01-user-auth. Let's pick the tech stack."
 
-AI: [Analyzes requirements from 01-user-auth-prd.md and 01-user-auth-tasks.md]
+AI: [Analyzes requirements from 01-user-auth-prd.md]
 AI: "Based on your requirements for user authentication, I've identified 5 key technology decisions. Let me present the options..."
 AI: [Presents formatted document with options and recommendations]
 
@@ -194,7 +202,7 @@ AI: "Technology stack documented in /ai-work/01-user-auth-techstack.md. Key choi
 - Testing: Jest
 - Styling: Tailwind CSS
 
-Ready to proceed to task implementation (step 3)?"
+Ready to proceed to task creation (step 4)?"
 ```
 
 ## Target Audience

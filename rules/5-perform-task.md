@@ -23,7 +23,13 @@ This flag activates the AI-specific environment configuration required for all d
 
 - **Platform:** WSL (Windows Subsystem for Linux) running Ubuntu
 - **Shell:** Bash (default)
-- **IMPORTANT:** Never attempt to run PowerShell commands. All commands must be Linux/Bash compatible.
+- **CRITICAL:** You are operating in a Linux/Unix environment, NOT Windows:
+  - Use Unix/Linux commands only (e.g., `ls`, `cd`, `mkdir`, `rm`, `grep`, `find`)
+  - Use forward slashes `/` for paths, never backslashes `\`
+  - NEVER use PowerShell commands (e.g., `Get-ChildItem`, `Copy-Item`, `Remove-Item`)
+  - NEVER use Windows CMD commands (e.g., `dir`, `copy`, `del`)
+  - Use Unix-style package managers (`apt`, `npm`, `pip`) not Windows ones
+  - All file paths use Linux conventions (e.g., `/home/user/project` not `C:\Users\...`)
 - **Working Directory:** Assume all file paths are relative to the project root unless otherwise specified.
 
 ## Task Management Protocol
@@ -135,5 +141,5 @@ Which feature would you like to work on?"
 1. **Always** set `MARKER_JUNIE_TERMINAL=1` before executing any bash commands
 2. **Never** start tasks without explicit user approval
 3. **Always** update task checkboxes immediately upon completion
-4. **Never** use PowerShell commands; this is a WSL/Ubuntu environment
+4. **CRITICAL:** Never use PowerShell or Windows CMD commands; this is a WSL/Ubuntu Linux environment - use only Linux/Unix commands
 5. **Always** work within the scope of the assigned task

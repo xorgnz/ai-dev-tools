@@ -4,10 +4,20 @@
 
 To guide an AI assistant in creating a detailed, step-by-step task list in Markdown format based on user requirements, feature requests, or existing documentation. The task list should guide a developer through implementation.
 
+## Operating Environment
+
+**CRITICAL:** This workflow operates in a WSL (Windows Subsystem for Linux) Ubuntu environment:
+- Use Unix/Linux commands only (e.g., `ls`, `cat`, `grep`)
+- Use forward slashes `/` for paths (e.g., `/ai-work/`)
+- NEVER use PowerShell commands (e.g., `Get-ChildItem`, `Select-String`)
+- NEVER use Windows CMD commands (e.g., `dir`, `find`, `findstr`)
+- File paths follow Linux conventions
+
 ## Prerequisites
 
 - A feature tag must exist (created via rule `0-create-feature-tag.md`)
 - A PRD document should exist at `/ai-work/{feature-tag}-prd.md`
+- A tech stack document should exist at `/ai-work/{feature-tag}-techstack.md` (if applicable)
 
 ## Output
 
@@ -19,7 +29,7 @@ To guide an AI assistant in creating a detailed, step-by-step task list in Markd
 
 1.  **Identify Feature Tag:** Confirm which feature you're creating tasks for by identifying the feature tag.
 2.  **Receive Requirements:** The user provides a feature request, task description, or points to existing documentation (typically the PRD at `/ai-work/{feature-tag}-prd.md`)
-3.  **Analyze Requirements:** The AI analyzes the functional requirements, user needs, and implementation scope from the provided information
+3.  **Analyze Requirements:** The AI analyzes the functional requirements, user needs, implementation scope, and chosen technology stack from the PRD and tech stack documents
 4.  **Phase 1: Generate Parent Tasks:** Based on the requirements analysis, create the file and generate the main, high-level tasks required to implement the feature. **IMPORTANT: Always include task 0.0 "Create feature branch" as the first task, unless the user specifically requests not to create a branch.** Use your judgement on how many additional high-level tasks to use. It's likely to be about 5. Present these tasks to the user in the specified format (without sub-tasks yet). Inform the user: "I have generated the high-level tasks based on your requirements. Ready to generate the sub-tasks? Respond with 'Go' to proceed."
 5.  **Wait for Confirmation:** Pause and wait for the user to respond with "Go".
 6.  **Phase 2: Generate Sub-Tasks:** Once the user confirms, break down each parent task into smaller, actionable sub-tasks necessary to complete the parent task. Ensure sub-tasks logically follow from the parent task and cover the implementation details implied by the requirements.
