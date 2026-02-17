@@ -26,8 +26,11 @@ This flag activates the AI-specific environment configuration required for all d
 - **CRITICAL:** You are operating in a Linux/Unix environment, NOT Windows:
   - Use Unix/Linux commands only (e.g., `ls`, `cd`, `mkdir`, `rm`, `grep`, `find`)
   - Use forward slashes `/` for paths, never backslashes `\`
+  - Run commands only in WSL Bash
   - NEVER use PowerShell commands (e.g., `Get-ChildItem`, `Copy-Item`, `Remove-Item`)
   - NEVER use Windows CMD commands (e.g., `dir`, `copy`, `del`)
+  - NEVER use `wsl` or `bash -lc` bridging from another shell
+  - If Bash isn't available, ask the user to run the command in WSL Bash
   - Use Unix-style package managers (`apt`, `npm`, `pip`) not Windows ones
   - All file paths use Linux conventions (e.g., `/home/user/project` not `C:\Users\...`)
 - **Working Directory:** Assume all file paths are relative to the project root unless otherwise specified.

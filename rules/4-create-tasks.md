@@ -9,8 +9,11 @@ To guide an AI assistant in creating a detailed, step-by-step task list in Markd
 **CRITICAL:** This workflow operates in a WSL (Windows Subsystem for Linux) Ubuntu environment:
 - Use Unix/Linux commands only (e.g., `ls`, `cat`, `grep`)
 - Use forward slashes `/` for paths (e.g., `/ai-work/`)
+- Run commands only in WSL Bash
 - NEVER use PowerShell commands (e.g., `Get-ChildItem`, `Select-String`)
 - NEVER use Windows CMD commands (e.g., `dir`, `find`, `findstr`)
+- NEVER use `wsl` or `bash -lc` bridging from another shell
+- If Bash isn't available, ask the user to run the command in WSL Bash
 - File paths follow Linux conventions
 
 ## Prerequisites
