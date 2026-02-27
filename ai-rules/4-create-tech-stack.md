@@ -1,3 +1,7 @@
+---
+version: 1.0.0
+timestamp: 2026-02-27 15:40
+---
 # Rule: Technology Stack Selection and Documentation
 
 ## Goal
