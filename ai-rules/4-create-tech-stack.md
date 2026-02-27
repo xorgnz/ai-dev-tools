@@ -6,11 +6,11 @@ To guide an AI assistant in evaluating technical requirements from the PRD, prop
 
 ## When to Use
 
-This rule should be executed **after** creating the PRD (step 2) and **before** creating the task list (step 4). It serves as step 3 in the development workflow.
+This rule should be executed **after** creating the PRD (step 3) and **before** creating the task list (step 5). It serves as step 4 in the development workflow.
 
 ## Prerequisites
 
-- A feature tag must exist (created via rule `0-create-feature-tag.md`)
+- A feature tag must exist (created via rule `1-create-feature-tag.md`)
 - A completed PRD document exists in `/ai-work/{feature-tag}-prd.md`
 
 ## Output
@@ -193,7 +193,7 @@ AI: "Technology stack documented in /ai-work/01-user-auth-techstack.md. Key choi
 - Testing: Jest
 - Styling: Tailwind CSS
 
-Ready to proceed to task creation (step 4)?"
+Ready to proceed to task creation (step 5)?"
 ```
 
 ## Target Audience

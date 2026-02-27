@@ -6,7 +6,7 @@ To guide an AI assistant in creating a detailed Product Requirements Document (P
 
 ## Prerequisites
 
-- A feature tag must exist (created via rule `0-create-feature-tag.md`)
+- A feature tag must exist (created via rule `1-create-feature-tag.md`)
 - A scope file should exist at `tasks/{feature-tag}-scope.md`
 
 ## Process

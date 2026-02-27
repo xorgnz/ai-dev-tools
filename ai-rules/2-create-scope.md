@@ -6,13 +6,13 @@ To guide an AI assistant in working with the user to create a clear, high-level 
 
 ## Prerequisites
 
-- A feature tag must be created first using rule `0-create-feature-tag.md`
+- A feature tag must be created first using rule `1-create-feature-tag.md`
 - The feature tag format is `{NN}-{identifier}` (e.g., `01-user-auth`)
 
 ## Process
 
 1.  **Receive Initial Request:** The user provides a brief idea, feature request, or project concept.
-2.  **Create or Confirm Feature Tag:** If not already created, generate a feature tag following rule `0-create-feature-tag.md`. If a tag exists, confirm which feature you're working on.
+2.  **Create or Confirm Feature Tag:** If not already created, generate a feature tag following rule `1-create-feature-tag.md`. If a tag exists, confirm which feature you're working on.
 3.  **Ask Discovery Questions:** Guide the user through a structured set of discovery questions to understand the vision, constraints, and boundaries. Use the question framework below.
 4.  **Summarize Understanding:** After receiving answers, provide a concise summary of what you understand and ask for confirmation or corrections.
 5.  **Generate Scope Document:** Create a high-level scope document using the template structure below.
@@ -172,4 +172,3 @@ Ask 5-7 questions maximum, focusing on these key areas:
 3. Help the user think through boundaries and constraints
 4. Make sure to document both questions and answers in the final scope file
 5. Do NOT proceed to create a PRD unless explicitly asked
-6. After creating the scope, suggest: "Would you like me to create a detailed PRD based on this scope?"

@@ -6,7 +6,7 @@ To guide an AI assistant in creating a detailed, step-by-step task list in Markd
 
 ## Prerequisites
 
-- A feature tag must exist (created via rule `0-create-feature-tag.md`)
+- A feature tag must exist (created via rule `1-create-feature-tag.md`)
 - A PRD document should exist at `/ai-work/{feature-tag}-prd.md`
 - A tech stack document should exist at `/ai-work/{feature-tag}-techstack.md` (if applicable)
 

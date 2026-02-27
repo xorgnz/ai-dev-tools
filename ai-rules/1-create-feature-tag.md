@@ -109,4 +109,4 @@ AI: "Great! Feature tag '03-user-auth' is confirmed. Let's proceed to create the
 2. Feature tag must be unique within the project
 3. Once confirmed, use this tag consistently for ALL related files
 4. The tag should be memorable enough that the user can reference it easily (e.g., "Let's work on feature 03")
-5. After confirming the tag, proceed immediately to creating the scope document using rule `1-create-scope.md`
+5. Do not proceed creating the scope document. I will instruct you to do this explicitly.
