@@ -1,6 +1,6 @@
 ---
-version: 1.0.0
-timestamp: 2026-02-27 15:40
+version: 1.1.0
+timestamp: 2026-02-27 16:21
 ---
 # Rule: Technology Stack Selection and Documentation
 
@@ -23,7 +23,18 @@ This rule should be executed **after** creating the PRD (step 3) and **before** 
 - **Location:** `/ai-work/`
 - **Filename:** `{feature-tag}-techstack.md` (e.g., `01-user-auth-techstack.md`)
 
-## Process
+## Determining the Mode: First Feature vs. Subsequent Features
+
+Before starting, check the `/ai-work` directory for any existing `*-techstack.md` files.
+
+- **If none exist:** This is the **first feature**. Follow the [Full Tech Stack Process](#full-tech-stack-process).
+- **If one or more exist:** This is a **subsequent feature**. Follow the [Tech Stack Changes Process](#tech-stack-changes-process).
+
+---
+
+## Full Tech Stack Process
+
+_Use this process only for the first feature in the project._
 
 ### 1. Analyze Technical Requirements
 
@@ -97,7 +108,7 @@ Format the proposal as a clear, scannable document:
 
 ### 6. Document Final Choices
 
-Once the user has made all decisions, create or update `/ai-work/{feature-tag}-techstack.md` with:
+Once the user has made all decisions, create `/ai-work/{feature-tag}-techstack.md` with:
 
 ```markdown
 # Technology Stack: [Project/Feature Name]
@@ -162,13 +173,97 @@ Brief description of the project and its technical requirements.
 - Confirm with the user that the technology stack is documented and approved
 - Note that this document should be referenced during task implementation
 
+---
+
+## Tech Stack Changes Process
+
+_Use this process for every feature after the first one._
+
+### 1. Review Existing Tech Stack
+
+Read the most recent `*-techstack.md` file(s) in `/ai-work/` to understand the established stack.
+
+### 2. Analyze the PRD for New Requirements
+
+Review the current feature's PRD and identify only the technology decisions that are **new or different** from the existing stack:
+- New libraries or tools not previously used
+- Version upgrades required by this feature
+- Replacement of an existing technology
+- Additional infrastructure (e.g., a new database, a caching layer)
+
+If the feature requires **no changes** to the existing stack, note this explicitly and skip to step 5.
+
+### 3. Propose Changes Only
+
+For each new or changed technology decision, present options using the same format as the full process (options, pros/cons, recommendation). Do **not** re-document technologies that remain unchanged.
+
+### 4. Facilitate User Decision
+
+- Present only the new/changed decisions for user confirmation
+- **Wait for user confirmation** before proceeding to documentation
+
+### 5. Document Changes
+
+Create `/ai-work/{feature-tag}-techstack.md` using the following format:
+
+```markdown
+# Technology Stack Changes: [Feature Name]
+
+**Created:** [Date]
+**Status:** Approved
+**Base Stack:** [Tag of the feature whose techstack this builds upon, e.g., `01-user-auth`]
+
+## Overview
+
+Brief description of why tech stack changes are needed for this feature (or note that no changes are required).
+
+## Changes
+
+### [Category] — [Change Type: Added | Upgraded | Replaced | Removed]
+- **Previous:** [Prior technology/version, or "N/A" if newly added]
+- **New Choice:** [Selected Technology and version]
+- **Rationale:** [Why this change is needed for this feature]
+
+[Repeat for each change. If no changes, state "No changes to the existing tech stack are required for this feature."]
+
+## New Dependencies
+
+### Core Dependencies
+```json
+{
+  "[package-name]": "[version]"
+}
+```
+
+### Development Dependencies
+```json
+{
+  "[package-name]": "[version]"
+}
+```
+
+_(Omit dependency sections if there are no new dependencies.)_
+
+## Architecture Notes
+
+[Any notes specific to how new technologies integrate with the existing stack, or omit if not applicable]
+```
+
+### 6. Save and Confirm
+
+- Save the completed `{feature-tag}-techstack.md` file to `/ai-work/`
+- Confirm with the user that the changes are documented and approved
+
+---
+
 ## Interaction Model
 
-1. **Analysis Phase:** AI reviews PRD silently
-2. **Proposal Phase:** AI presents technology options with recommendations
-3. **Decision Phase:** User reviews and makes choices (may be iterative with discussion)
-4. **Documentation Phase:** AI documents final decisions in standard format
-5. **Confirmation:** AI confirms completion and readiness to proceed to task implementation
+1. **Check Phase:** AI checks `/ai-work` to determine if this is the first feature or a subsequent one
+2. **Analysis Phase:** AI reviews PRD silently
+3. **Proposal Phase:** AI presents technology options (full stack or changes only) with recommendations
+4. **Decision Phase:** User reviews and makes choices (may be iterative with discussion)
+5. **Documentation Phase:** AI documents final decisions in the appropriate format
+6. **Confirmation:** AI confirms completion and readiness to proceed to task implementation
 
 ## Important Notes
 
@@ -178,18 +273,19 @@ Brief description of the project and its technical requirements.
 - **Document constraints:** If certain choices are constrained by existing decisions, note this clearly
 - **Version awareness:** Specify version ranges when important for compatibility
 
-## Example Workflow
+## Example Workflow — First Feature
 
 ```
 User: "I've got my PRD for feature 01-user-auth. Let's pick the tech stack."
 
+AI: [Checks /ai-work — no existing techstack files found. Uses Full Tech Stack Process.]
 AI: [Analyzes requirements from 01-user-auth-prd.md]
 AI: "Based on your requirements for user authentication, I've identified 5 key technology decisions. Let me present the options..."
 AI: [Presents formatted document with options and recommendations]
 
 User: "I'll go with your recommendations for everything except the database - use PostgreSQL instead of SQLite."
 
-AI: [Updates 01-user-auth-techstack.md with user's choices]
+AI: [Creates 01-user-auth-techstack.md with user's choices]
 AI: "Technology stack documented in /ai-work/01-user-auth-techstack.md. Key choices:
 - Frontend: React 18
 - Backend: Express.js
@@ -197,6 +293,27 @@ AI: "Technology stack documented in /ai-work/01-user-auth-techstack.md. Key choi
 - Testing: Jest
 - Styling: Tailwind CSS
 
+Ready to proceed to task creation (step 5)?"
+```
+
+## Example Workflow — Subsequent Feature
+
+```
+User: "I've got my PRD for feature 02-payment-gateway. Let's do the tech stack."
+
+AI: [Checks /ai-work — finds 01-user-auth-techstack.md. Uses Tech Stack Changes Process.]
+AI: [Reviews 01-user-auth-techstack.md and 02-payment-gateway-prd.md]
+AI: "The existing stack covers most of what's needed. I've identified 2 changes required for this feature:
+
+1. **New Library — Stripe SDK** (payment processing)
+2. **New Library — Webhook middleware** (for Stripe event handling)
+
+[Presents options and recommendations for each]"
+
+User: "Looks good, go with your recommendations."
+
+AI: [Creates 02-payment-gateway-techstack.md documenting only the changes]
+AI: "Tech stack changes documented in /ai-work/02-payment-gateway-techstack.md.
 Ready to proceed to task creation (step 5)?"
 ```
 
