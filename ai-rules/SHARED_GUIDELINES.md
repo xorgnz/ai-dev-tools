@@ -6,20 +6,20 @@ This file is the single shared source of truth for root-level instructions in th
 
 It governs how AI agents should work while maintaining this repository itself.
 
-It does not define the reusable guidance stored in `codex/`, `claude/`, or `junie/` for downstream projects.
+It does not define the reusable guidance stored in `downstream/codex/`, `downstream/claude/`, or `downstream/junie/` for downstream projects.
 
 ## Terminology
 
 - "Root rules" means the rules intended to be applied in this project while working in this repository.
 - "Downstream rules" means the rules authored in this project for use elsewhere.
-- In this repository, the downstream rules are the files stored in the agent-specific folders such as `codex/`, `claude/`, and `junie/`.
+- In this repository, the downstream rules are the files stored in the agent-specific folders under `downstream/`, such as `downstream/codex/`, `downstream/claude/`, and `downstream/junie/`.
 
 ## Repository Role
 
 This repository has two distinct layers:
 
 1. The meta-project layer at the root, where agents help author and maintain repository structure and shared guidance.
-2. The reusable artifact layer inside `codex/`, `claude/`, and `junie/`, where agent-specific rules are prepared for use in other projects.
+2. The reusable artifact layer inside `downstream/codex/`, `downstream/claude/`, and `downstream/junie/`, where agent-specific rules are prepared for use in other projects.
 
 Agents must preserve the distinction between those two layers, which is also the distinction between root rules and downstream rules.
 
@@ -33,9 +33,9 @@ If a rule is meant to be copied into other repositories, it is a downstream rule
 
 ## Agent-Specific Subfolders
 
-- `codex/` contains reusable Codex-oriented guidance for downstream projects.
-- `claude/` contains reusable Claude-oriented guidance for downstream projects.
-- `junie/` contains reusable Junie-oriented guidance for downstream projects.
+- `downstream/codex/` contains reusable Codex-oriented guidance for downstream projects.
+- `downstream/claude/` contains reusable Claude-oriented guidance for downstream projects.
+- `downstream/junie/` contains reusable Junie-oriented guidance for downstream projects.
 
 When editing files in those folders, treat them as downstream rules and reusable artifacts rather than root operating instructions.
 
@@ -47,7 +47,7 @@ In this repository, downstream rules should only be consulted when the task is t
 
 This commit rule applies only to commits made while maintaining this repository.
 
-It does not apply to guidance being developed inside `codex/`, `claude/`, or `junie/` unless that guidance explicitly defines a similar rule for downstream use.
+It does not apply to guidance being developed inside `downstream/codex/`, `downstream/claude/`, or `downstream/junie/` unless that guidance explicitly defines a similar rule for downstream use.
 
 When asked to commit changes in this repository:
 

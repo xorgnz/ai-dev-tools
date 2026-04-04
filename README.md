@@ -8,22 +8,24 @@ In this repository:
 
 - "root rules" means the rules intended to be applied in this project itself
 - "downstream rules" means the rules authored here for use in other projects
-- the downstream rules are the files stored in the agent-specific folders
+- the downstream rules are the files stored in the agent-specific folders under `downstream/`
 
 ## What This Repository Contains
 
 The repository is organized by AI toolset:
 
-- `codex/` contains Codex-specific guidance and workflow artifacts intended for reuse in other projects.
-- `claude/` is reserved for Claude-specific guidance and is currently a placeholder for future content.
-- `junie/` contains Junie-specific guidance and workflow artifacts intended for reuse in other projects.
+- `downstream/codex/` contains Codex-specific guidance and workflow artifacts intended for reuse in other projects.
+- `downstream/claude/` is reserved for Claude-specific guidance and is currently a placeholder for future content.
+- `downstream/junie/` contains Junie-specific guidance and workflow artifacts intended for reuse in other projects.
 
 At the root, the repository also contains a small set of files used to manage this repository itself:
 
 - `AGENTS.md`
 - `CLAUDE.md`
 - `.junie/guidelines.md`
-- `SHARED_GUIDELINES.md`
+- `ai-rules/`
+
+The root entrypoint files stay in place for agent discovery, and the shared root rules and instructions live under `ai-rules/`.
 
 Those root files are root rules for maintaining this repository and keeping the root-level instructions aligned across agents.
 
@@ -33,8 +35,8 @@ The repository is in an early organization phase.
 
 Current downstream content includes:
 
-- a more developed Codex ruleset under `codex/`
-- an existing Junie ruleset under `junie/`
+- a more developed Codex ruleset under `downstream/codex/`
+- an existing Junie ruleset under `downstream/junie/`
 - a Claude area that has been created but not populated yet
 
 There is also an `ai-work/` folder containing planning artifacts related to improving and restructuring the rule system.
