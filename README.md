@@ -4,6 +4,12 @@ This repository is a home for rules, prompts, workflows, and supporting files us
 
 The goal is to keep those materials organized in one place, separate shared repository governance from reusable downstream artifacts, and make it easier to refine each agent's guidance over time.
 
+In this repository:
+
+- "root rules" means the rules intended to be applied in this project itself
+- "downstream rules" means the rules authored here for use in other projects
+- the downstream rules are the files stored in the agent-specific folders
+
 ## What This Repository Contains
 
 The repository is organized by AI toolset:
@@ -19,7 +25,7 @@ At the root, the repository also contains a small set of files used to manage th
 - `.junie/guidelines.md`
 - `SHARED_GUIDELINES.md`
 
-Those root files are for maintaining this repository and keeping the root-level instructions aligned across agents.
+Those root files are root rules for maintaining this repository and keeping the root-level instructions aligned across agents.
 
 ## Current Status
 
@@ -37,8 +43,8 @@ There is also an `ai-work/` folder containing planning artifacts related to impr
 
 This project separates two different concerns:
 
-- repository-level governance for maintaining this meta-project
-- reusable agent-specific guidance that may later be copied into real development repositories
+- root rules for maintaining this meta-project
+- downstream rules that may later be copied into real development repositories
 
 Keeping those layers separate reduces confusion, makes the guidance easier to maintain, and helps prevent repository-maintenance rules from leaking into downstream project templates.
 
