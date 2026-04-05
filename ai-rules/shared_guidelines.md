@@ -8,6 +8,8 @@ It governs how AI agents should work while maintaining this repository itself.
 
 It does not define the reusable guidance stored under `downstream/` for downstream projects.
 
+The specific root rules live alongside this file in `ai-rules/`.
+
 ## Terminology
 
 - "Root rules" means the rules intended to be applied in this project while working in this repository.
@@ -34,6 +36,14 @@ They are not templates for downstream development projects unless a file explici
 
 If a rule is meant to be copied into other repositories, it is a downstream rule and belongs under `downstream/`, not in the root governance layer.
 
+## Root Rule Files
+
+- `ai-rules/rule-1-plan-work.md` is the scaffold for planning new root-level work.
+- `ai-rules/rule-2-do-work.md` is the scaffold for executing approved root-level work.
+- `ai-rules/rule-3-commit.md` defines the root-only commit rule.
+
+When working in this repository, apply this shared guidance together with the relevant root rule files.
+
 ## Downstream Layout
 
 - `downstream/ai-rules/` contains the shared downstream rules.
@@ -45,21 +55,6 @@ When editing files under `downstream/`, treat them as downstream rules and reusa
 Agents working in this repository should not execute downstream rules as if this repository were a downstream project.
 
 In this repository, downstream rules should only be consulted when the task is to review, edit, reorganize, or otherwise work on those downstream rules themselves.
-
-## Commit Rule For This Repository Only
-
-This commit rule applies only to commits made while maintaining this repository.
-
-It does not apply to guidance being developed inside `downstream/` unless that guidance explicitly defines a similar rule for downstream use.
-
-When asked to commit changes in this repository:
-
-1. Review the changes since the last commit.
-2. Propose a commit message that starts with the prefix `ai`.
-3. Wait for explicit user approval.
-4. Create the commit only after approval is given.
-
-Do not commit automatically without explicit user approval.
 
 ## Writing Guidance In This Repository
 

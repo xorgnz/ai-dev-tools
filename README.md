@@ -23,7 +23,7 @@ Agent-facing instructions for working in this repository:
 - `CLAUDE.md`
 - `ai-rules/`
 
-The root entrypoint files stay in place for agent discovery, and the shared root rules and instructions live under `ai-rules/`. A Junie root entrypoint may also exist under `.junie/` when needed, but it is part of the same root-instruction layer.
+The root entrypoint files stay in place for agent discovery. Shared root guidance and `rule-#-name.md` root rule files live under `ai-rules/`. A Junie root entrypoint may also exist under `.junie/` when needed, but it is part of the same root-instruction layer.
 
 Planning artifacts for agents working in this repository:
 

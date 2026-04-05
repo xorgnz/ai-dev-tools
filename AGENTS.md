@@ -2,8 +2,8 @@
 
 This file is the Codex-facing root entry point for this repository.
 
-The shared root instructions live in `ai-rules/SHARED_GUIDELINES.md` and are the source of truth.
+The shared root instructions live in `ai-rules/shared_guidelines.md` and are the source of truth.
 
-Apply `ai-rules/SHARED_GUIDELINES.md` when working in this repository. If this file and the shared file ever differ, the shared file wins.
+Apply `ai-rules/shared_guidelines.md` and the relevant `rule-#-name.md` files in `ai-rules/` when working in this repository. If this file and the shared file ever differ, the shared file wins.
 
 This root file is only for maintaining this repository. It is not the same as reusable guidance stored in `downstream/codex/` for downstream projects.
