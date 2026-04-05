@@ -12,6 +12,8 @@ This rule applies to root-level planning only.
 
 It does not create downstream scope or PRD artifacts, and it should not apply downstream planning rules inside this repository.
 
+Do not invoke this rule for small ad hoc root-level requests unless the user explicitly asks to create or update a plan.
+
 ## Core Principle
 
 Root planning in this repository is intentionally simple.

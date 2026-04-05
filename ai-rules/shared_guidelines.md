@@ -62,6 +62,10 @@ In this repository, downstream rules should only be consulted when the task is t
 - `ai-work/archive/` contains completed or superseded root-level work plans kept for historical reference.
 - `ai-work/work-log.md` records planning and execution updates for root-level work in this repository.
 
+The `ai-work/` planning layer is optional and should be used only when the user explicitly asks to plan work or when the user is already working from an approved active plan.
+
+Small ad hoc root-level requests do not need a plan by default.
+
 Each discrete root-level effort should be represented by one plan document in `ai-work/active/`.
 
 Plan filenames should use the format `yyyy-mm-dd - NN - description - plan.md`, where `NN` is a two-digit sequence number for that date.
