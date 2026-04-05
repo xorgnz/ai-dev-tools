@@ -8,7 +8,7 @@
 - `ai-rules/9-change-feature.md` - Phase 1, Phase 2, and Phase 3 updates for branch/state alignment, shared workflow structure, and exceptional-case examples.
 - `ai-rules/00-command-glossary.md` - Phase 3 glossary for shorthand workflow commands.
 - `ai-work/00-feature-status.md` - Possible Phase 2 location for a shared feature-state contract if no separate contract document is introduced.
-- `ai-work/ai-rules-improvements-plan.md` - Phase planning reference for this effort.
+- `ai-work/plan.md` - Phase planning reference for this effort.
 
 ### Notes
 
