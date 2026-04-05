@@ -8,9 +8,7 @@ To guide an agent in preparing a clean root-level management commit for this rep
 
 Use this rule when the user asks to commit changes made while maintaining this repository.
 
-This rule applies only to root-level repository management work.
-
-It does not apply to guidance being developed inside `downstream/` unless that guidance explicitly defines a similar downstream commit rule.
+This rule applies to root-level repository management work, including edits made inside `downstream/` when those edits are part of maintaining this repository, unless the user explicitly asks to follow a different process.
 
 ## Core Principle
 

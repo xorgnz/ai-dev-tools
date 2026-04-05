@@ -64,7 +64,7 @@ If multiple plausible active plans exist, do not infer. Ask the user which plan 
 
 ### Execute
 
-9. Create a new timestamped plan file in `ai-work/active/` when no suitable active plan exists, or update the existing active plan when it does.
+9. Create a new dated and numbered plan file in `ai-work/active/` when no suitable active plan exists, or update the existing active plan when it does.
 10. Keep the plan concrete, reviewable, and easy to execute over time.
 11. Include actionable checklist items or similarly explicit work items in the plan document itself.
 12. Prefer modifying an existing active plan over creating a duplicate plan unless the user clearly wants a separate work track.
@@ -79,7 +79,7 @@ If multiple plausible active plans exist, do not infer. Ask the user which plan 
 ## Default Behavior
 
 - If the user asks to plan work and there is one obvious active plan in `ai-work/active/`, use it.
-- If the user asks to plan work for a new effort and no suitable active plan exists yet, create a new timestamped plan file in `ai-work/active/`.
+- If the user asks to plan work for a new effort and no suitable active plan exists yet, create a new dated and numbered plan file in `ai-work/active/`.
 - If the user asks to plan work but the request is too vague to produce meaningful actions, ask for clarification rather than writing filler.
 - Root planning should update the plan and the work log unless the user explicitly asks otherwise.
 

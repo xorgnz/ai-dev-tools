@@ -31,6 +31,8 @@ Use the relevant plan document in `ai-work/active/` as the default execution sou
 
 Use `ai-work/work-log.md` as the supporting activity record when broader context is needed.
 
+Plans stored in `ai-work/archive/` are historical records and should not be executed directly. If the user wants to resume archived work, move or copy the plan back into `ai-work/active/`, confirm the active work item, and then proceed.
+
 ## Task Selection Process
 
 1. If the user gives a specific work item or plan name, use that after confirming the request is explicit enough to execute.
@@ -62,6 +64,8 @@ As each approved work item or sub-task is completed:
 4. Do not execute downstream rules as if this repository were a downstream project.
 5. Consult downstream materials only when the approved root task is specifically about editing or reviewing those downstream materials.
 6. If the approved effort is complete, move its plan file from `ai-work/active/` to `ai-work/archive/` and record that transition in `ai-work/work-log.md`.
+7. Do not execute work directly from an archived plan; reactivate it into `ai-work/active/` first.
+8. If an active work item appears complete, ask the user whether it should be treated as done and archived rather than assuming closure.
 
 ## Process
 
@@ -93,3 +97,5 @@ As each approved work item or sub-task is completed:
 3. Use `ai-work/work-log.md` for supporting context when needed.
 4. Update completed checklist items promptly.
 5. Stop after the approved task unless the user explicitly asks for more.
+6. Treat archived plans as history, not active execution sources.
+7. Ask the user before treating active work as complete and moving it to `ai-work/archive/`.

@@ -66,6 +66,8 @@ Each discrete root-level effort should be represented by one plan document in `a
 
 Plan filenames should use the format `yyyy-mm-dd - NN - description - plan.md`, where `NN` is a two-digit sequence number for that date.
 
+Use `01` for the first plan created on a given date and increment the sequence for each additional plan created on that same date.
+
 When a root-level effort is completed or explicitly retired, move its plan document from `ai-work/active/` to `ai-work/archive/` and record that transition in `ai-work/work-log.md`.
 
 ## Writing Guidance In This Repository
