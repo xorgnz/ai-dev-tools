@@ -56,6 +56,18 @@ Agents working in this repository should not execute downstream rules as if this
 
 In this repository, downstream rules should only be consulted when the task is to review, edit, reorganize, or otherwise work on those downstream rules themselves.
 
+## Root Work Tracking Layout
+
+- `ai-work/active/` contains active root-level work plans.
+- `ai-work/archive/` contains completed or superseded root-level work plans kept for historical reference.
+- `ai-work/work-log.md` records planning and execution updates for root-level work in this repository.
+
+Each discrete root-level effort should be represented by one plan document in `ai-work/active/`.
+
+Plan filenames should use the format `yyyy-mm-dd - NN - description - plan.md`, where `NN` is a two-digit sequence number for that date.
+
+When a root-level effort is completed or explicitly retired, move its plan document from `ai-work/active/` to `ai-work/archive/` and record that transition in `ai-work/work-log.md`.
+
 ## Writing Guidance In This Repository
 
 - Use clear language that another agent can follow without hidden context.

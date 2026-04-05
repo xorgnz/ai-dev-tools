@@ -2,7 +2,7 @@
 
 ## Goal
 
-To guide an agent in carrying out approved root-level work for this repository in a controlled, trackable way, while keeping execution aligned with the current plan and task list in `ai-work/`.
+To guide an agent in carrying out approved root-level work for this repository in a controlled, trackable way, while keeping execution aligned with the current active plan in `ai-work/active/` and the work log in `ai-work/work-log.md`.
 
 ## When To Use
 
@@ -18,24 +18,24 @@ Root execution in this repository should be simple and explicit.
 
 The agent should:
 
-- identify the relevant task in `ai-work/tasks.md`
+- identify the relevant active plan and approved work item within it
 - perform only the approved task
 - keep the work scoped to root-level repository maintenance
-- update task progress as work is completed
+- update plan progress and the work log as work is completed
 
 Do not silently continue into the next task after finishing the current one.
 
 ## Task Source
 
-Use `ai-work/tasks.md` as the default root task list unless the user explicitly points to a different planning artifact.
+Use the relevant plan document in `ai-work/active/` as the default execution source unless the user explicitly points to a different planning artifact.
 
-Use `ai-work/plan.md` as the supporting high-level reference for why the task exists and how it fits into the broader work.
+Use `ai-work/work-log.md` as the supporting activity record when broader context is needed.
 
 ## Task Selection Process
 
-1. If the user gives a specific task number or task name, use that task after confirming the request is explicit enough to execute.
-2. If the user asks to do work without naming a task, review `ai-work/tasks.md`, identify the next sensible incomplete task, present it briefly, and wait for approval before proceeding.
-3. If more than one plausible task matches the request, do not infer. Ask the user which one to perform.
+1. If the user gives a specific work item or plan name, use that after confirming the request is explicit enough to execute.
+2. If the user asks to do work without naming a task, review the relevant active plan, identify the next sensible incomplete item, present it briefly, and wait for approval before proceeding.
+3. If more than one plausible work item or active plan matches the request, do not infer. Ask the user which one to perform.
 
 ## Execution Rules
 
@@ -47,11 +47,12 @@ Use `ai-work/plan.md` as the supporting high-level reference for why the task ex
 
 ## Progress Tracking
 
-As each task or sub-task is completed:
+As each approved work item or sub-task is completed:
 
-1. Update `ai-work/tasks.md` promptly.
+1. Update the active plan promptly.
 2. Change `- [ ]` to `- [x]` where appropriate.
-3. Keep the task file aligned with the actual work completed.
+3. Add a concise execution update to `ai-work/work-log.md`.
+4. Keep the plan aligned with the actual work completed.
 
 ## General Working Principles
 
@@ -60,32 +61,35 @@ As each task or sub-task is completed:
 3. Ask clarifying questions if the approved task is still ambiguous at execution time.
 4. Do not execute downstream rules as if this repository were a downstream project.
 5. Consult downstream materials only when the approved root task is specifically about editing or reviewing those downstream materials.
+6. If the approved effort is complete, move its plan file from `ai-work/active/` to `ai-work/archive/` and record that transition in `ai-work/work-log.md`.
 
 ## Process
 
 ### Inspect
 
-1. Read `ai-work/tasks.md`.
-2. Read `ai-work/plan.md` when broader context is needed.
-3. Confirm the intended task and scope before editing files.
+1. Identify the relevant active plan in `ai-work/active/`.
+2. Read that active plan before starting work.
+3. Read `ai-work/work-log.md` when broader context is needed.
+4. Confirm the intended task and scope before editing files.
 
 ### Execute
 
-4. Perform the approved task.
-5. Keep edits focused and traceable.
-6. Run any appropriate validation that fits the work.
-7. Update task progress in `ai-work/tasks.md` when the task or sub-task is completed.
+5. Perform the approved task.
+6. Keep edits focused and traceable.
+7. Run any appropriate validation that fits the work.
+8. Update plan progress in the active plan when the task or sub-task is completed.
+9. Add a concise execution entry to `ai-work/work-log.md`.
 
 ### Report
 
-8. Report what was changed.
-9. Report any validation performed.
-10. Report whether the task file was updated.
+10. Report what was changed.
+11. Report any validation performed.
+12. Report whether the active plan and work log were updated.
 
 ## Final Instructions
 
 1. Never start work without explicit user approval.
-2. Use `ai-work/tasks.md` as the default execution source.
-3. Use `ai-work/plan.md` for supporting context when needed.
-4. Update completed task checkboxes promptly.
+2. Use the relevant plan in `ai-work/active/` as the default execution source.
+3. Use `ai-work/work-log.md` for supporting context when needed.
+4. Update completed checklist items promptly.
 5. Stop after the approved task unless the user explicitly asks for more.

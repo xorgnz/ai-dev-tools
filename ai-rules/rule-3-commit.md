@@ -2,7 +2,7 @@
 
 ## Goal
 
-To guide an agent in preparing a clean root-level management commit for this repository by inspecting the current changes, proposing a `mgmt` commit message, and waiting for explicit user approval before creating the commit.
+To guide an agent in preparing a clean root-level management commit for this repository by inspecting the current changes, proposing a `mgmt:` commit message, and waiting for explicit user approval before creating the commit.
 
 ## When To Use
 
@@ -20,10 +20,10 @@ The agent should:
 
 - inspect the current changes
 - summarize the current commit scope
-- propose a commit message that starts with `mgmt`
+- propose a commit message that starts with `mgmt:`
 - wait for the user's approval unless approval was already included
 
-All commits prepared under this rule are management commits for this repository and should use the `mgmt` prefix.
+All commits prepared under this rule are management commits for this repository and should use the `mgmt:` prefix.
 
 ## Process
 
@@ -37,7 +37,7 @@ All commits prepared under this rule are management commits for this repository 
 
 ### Propose
 
-6. Draft a concise commit message that starts with `mgmt`.
+6. Draft a concise commit message that starts with `mgmt:`.
 7. Make the description reflect the actual scoped diff since `HEAD`, not just the most recent user request in the conversation.
 8. Present the proposed message together with a short summary of the changes being committed.
 9. Wait for explicit user approval unless the user already included approval in the same request.
@@ -65,6 +65,6 @@ All commits prepared under this rule are management commits for this repository 
 
 1. Do not create the commit until the user explicitly approves the message and scope, unless the same command already included approval.
 2. Always inspect the current changes before proposing a commit.
-3. Use a commit message that starts with the prefix `mgmt`.
+3. Use a commit message that starts with the prefix `mgmt:`.
 4. Make the proposed description match the full scoped set of changes being committed.
 5. Surface unrelated changes clearly instead of silently bundling them.
