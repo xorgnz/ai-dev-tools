@@ -6,20 +6,23 @@ This file is the single shared source of truth for root-level instructions in th
 
 It governs how AI agents should work while maintaining this repository itself.
 
-It does not define the reusable guidance stored in `downstream/codex/`, `downstream/claude/`, or `downstream/junie/` for downstream projects.
+It does not define the reusable guidance stored under `downstream/` for downstream projects.
 
 ## Terminology
 
 - "Root rules" means the rules intended to be applied in this project while working in this repository.
 - "Downstream rules" means the rules authored in this project for use elsewhere.
-- In this repository, the downstream rules are the files stored in the agent-specific folders under `downstream/`, such as `downstream/codex/`, `downstream/claude/`, and `downstream/junie/`.
+- In this repository, downstream artifacts live under `downstream/`.
+- The shared downstream rules live in `downstream/ai-rules/`.
+- The shared downstream guideline base and agent-specific guideline overlays live in `downstream/guidelines/`.
+- Deployment-specific downstream agent files are not stored as source artifacts unless explicitly added later.
 
 ## Repository Role
 
 This repository has two distinct layers:
 
 1. The meta-project layer at the root, where agents help author and maintain repository structure and shared guidance.
-2. The reusable artifact layer inside `downstream/codex/`, `downstream/claude/`, and `downstream/junie/`, where agent-specific rules are prepared for use in other projects.
+2. The reusable artifact layer inside `downstream/`, where shared downstream rules and agent-specific downstream guidelines are prepared for use in other projects.
 
 Agents must preserve the distinction between those two layers, which is also the distinction between root rules and downstream rules.
 
@@ -29,15 +32,15 @@ Root-level governance files exist only to guide work performed in this repositor
 
 They are not templates for downstream development projects unless a file explicitly says so.
 
-If a rule is meant to be copied into other repositories, it is a downstream rule and belongs in the appropriate agent-specific subfolder, not in the root governance layer.
+If a rule is meant to be copied into other repositories, it is a downstream rule and belongs under `downstream/`, not in the root governance layer.
 
-## Agent-Specific Subfolders
+## Downstream Layout
 
-- `downstream/codex/` contains reusable Codex-oriented guidance for downstream projects.
-- `downstream/claude/` contains reusable Claude-oriented guidance for downstream projects.
-- `downstream/junie/` contains reusable Junie-oriented guidance for downstream projects.
+- `downstream/ai-rules/` contains the shared downstream rules.
+- `downstream/guidelines/` contains the shared downstream guideline base and agent-specific guideline overlays.
+- Deployment-specific downstream agent files can be assembled later from these shared sources when needed.
 
-When editing files in those folders, treat them as downstream rules and reusable artifacts rather than root operating instructions.
+When editing files under `downstream/`, treat them as downstream rules and reusable artifacts rather than root operating instructions.
 
 Agents working in this repository should not execute downstream rules as if this repository were a downstream project.
 
@@ -47,7 +50,7 @@ In this repository, downstream rules should only be consulted when the task is t
 
 This commit rule applies only to commits made while maintaining this repository.
 
-It does not apply to guidance being developed inside `downstream/codex/`, `downstream/claude/`, or `downstream/junie/` unless that guidance explicitly defines a similar rule for downstream use.
+It does not apply to guidance being developed inside `downstream/` unless that guidance explicitly defines a similar rule for downstream use.
 
 When asked to commit changes in this repository:
 

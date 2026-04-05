@@ -8,26 +8,32 @@ In this repository:
 
 - "root rules" means the rules intended to be applied in this project itself
 - "downstream rules" means the rules authored here for use in other projects
-- the downstream rules are the files stored in the agent-specific folders under `downstream/`
+- the downstream rules are the files stored under `downstream/`
 
 ## What This Repository Contains
 
-The repository is organized by AI toolset:
+Human-facing files at the root:
 
-- `downstream/codex/` contains Codex-specific guidance and workflow artifacts intended for reuse in other projects.
-- `downstream/claude/` is reserved for Claude-specific guidance and is currently a placeholder for future content.
-- `downstream/junie/` contains Junie-specific guidance and workflow artifacts intended for reuse in other projects.
+- `README.md`
+- `TODO.md`
 
-At the root, the repository also contains a small set of files used to manage this repository itself:
+Agent-facing instructions for working in this repository:
 
 - `AGENTS.md`
 - `CLAUDE.md`
-- `.junie/guidelines.md`
 - `ai-rules/`
 
-The root entrypoint files stay in place for agent discovery, and the shared root rules and instructions live under `ai-rules/`.
+The root entrypoint files stay in place for agent discovery, and the shared root rules and instructions live under `ai-rules/`. A Junie root entrypoint may also exist under `.junie/` when needed, but it is part of the same root-instruction layer.
 
-Those root files are root rules for maintaining this repository and keeping the root-level instructions aligned across agents.
+Planning artifacts for agents working in this repository:
+
+- `ai-work/`
+
+Downstream artifacts intended for use in other projects:
+
+- `downstream/ai-rules/` contains the shared downstream rules used by multiple agents.
+- `downstream/guidelines/` contains the shared downstream guideline base plus agent-specific guideline overlays.
+- downstream deployment files are not stored yet and can be assembled later from the shared rules and guideline sources.
 
 ## Current Status
 
@@ -35,18 +41,18 @@ The repository is in an early organization phase.
 
 Current downstream content includes:
 
-- a more developed Codex ruleset under `downstream/codex/`
-- an existing Junie ruleset under `downstream/junie/`
-- a Claude area that has been created but not populated yet
+- a shared downstream ruleset under `downstream/ai-rules/`
+- a shared downstream guideline base plus agent-specific overlays under `downstream/guidelines/`
 
 There is also an `ai-work/` folder containing planning artifacts related to improving and restructuring the rule system.
 
 ## Why The Structure Matters
 
-This project separates two different concerns:
+This project separates three different concerns:
 
+- human-facing repository documentation
 - root rules for maintaining this meta-project
-- downstream rules that may later be copied into real development repositories
+- downstream rules and guidelines that may later be copied into real development repositories
 
 Keeping those layers separate reduces confusion, makes the guidance easier to maintain, and helps prevent repository-maintenance rules from leaking into downstream project templates.
 
@@ -54,4 +60,4 @@ Keeping those layers separate reduces confusion, makes the guidance easier to ma
 
 This repository is primarily an authoring and organization workspace.
 
-It is meant to be the place where agent-specific development guidance is drafted, reviewed, compared, and improved before being reused elsewhere.
+It is meant to be the place where shared downstream rules and agent-specific guidelines are drafted, reviewed, compared, and improved before being assembled and reused elsewhere.
