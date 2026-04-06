@@ -170,12 +170,12 @@ AI: [Reads 00-feature-status.md]
 AI: "Feature `01-initial` is completed. I won't prepare a new implementation commit for a completed feature unless you explicitly ask for an exception."
 ```
 
-## PowerShell Command Guidance
+## Git Command Sequencing
 
-- In this repository, commit preparation commands must be PowerShell-compatible
-- Do not chain `git add` and `git commit` with `&&`
-- Do not issue staging and commit commands simultaneously through parallel tool calls
-- Run `git add`, `git commit`, and post-commit `git status` as separate sequential shell commands
+- Do not rely on shell chaining semantics to serialize Git commit workflow steps across platforms
+- Do not issue `git add`, `git commit`, or `git status` simultaneously through parallel tool calls
+- Do not run `git status` at the same time as `git add` or `git commit`
+- Run `git add`, `git commit`, and any post-commit `git status` as separate sequential shell commands
 - Do not bundle `git add`, `git commit`, and `git status` into the same shell invocation
 
 ## Non-Active and Completed Feature Behavior
