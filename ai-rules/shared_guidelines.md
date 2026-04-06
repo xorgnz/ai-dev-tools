@@ -51,6 +51,7 @@ If the user says `root rule 1`, `root rule 2`, `root rule 3`, or `root rule 4`, 
 
 - `downstream/ai-rules/` contains the shared downstream rules.
 - `downstream/guidelines/` contains the shared downstream guideline base and agent-specific guideline overlays.
+- `downstream/environments/` contains environment-specific downstream guideline overlays that must be included during export.
 - `downstream/toolsets/` contains technology-specific downstream guideline overlays that can be included during export.
 - `downstream/export/` is the generated export target for one agent-specific downstream bundle at a time.
 - Deployment-specific downstream agent files can be assembled later from these shared sources when needed.

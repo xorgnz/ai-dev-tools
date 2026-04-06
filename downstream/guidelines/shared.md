@@ -2,7 +2,7 @@
 
 This file is the shared base for downstream agent guidelines.
 
-At deployment time, combine this file with exactly one agent-specific file from `downstream/guidelines/`.
+At deployment time, combine this file with exactly one agent-specific file from `downstream/guidelines/` and exactly one environment-specific file from `downstream/environments/`.
 
 When needed, you may also append one or more technology-specific overlays from `downstream/toolsets/`.
 
@@ -16,13 +16,9 @@ When needed, you may also append one or more technology-specific overlays from `
 - For rule-driven work, prefer short requests such as `Rule: @ai-rules/5-create-tasks.md` and `Feature: 01-some-feature`.
 - Any time the user asks you to execute a rule, look through the relevant instructions in `ai-rules/` before proceeding.
 
-## Default Environment
+## Environment-Agnostic Defaults
 
-- This project is run with Node on Windows unless an agent-specific guideline says otherwise.
-- Use commands that work in the current Windows shell environment unless the agent-specific guideline explicitly asks for an alternative.
-- Use Windows paths when executing local commands. Forward-slash paths are fine in documentation and code when the underlying tool supports them.
 - Keep commands non-interactive when feasible.
-- In PowerShell, do not chain command steps with `&&`; run sequential commands as separate shell invocations instead.
 - Consider the consequences of running commands in parallel before attempting to do so.
 
 ## Execution Constraints
