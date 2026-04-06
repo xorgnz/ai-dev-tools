@@ -88,7 +88,7 @@ When a root-level effort is completed or explicitly retired, move its plan docum
 
 When a root rule requires user approval, ask for it with a single yes/no question in this exact form:
 
-`Approve this? Yes/No.`
+`Approve this? Y/N.`
 
 Present the proposed plan, task, or commit scope first, then ask that question unchanged.
 

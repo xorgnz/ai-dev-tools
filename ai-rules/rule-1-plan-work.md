@@ -63,7 +63,7 @@ If multiple plausible active plans exist, do not infer. Ask the user which plan 
 
 7. Summarize the planned update briefly before making substantial changes when the direction is not already clear from the user's request.
 8. Keep the proposed planning focused on root-level repository work, not downstream feature implementation.
-9. If approval is needed before writing the plan, present the proposed update and then ask `Approve this? Yes/No.`
+9. If approval is needed before writing the plan, present the proposed update and then ask `Approve this? Y/N.`
 
 ### Execute
 
