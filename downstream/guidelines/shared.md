@@ -4,6 +4,8 @@ This file is the shared base for downstream agent guidelines.
 
 At deployment time, combine this file with exactly one agent-specific file from `downstream/guidelines/`.
 
+When needed, you may also append one or more technology-specific overlays from `downstream/toolsets/`.
+
 ## Project Workflow
 
 - Do not begin implementation or multi-step work without an explicit user request.
