@@ -11,3 +11,4 @@ Use this overlay when the downstream project is being run from WSL on Windows.
 ## Runtime Assumptions
 
 - Treat the execution environment as Linux-style shell behavior running under WSL rather than native Windows shell behavior.
+- Treat `wsl` and `windows` as distinct environment choices. Do not assume native Windows shell behavior when the selected environment is WSL.

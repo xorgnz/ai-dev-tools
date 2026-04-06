@@ -2,6 +2,8 @@
 
 Use this overlay when the downstream project is being run from a Windows shell environment.
 
+This means native Windows shell usage, not WSL, unless the target repository explicitly says otherwise.
+
 ## Commands And Paths
 
 - Use commands that work in the current Windows shell environment unless higher-priority instructions require an alternative.
@@ -11,3 +13,4 @@ Use this overlay when the downstream project is being run from a Windows shell e
 ## Runtime Assumptions
 
 - Assume the project is being run with Node on Windows unless the target repository clearly documents a different local runtime expectation.
+- Treat `windows` and `wsl` as distinct environment choices. Do not assume WSL behavior when the selected environment is Windows.
