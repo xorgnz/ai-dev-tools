@@ -41,15 +41,17 @@ If a rule is meant to be copied into other repositories, it is a downstream rule
 - `ai-rules/rule-1-plan-work.md` is the scaffold for planning new root-level work.
 - `ai-rules/rule-2-do-work.md` is the scaffold for executing approved root-level work.
 - `ai-rules/rule-3-commit.md` defines the root-only commit rule.
+- `ai-rules/rule-4-export.md` defines the downstream export rule for generating agent-specific export bundles.
 
 When working in this repository, apply this shared guidance together with the relevant root rule files.
 
-If the user says `root rule 1`, `root rule 2`, or `root rule 3`, treat that as an instruction to run the corresponding root rule rather than merely describing it.
+If the user says `root rule 1`, `root rule 2`, `root rule 3`, or `root rule 4`, treat that as an instruction to run the corresponding root rule rather than merely describing it.
 
 ## Downstream Layout
 
 - `downstream/ai-rules/` contains the shared downstream rules.
 - `downstream/guidelines/` contains the shared downstream guideline base and agent-specific guideline overlays.
+- `downstream/export/` is the generated export target for one agent-specific downstream bundle at a time.
 - Deployment-specific downstream agent files can be assembled later from these shared sources when needed.
 
 When editing files under `downstream/`, treat them as downstream rules and reusable artifacts rather than root operating instructions.
