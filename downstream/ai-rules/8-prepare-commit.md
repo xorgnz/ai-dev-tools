@@ -1,6 +1,6 @@
 ---
-version: 1.5.1
-timestamp: 2026-04-04 12:05
+version: 1.5.2
+timestamp: 2026-04-05 18:56
 ---
 # Rule: Prepare a Task Commit for Approval
 
@@ -14,9 +14,9 @@ Use this rule when the user says they have completed implementation for a task a
 
 ## Prerequisites
 
+- `/ai-work/00-workflow-config.md` should exist
 - `/ai-work/00-feature-status.md` must exist
 - A feature must be marked `active`
-- The current branch must match the active feature branch
 - A task list should exist at `/ai-work/{feature-tag}-tasks.md`
 - The relevant task should already be implemented
 - Follow the shared feature-state contract in `/ai-work/00-feature-status.md`
@@ -66,8 +66,11 @@ Follow-up format:
 ### Inspect
 
 1. **Identify the Active Feature and Task**
+   - Read `/ai-work/00-workflow-config.md`
+   - If it is missing, ask whether `branch_mode` should be `required` or `optional`, write the file, and then continue
    - Read `/ai-work/00-feature-status.md`
-   - Use the active feature and branch as the default and expected source of truth
+   - Use the active feature as the default and expected source of truth
+   - If `branch_mode: required`, also use the active branch as an additional required source of truth
    - If the user provides a task ID, use it as the first-choice task context
    - If the user does not provide a task ID, identify the task that best matches the current diff before considering recency
    - If no clear diff match exists, use the most recently completed task in the active feature as the fallback context
@@ -178,17 +181,20 @@ AI: "Feature `01-initial` is completed. I won't prepare a new implementation com
 ## Non-Active and Completed Feature Behavior
 
 - Do not prepare implementation commits when no feature is active, even if the repository is still checked out on an old feature branch
+- If `branch_mode: required`, do not prepare implementation commits when the current branch does not match the active feature branch
+- If `branch_mode: optional`, do not reject implementation commit preparation solely because the current branch differs from any recorded feature branch
 - Do not prepare commits for a paused feature until it has been switched back to active
 - Do not prepare new implementation commits for completed features unless the user explicitly asks for an exception
 
 ## Final Instructions
 
 1. Do not create the commit until the user explicitly approves the message and scope, unless the same command already included `approve` or `approved`
-2. Always inspect the active feature and current Git branch first
-3. If no feature is active, refuse implementation commit preparation until the user activates or switches to a feature
-4. Prefer a narrow, task-aligned commit over a broad convenience commit
-5. Use the exact main-task format `feat: <feature-tag>-<task id> - <description>` for main task-completion commits
-6. Use the exact ad hoc feature format `feat: <feature-tag>-<task id>+ - <description>` when the user explicitly requests ad hoc `feat`
-7. Use the exact follow-up format `<prefix>: <feature-tag>-<task id>+ - <description>` for `tidy`, `style`, `fix`, `docs`, `mgmt`, and `tweak`
-8. Surface unrelated changes clearly instead of silently bundling them
-9. For follow-up prefixes and ad hoc `feat`, including `tweak`, ensure the description summarizes all known in-scope changes included since `HEAD`, not only the latest tweak discussed
+2. Always inspect the active feature first
+3. If `branch_mode: required`, also inspect the current Git branch first
+4. If no feature is active, refuse implementation commit preparation until the user activates or switches to a feature
+5. Prefer a narrow, task-aligned commit over a broad convenience commit
+6. Use the exact main-task format `feat: <feature-tag>-<task id> - <description>` for main task-completion commits
+7. Use the exact ad hoc feature format `feat: <feature-tag>-<task id>+ - <description>` when the user explicitly requests ad hoc `feat`
+8. Use the exact follow-up format `<prefix>: <feature-tag>-<task id>+ - <description>` for `tidy`, `style`, `fix`, `docs`, `mgmt`, and `tweak`
+9. Surface unrelated changes clearly instead of silently bundling them
+10. For follow-up prefixes and ad hoc `feat`, including `tweak`, ensure the description summarizes all known in-scope changes included since `HEAD`, not only the latest tweak discussed
