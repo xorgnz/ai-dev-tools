@@ -14,4 +14,6 @@ Use `active` for work on active plans, including planning and execution updates.
 
 Use `archived` when recording that a plan was moved into `ai-work/archive/` or otherwise treated as historical.
 
-- `2026-04-04 12:30` - `archived` - restored the former `ai-work/plan.md` and `ai-work/tasks.md` content into `ai-work/archive/2026-04-04 - 01 - ai-rules improvements - plan.md`
+| Timestamp | State | Description |
+| --- | --- | --- |
+| `2026-04-04 12:30` | `archived` | restored the former `ai-work/plan.md` and `ai-work/tasks.md` content into `ai-work/archive/2026-04-04 - 01 - ai-rules improvements - plan.md` |
