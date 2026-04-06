@@ -62,6 +62,10 @@ Agents working in this repository should not execute downstream rules as if this
 
 In this repository, downstream rules should only be consulted when the task is to review, edit, reorganize, or otherwise work on those downstream rules themselves.
 
+Environment-specific and toolset-specific guidance should normally be authored in `downstream/environments/` or `downstream/toolsets/`, not embedded into root rules or downstream `ai-rules/`.
+
+If an agent thinks environment-specific or toolset-specific behavior truly belongs in a rule rather than an overlay, it should ask the user before making that change.
+
 ## Root Work Tracking Layout
 
 - `ai-work/active/` contains active root-level work plans.
@@ -85,6 +89,7 @@ When a root-level effort is completed or explicitly retired, move its plan docum
 - Use clear language that another agent can follow without hidden context.
 - State whether new guidance is a root rule or a downstream rule.
 - Do not mix root rules into downstream rules by accident.
+- Do not put environment-specific or toolset-specific guidance into rules when an overlay is the better fit.
 - Keep cross-agent root guidance aligned by editing this shared file instead of duplicating the same rule in multiple places.
 - If an agent notices that a root agent-specific guidance file differs from this shared file in substance, it should alert the user immediately so the mismatch can be resolved.
 

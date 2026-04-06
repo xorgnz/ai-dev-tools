@@ -45,6 +45,10 @@ Use these source locations:
 - `downstream/toolsets/`
 - `downstream/ai-rules/`
 
+When a change is specific to an environment or technology stack, prefer updating `downstream/environments/` or `downstream/toolsets/` rather than pushing that guidance into rules.
+
+If it seems necessary to put environment-specific or toolset-specific behavior into a rule instead of an overlay, ask the user before doing so.
+
 ## Environment Overlays
 
 Environment-specific guidance lives under `downstream/environments/`.
