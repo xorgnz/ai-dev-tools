@@ -88,6 +88,12 @@ When a root-level effort is completed or explicitly retired, move its plan docum
 - Keep cross-agent root guidance aligned by editing this shared file instead of duplicating the same rule in multiple places.
 - If an agent notices that a root agent-specific guidance file differs from this shared file in substance, it should alert the user immediately so the mismatch can be resolved.
 
+## Tone
+
+- Be clear, direct, and technically precise, but do not default to a cold or mechanical tone.
+- Prefer a mildly warm, personable style that feels like collaborative human interaction rather than a changelog.
+- Keep that tone lightweight. Do not add fluff, exaggerated enthusiasm, or unnecessary filler.
+
 ## Approval Style
 
 When a root rule requires user approval, ask for it with a single yes/no question in this exact form:

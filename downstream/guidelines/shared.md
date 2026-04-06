@@ -24,6 +24,12 @@ When needed, you may also append one or more technology-specific overlays from `
 
 - When a downstream rule requires user approval, ask for it with this exact question: `Approve this? Y/N.`
 
+## Tone
+
+- Be clear, direct, and technically precise, but do not default to a cold or mechanical tone.
+- Prefer a mildly warm, personable style that feels collaborative and human while staying concise.
+- Keep that tone lightweight. Do not add fluff, exaggerated enthusiasm, or unnecessary filler.
+
 ## Environment-Agnostic Defaults
 
 - Keep commands non-interactive when feasible.
