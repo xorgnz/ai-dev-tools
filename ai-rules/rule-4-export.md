@@ -19,6 +19,7 @@ The agent should:
 - require one specific target agent before exporting
 - require one specific target environment before exporting
 - build the export from `downstream/guidelines/shared.md`, one agent-specific downstream guideline file, one environment-specific guideline file, any explicitly requested toolset-specific guideline files, and the current downstream `ai-rules/`
+- treat `downstream/export/` as generated output rather than source content
 - replace the existing contents of `downstream/export/` with the new bundle for that one agent
 - avoid mixing artifacts for multiple agents in the same export pass
 
@@ -72,6 +73,8 @@ If the user asks to export with toolset-specific guidance but does not identify 
 
 Write the generated bundle into `downstream/export/`.
 
+`downstream/export/` is a generated folder. Its contents should not be kept in git and should be created only when an export run needs them.
+
 The export must contain:
 
 1. One merged guideline file for the requested agent:
@@ -102,12 +105,12 @@ Keep clear separation between each section in the merged guideline file.
 7. Read the shared downstream guideline file, the selected agent-specific downstream guideline file, and the selected environment-specific guideline file.
 8. Read any selected toolset-specific guideline files.
 9. Read the downstream `ai-rules/` set that will be copied into the export bundle.
-10. Inspect the current contents of `downstream/export/` before replacing them.
+10. Inspect the current contents of `downstream/export/` if the folder already exists.
 
 ### Execute
 
-11. Remove the existing files and directories inside `downstream/export/`.
-12. Recreate the export folder structure needed for the selected agent.
+11. If `downstream/export/` already exists, remove the existing files and directories inside it.
+12. Create the export folder structure needed for the selected agent.
 13. Write the merged guideline file to the correct agent-specific export path.
 14. Copy the full downstream `ai-rules/` directory into `downstream/export/ai-rules/`.
 15. Ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset overlays.
@@ -127,6 +130,7 @@ Keep clear separation between each section in the merged guideline file.
 - If the user asks to export but does not name an environment, ask which one: `windows`, `wsl`, or `linux`, and do not proceed until the user answers.
 - If the user asks to export with toolset-specific guidance but does not name the toolset, ask which toolset overlay to include.
 - If the export folder already contains files, replace them as part of the export for the requested agent.
+- If the export folder does not exist yet, create it as part of the export run.
 - If the selected agent, selected environment, or requested toolset overlay does not have a source file, stop and report the missing source instead of inferring a fallback.
 
 ## Final Instructions
@@ -138,3 +142,4 @@ Keep clear separation between each section in the merged guideline file.
 5. Replace the contents of `downstream/export/` on each export run.
 6. Export exactly one merged guideline file and one `ai-rules/` copy for the selected agent.
 7. Do not mix artifacts for multiple agents in the same export folder.
+8. Treat `downstream/export/` as generated output and do not preserve its contents in git.
