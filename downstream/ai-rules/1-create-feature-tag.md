@@ -56,7 +56,7 @@ Examples:
 
 5. **Present the Proposed Tag**
    - Show the proposed feature tag and expected related files
-   - Get user confirmation before recording it anywhere
+   - Ask `Approve this? Y/N.` before recording it anywhere
 
 6. **Record the Proposed Feature**
    - After approval, add the feature to `/ai-work/00-feature-status.md`

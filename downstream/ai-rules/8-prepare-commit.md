@@ -28,7 +28,7 @@ The AI must not commit automatically when using this rule unless the user explic
 - inspect the current changes
 - determine which files belong to the completed task
 - propose a commit message in the required format
-- ask the user to approve the commit message and scope unless approval was already included in the command
+- ask `Approve this? Y/N.` for the commit message and scope unless approval was already included in the command
 
 ## Required Commit Message Format
 
@@ -95,7 +95,7 @@ Follow-up format:
 
 5. **Propose the Commit**
    - Present the proposed message and file list
-   - Wait for explicit user approval unless the user already provided preapproval in the same command
+   - Ask `Approve this? Y/N.` unless the user already provided preapproval in the same command
 
 ### Execute and Report
 

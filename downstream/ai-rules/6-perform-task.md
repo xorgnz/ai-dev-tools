@@ -48,7 +48,7 @@ Use the active feature from `/ai-work/00-feature-status.md` as the default and e
    - Review the active feature task list
    - Identify the next unchecked task
    - Present it to the user
-   - Wait for explicit approval before proceeding
+   - Ask `Approve this? Y/N.` before proceeding
 
 3. **If the User Also Names a Feature**
    - Treat the active feature as the source of truth
