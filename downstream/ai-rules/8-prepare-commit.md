@@ -1,6 +1,6 @@
 ---
-version: 1.5.2
-timestamp: 2026-04-05 18:56
+version: 1.5.3
+timestamp: 2026-04-05 20:14
 ---
 # Rule: Prepare a Task Commit for Approval
 
@@ -12,11 +12,13 @@ To guide an AI assistant in preparing a clean commit for a completed task by ide
 
 Use this rule when the user says they have completed implementation for a task and want to commit the work.
 
+This rule may also be used for a planned or not-yet-started feature when the user explicitly wants a feature-related commit before normal task completion has begun.
+
 ## Prerequisites
 
 - `/ai-work/00-workflow-config.md` should exist
 - `/ai-work/00-feature-status.md` must exist
-- A feature must be marked `active`
+- A feature must be marked `active`, or the user must explicitly identify a `planned` feature for a pre-start feature-related commit
 - A task list should exist at `/ai-work/{feature-tag}-tasks.md`
 - The relevant task should already be implemented
 - Follow the shared feature-state contract in `/ai-work/00-feature-status.md`
@@ -69,11 +71,12 @@ Follow-up format:
    - Read `/ai-work/00-workflow-config.md`
    - If it is missing, ask whether `branch_mode` should be `required` or `optional`, write the file, and then continue
    - Read `/ai-work/00-feature-status.md`
-   - Use the active feature as the default and expected source of truth
+   - Use the active feature as the default and expected source of truth unless the user explicitly identifies a `planned` feature for a pre-start feature-related commit
    - If `branch_mode: required`, also use the active branch as an additional required source of truth
    - If the user provides a task ID, use it as the first-choice task context
    - If the user does not provide a task ID, identify the task that best matches the current diff before considering recency
-   - If no clear diff match exists, use the most recently completed task in the active feature as the fallback context
+   - If no clear diff match exists and the feature is `planned`, or if the feature has no completed tasks yet, use `0+` as the fallback context unless the commit clearly maps to the first task on the list
+   - If no clear diff match exists after that, use the most recently completed task in the feature as the fallback context
    - If the user explicitly invokes one of the allowed follow-up prefixes, use the same priority order unless the user provides a different task ID
    - If the user explicitly invokes ad hoc `feat`, treat that as the dedicated ad hoc feature mode rather than as a generic follow-up prefix
    - If two or more plausible task mappings remain, do not infer
@@ -81,7 +84,8 @@ Follow-up format:
 
 2. **Review Task Context**
    - Read `/ai-work/{feature-tag}-tasks.md`
-   - Use the task wording as the basis for the description
+   - Use the task wording as the basis for the description when a real task id is being used
+   - If the fallback context is `0+`, base the description on the scoped diff and the user's wording instead of pretending a completed task exists
 
 3. **Inspect Current Git Changes**
    - Review the current Git status
@@ -116,7 +120,8 @@ Follow-up format:
 - Use this task-selection order:
   1. explicit task ID from the user
   2. task that best matches the actual diff
-  3. most recently completed task only as a fallback
+  3. `0+` if the feature is `planned` or has no completed tasks yet, unless the commit clearly maps to the first task on the list
+  4. most recently completed task only as a fallback
 - If the user says `run 8 tidy`, `run 8 style`, `run 8 fix`, `run 8 docs`, `run 8 mgmt`, or `run 8 tweak`, assume the active feature and apply the same task-selection order before choosing the `+` context for the commit message
 - If the user says `run 8 feat`, treat that as the dedicated ad hoc feature mode and apply the same task-selection order before choosing the default `+` context unless the user provides a task ID
 - For `run 8 tidy`, `run 8 style`, `run 8 fix`, `run 8 docs`, `run 8 mgmt`, `run 8 feat`, and `run 8 tweak`, write the description to match the full scoped set of uncommitted changes since the last commit
@@ -133,6 +138,15 @@ AI: [Reviews the diff]
 AI: [Matches the diff to the best task, falling back to the most recently completed task only if needed]
 AI: [Summarizes the ad hoc feature work from the uncommitted changes]
 AI: "Proposed commit: `feat: 02-vchannel-mgmt-2.5+ - add focused admin review tooling`"
+```
+
+```text
+User: "run 8 feat for planned feature 03-user-auth"
+
+AI: [Reads 00-feature-status.md and sees 03-user-auth is still planned]
+AI: [Reviews the diff and sees it is feature-related but not clearly the first listed task]
+AI: [Uses the pre-start fallback context]
+AI: "Proposed commit: `feat: 03-user-auth-0+ - add initial auth scaffolding`"
 ```
 
 ```text
@@ -192,9 +206,11 @@ AI: "Feature `01-initial` is completed. I won't prepare a new implementation com
 2. Always inspect the active feature first
 3. If `branch_mode: required`, also inspect the current Git branch first
 4. If no feature is active, refuse implementation commit preparation until the user activates or switches to a feature
+   Exception: if the user explicitly identifies a `planned` feature for a pre-start feature-related commit, allow rule 8 to prepare that commit using the task-selection rules above
 5. Prefer a narrow, task-aligned commit over a broad convenience commit
 6. Use the exact main-task format `feat: <feature-tag>-<task id> - <description>` for main task-completion commits
 7. Use the exact ad hoc feature format `feat: <feature-tag>-<task id>+ - <description>` when the user explicitly requests ad hoc `feat`
 8. Use the exact follow-up format `<prefix>: <feature-tag>-<task id>+ - <description>` for `tidy`, `style`, `fix`, `docs`, `mgmt`, and `tweak`
 9. Surface unrelated changes clearly instead of silently bundling them
 10. For follow-up prefixes and ad hoc `feat`, including `tweak`, ensure the description summarizes all known in-scope changes included since `HEAD`, not only the latest tweak discussed
+11. If the feature is `planned` or has no completed tasks yet, use `0+` as the fallback `+` context unless the commit clearly maps to the first task on the list
