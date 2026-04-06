@@ -63,20 +63,21 @@ If multiple plausible active plans exist, do not infer. Ask the user which plan 
 
 7. Summarize the planned update briefly before making substantial changes when the direction is not already clear from the user's request.
 8. Keep the proposed planning focused on root-level repository work, not downstream feature implementation.
+9. If approval is needed before writing the plan, present the proposed update and then ask `Approve this? Yes/No.`
 
 ### Execute
 
-9. Create a new dated and numbered plan file in `ai-work/active/` when no suitable active plan exists, or update the existing active plan when it does.
-10. Keep the plan concrete, reviewable, and easy to execute over time.
-11. Include actionable checklist items or similarly explicit work items in the plan document itself.
-12. Prefer modifying an existing active plan over creating a duplicate plan unless the user clearly wants a separate work track.
-13. Add a concise entry to `ai-work/work-log.md` describing the planning action taken.
+10. Create a new dated and numbered plan file in `ai-work/active/` when no suitable active plan exists, or update the existing active plan when it does.
+11. Keep the plan concrete, reviewable, and easy to execute over time.
+12. Include actionable checklist items or similarly explicit work items in the plan document itself.
+13. Prefer modifying an existing active plan over creating a duplicate plan unless the user clearly wants a separate work track.
+14. Add a concise entry to `ai-work/work-log.md` describing the planning action taken.
 
 ### Report
 
-14. Report which plan file was created or updated.
-15. Report whether `ai-work/work-log.md` was updated.
-16. Summarize the new planning items that were added or changed.
+15. Report which plan file was created or updated.
+16. Report whether `ai-work/work-log.md` was updated.
+17. Summarize the new planning items that were added or changed.
 
 ## Default Behavior
 
@@ -84,6 +85,7 @@ If multiple plausible active plans exist, do not infer. Ask the user which plan 
 - If the user asks to plan work for a new effort and no suitable active plan exists yet, create a new dated and numbered plan file in `ai-work/active/`.
 - If the user asks to plan work but the request is too vague to produce meaningful actions, ask for clarification rather than writing filler.
 - Root planning should update the plan and the work log unless the user explicitly asks otherwise.
+- Treat `root rule 1` as a direct instruction to run this rule.
 
 ## Final Instructions
 

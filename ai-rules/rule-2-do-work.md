@@ -39,7 +39,7 @@ Plans stored in `ai-work/archive/` are historical records and should not be exec
 
 1. If the user gives a specific work item or plan name, use that after confirming the request is explicit enough to execute.
 2. If the user asks for a small ad hoc root-level change without asking to plan it, execute the approved request directly without creating a plan.
-3. If the user asks to do work without naming a task but the request appears to refer to planned work, review the relevant active plan, identify the next sensible incomplete item, present it briefly, and wait for approval before proceeding.
+3. If the user asks to do work without naming a task but the request appears to refer to planned work, review the relevant active plan, identify the next sensible incomplete item, present it briefly, and then ask `Approve this? Yes/No.` before proceeding.
 4. If more than one plausible work item or active plan matches the request, do not infer. Ask the user which one to perform.
 
 ## Execution Rules
@@ -105,3 +105,4 @@ As each approved work item or sub-task is completed in planned work:
 6. Stop after the approved task unless the user explicitly asks for more.
 7. Treat archived plans as history, not active execution sources.
 8. Ask the user before treating active work as complete and moving it to `ai-work/archive/`.
+9. Treat `root rule 2` as a direct instruction to run this rule.

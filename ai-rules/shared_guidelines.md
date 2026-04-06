@@ -44,6 +44,8 @@ If a rule is meant to be copied into other repositories, it is a downstream rule
 
 When working in this repository, apply this shared guidance together with the relevant root rule files.
 
+If the user says `root rule 1`, `root rule 2`, or `root rule 3`, treat that as an instruction to run the corresponding root rule rather than merely describing it.
+
 ## Downstream Layout
 
 - `downstream/ai-rules/` contains the shared downstream rules.
@@ -81,6 +83,14 @@ When a root-level effort is completed or explicitly retired, move its plan docum
 - Do not mix root rules into downstream rules by accident.
 - Keep cross-agent root guidance aligned by editing this shared file instead of duplicating the same rule in multiple places.
 - If an agent notices that a root agent-specific guidance file differs from this shared file in substance, it should alert the user immediately so the mismatch can be resolved.
+
+## Approval Style
+
+When a root rule requires user approval, ask for it with a single yes/no question in this exact form:
+
+`Approve this? Yes/No.`
+
+Present the proposed plan, task, or commit scope first, then ask that question unchanged.
 
 ## Default Decision Rule
 

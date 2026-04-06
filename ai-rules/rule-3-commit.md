@@ -38,7 +38,7 @@ All commits prepared under this rule are management commits for this repository 
 6. Draft a concise commit message that starts with `mgmt:`.
 7. Make the description reflect the actual scoped diff since `HEAD`, not just the most recent user request in the conversation.
 8. Present the proposed message together with a short summary of the changes being committed.
-9. Wait for explicit user approval unless the user already included approval in the same request.
+9. Ask `Approve this? Yes/No.` unless the user already included approval in the same request.
 
 ### Execute And Report
 
@@ -51,6 +51,7 @@ All commits prepared under this rule are management commits for this repository 
 - If there are no changes, do not propose a commit.
 - If the diff includes both root-rule work and unrelated downstream changes, call that out clearly and ask the user how to scope the commit.
 - Prefer one coherent management commit over a vague convenience commit.
+- Treat `root rule 3` as a direct instruction to run this rule.
 
 ## PowerShell Command Guidance
 
