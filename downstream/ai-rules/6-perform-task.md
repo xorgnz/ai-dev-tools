@@ -1,6 +1,6 @@
 ---
-version: 1.2.2
-timestamp: 2026-04-05 18:56
+version: 1.2.3
+timestamp: 2026-04-06 10:47
 ---
 # Rule: Performing a Task for the Active Feature
 
@@ -73,7 +73,8 @@ As each task or sub-task is completed:
 
 1. Update `/ai-work/{feature-tag}-tasks.md` immediately
 2. Change `- [ ]` to `- [x]`
-3. Save the file after each update
+3. If the last sub-task under a task is completed and the task itself is satisfied, also check off the parent task
+4. Save the file after each update
 
 ## General Working Principles
 
@@ -94,3 +95,4 @@ As each task or sub-task is completed:
 6. Treat paused features as inactive until switched back in
 7. Refuse routine edits to completed features
 8. Always update task checkboxes immediately upon completion
+9. Check off the parent task when its last sub-task is done and the task itself is actually complete
