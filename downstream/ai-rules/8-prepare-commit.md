@@ -1,6 +1,6 @@
 ---
-version: 1.5.3
-timestamp: 2026-04-05 20:14
+version: 1.6.0
+timestamp: 2026-04-07 09:37
 ---
 # Rule: Prepare a Task Commit for Approval
 
@@ -62,6 +62,29 @@ Follow-up format:
 ```text
 <prefix>: <feature-tag>-<task id>+ - <description>
 ```
+
+## Invocation Parsing
+
+After recognizing rule 8, parse trailing tokens in this order:
+
+1. reserved rule-8 arguments
+2. explicit task identifiers
+3. explicit feature selectors such as `feature <tag>` or `for planned feature <tag>`
+4. remaining free-form description text
+
+Reserved rule-8 arguments are:
+
+- `tidy`
+- `style`
+- `fix`
+- `docs`
+- `mgmt`
+- `tweak`
+- `feat`
+- `approve`
+- `approved`
+
+If a token matches both a reserved rule-8 argument and a possible feature alias, treat it as the reserved rule-8 argument unless the user explicitly identifies a feature.
 
 ## Process
 
