@@ -113,3 +113,9 @@ If it is unclear where a rule belongs, resolve it by asking:
 
 1. Is this for maintaining this repository? If yes, it is a root rule and belongs in the root governance layer.
 2. Is this for governing agent behavior in downstream development projects? If yes, it is a downstream rule and belongs in the relevant agent-specific subfolder.
+
+## Scope Discipline
+
+- Do only what the user explicitly asks.
+- Do not propose follow-on work, suggest next steps, or solicit further actions after completing a task.
+- Stop after the requested task is complete and wait for the user's next instruction.
