@@ -1,6 +1,6 @@
 ---
-version: 1.2.3
-timestamp: 2026-04-06 10:47
+version: 1.2.4
+timestamp: 2026-04-13 00:00
 ---
 # Rule: Performing a Task for the Active Feature
 
@@ -14,6 +14,7 @@ To guide an AI assistant in executing development tasks from structured task lis
 - `/ai-work/00-feature-status.md` must exist
 - A feature must be marked `active`
 - A task list must exist at `/ai-work/{feature-tag}-tasks.md`
+- `/ai-work/00-master-techstack.md` is the shared technology source of truth if it exists
 
 ## Active Feature Protocol
 
@@ -66,6 +67,7 @@ Use the active feature from `/ai-work/00-feature-status.md` as the default and e
 - Never start work on any task without explicit user approval
 - Complete only the approved task
 - Do not silently move to the next task
+- Before implementation, read `/ai-work/00-master-techstack.md` when it exists and apply any relevant shared technology decisions alongside the PRD and task list
 
 ## Progress Tracking
 
@@ -79,11 +81,12 @@ As each task or sub-task is completed:
 ## General Working Principles
 
 1. Prefer editing existing files over creating new ones unless creation is required
-2. Run validation as appropriate using the testing rule
-3. Ask clarifying questions if task requirements are ambiguous
-4. Do not expand scope without approval
-5. Do not run long-running application servers unless explicitly asked
-6. Follow `AGENTS.md` for command, style, and environment conventions
+2. Use the PRD as the implementation-facing feature document and the master tech stack as the shared technology baseline when it exists
+3. Run validation as appropriate using the testing rule
+4. Ask clarifying questions if task requirements are ambiguous
+5. Do not expand scope without approval
+6. Do not run long-running application servers unless explicitly asked
+7. Follow `AGENTS.md` for command, style, and environment conventions
 
 ## Final Instructions
 
@@ -94,5 +97,6 @@ As each task or sub-task is completed:
 5. If no feature is active, refuse implementation work until the user activates or switches to a feature
 6. Treat paused features as inactive until switched back in
 7. Refuse routine edits to completed features
-8. Always update task checkboxes immediately upon completion
-9. Check off the parent task when its last sub-task is done and the task itself is actually complete
+8. Read `/ai-work/00-master-techstack.md` before implementation when that file exists
+9. Always update task checkboxes immediately upon completion
+10. Check off the parent task when its last sub-task is done and the task itself is actually complete
