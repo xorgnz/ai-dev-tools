@@ -1,6 +1,6 @@
 ---
-version: 1.3.1
-timestamp: 2026-04-04 11:15
+version: 1.3.2
+timestamp: 2026-04-13 00:00
 ---
 # Rule: Creating a High-Level Project Scope
 
@@ -117,6 +117,8 @@ AI: "Feature `03-user-auth` remains planned. I can write the approved scope with
 
 1. Keep the scope high-level
 2. Focus on what and why, not how
-3. Do not create or update scope files for paused or completed features unless the user explicitly asks to make an exception
-4. Require explicit approval before writing the scope file
-5. Do not proceed to create a PRD unless explicitly asked
+3. Treat the scope as the upstream planning document rather than the implementation-facing source of truth
+4. Expect the later PRD to carry forward the important boundary content in implementation-ready form
+5. Do not create or update scope files for paused or completed features unless the user explicitly asks to make an exception
+6. Require explicit approval before writing the scope file
+7. Do not proceed to create a PRD unless explicitly asked

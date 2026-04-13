@@ -1,6 +1,6 @@
 ---
-version: 1.5.0
-timestamp: 2026-04-08 11:05
+version: 1.6.0
+timestamp: 2026-04-13 00:00
 ---
 # Rule: Generating a Product Requirements Document (PRD)
 
@@ -29,7 +29,8 @@ To guide an AI assistant in creating a clear, implementation-relevant Product Re
 
 2. **Read the Scope**
    - Check for `/ai-work/{feature-tag}-scope.md`
-   - Use it as the high-level boundary document
+   - Use it as the high-level upstream boundary document
+   - Carry the important scope boundaries forward into the PRD so implementation does not depend on reopening the scope file
 
 3. **Ask Essential Clarifying Questions**
    - Ask only the 3-5 most important unresolved questions
@@ -39,6 +40,7 @@ To guide an AI assistant in creating a clear, implementation-relevant Product Re
 
 4. **Generate the PRD Proposal**
    - Write the PRD using a structure that matches the feature complexity
+   - Include the essential scope material directly in the PRD, especially feature intent, in-scope areas, out-of-scope areas, and key assumptions or constraints
    - Capture the important clarifications inside the proposed PRD
    - If two or more plausible interpretations remain, do not infer
    - Present the top candidate interpretations briefly and ask the user to choose
@@ -62,8 +64,15 @@ Every PRD should cover these core elements:
 
 1. Overview
 2. Goals
-3. Requirements
-4. Constraints and considerations
+3. Scope boundaries
+4. Requirements
+5. Constraints and considerations
+
+The `Scope boundaries` section should make the PRD implementation-facing on its own. It should briefly capture:
+
+- What is in scope
+- What is out of scope
+- Key assumptions and constraints that materially affect implementation
 
 Add more detailed sections when they materially improve execution clarity. Useful optional sections include:
 
@@ -80,9 +89,10 @@ Add more detailed sections when they materially improve execution clarity. Usefu
 
 1. Do not start implementation from this rule
 2. Capture the important clarifications inside the PRD
-3. Use the scope file as the concise boundary document
-4. Keep the PRD as lean as possible while still giving implementation enough direction
-5. Add detailed sections only when they improve clarity for the feature at hand
-6. Do not create or update PRDs for paused or completed features
-7. Allow PRD work for an explicitly selected planned feature without activating it
-8. Require explicit approval before writing the PRD file
+3. Treat the scope file as the upstream planning artifact, not the implementation-time boundary source of truth
+4. Ensure the PRD contains the essential boundary context needed for implementation without requiring the reader to reopen the scope file
+5. Keep the PRD as lean as possible while still giving implementation enough direction
+6. Add detailed sections only when they improve clarity for the feature at hand
+7. Do not create or update PRDs for paused or completed features
+8. Allow PRD work for an explicitly selected planned feature without activating it
+9. Require explicit approval before writing the PRD file
