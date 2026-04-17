@@ -1,39 +1,53 @@
 ---
-version: 1.9.2
-timestamp: 2026-04-17 09:25
+version: 1.10.4
+timestamp: 2026-04-17 10:35
 ---
 # Rule: Prepare a Commit for Approval
 
 ## Overview. 
 
-This rule guides an AI assistant in preparing commits to git. To execute, work through steps 1 through 6 in order.
+This rule guides an AI assistant in preparing commits to git. To execute, parse the invocation in Step 0, then work through steps 1 through 6 in order.
 
 Use this rule when the user explicitly asks to run rule 8 or otherwise asks to prepare a commit.
-
-## Prerequisites
-
-- `/ai-work/00-workflow-config.md` should exist for commits tied to a tracked feature or task
-- `/ai-work/00-feature-status.md` must exist for commits tied to a tracked feature or task
-- Main task commits require an `active` tracked feature
-- Ad hoc `feat` commits tied to a tracked feature also require an `active` tracked feature
-- A task list should exist at `/ai-work/{feature-tag}-tasks.md` when using task-scoped context
-- The relevant task should already be implemented when using task-scoped context
-- Commits not tied to any tracked feature do not require an active tracked feature or task list
-- Follow the shared feature-state contract in `/ai-work/00-feature-status.md`
 
 ## Core Principle
 
 The AI must not commit automatically when using this rule unless the user explicitly includes approval in the same request.
 
-Quick definitions:
+- Step 0 parses the rule invocation into reserved arguments, explicit selectors, and free-form description text.
+- Step 1 uses parsed invocation parameters and repository context to choose the candidate context mode; what the commit is attached to.
+- Step 2 selects the commit prefix, determines the commit mode, and validates the candidate context into a selected context.
+- Step 3 prepares the tag from the selected context, selected prefix, and commit mode.
+- Step 4 builds the full commit message from the prefix, tag, and scoped diff.
+- Step 5 confirms the exact message and file scope with the user.
+- Step 6 creates the commit and reports the result.
 
-- `context mode`: what the commit is attached to (`task-scoped`, `tracked-feature-scoped`, or `repo-scoped`)
-- `commit prefix`: the literal prefix token (for example `feat`, `fix`, `mgmt`)
-- `commit mode`: the behavior class inferred from the commit prefix
+## Step 0 - Parse invocation
+
+After recognizing rule 8, parse trailing tokens in this order:
+
+1. reserved rule-8 arguments
+2. explicit task identifiers
+3. explicit tracked-feature selectors such as `feature <tag>`, plus planned-feature selectors such as `for planned feature <tag>` when the parsed reserved arguments indicate `mgmt`
+4. remaining free-form description text
+
+Reserved rule-8 arguments are:
+
+- `tidy`
+- `style`
+- `fix`
+- `docs`
+- `mgmt`
+- `tweak`
+- `feat`
+- `approve`
+- `approved`
+
+If a token matches both a reserved rule-8 argument and a possible feature alias, treat it as the reserved rule-8 argument unless the user explicitly identifies a feature.
 
 ## Step 1 - Identify the context mode 
 
-After identifying the commit mode, choose the context mode. Do not let the prefix alone pretend to answer the context question.
+Choose a candidate context mode from explicit selectors and diff evidence.
 
 Context modes:
 
@@ -41,15 +55,17 @@ Context modes:
 - `tracked-feature-scoped`: the commit is tied to a specific tracked feature but not to a specific task
 - `repo-scoped`: the commit is not tied to one specific tracked feature or task
 
+### Context selection
+
 Use this context-selection priority:
 
-- If the user explicitly names a task, use task-scoped context unless the prefix forbids task-scoped use
-- If the user explicitly names a tracked feature without a task, use tracked-feature-scoped context
-- If the diff strongly matches one task, use task-scoped context when the prefix allows it
-- If the diff clearly belongs to one tracked feature but not one task, use tracked-feature-scoped context
-- If the diff does not clearly belong to one tracked feature, use repo-scoped context when the prefix allows it
+1. If the user explicitly names a task, use task-scoped context.
+2. If the user explicitly names a tracked feature without a task, use tracked-feature-scoped context.
+3. If the diff strongly matches one task, use task-scoped context.
+4. If the diff clearly belongs to one tracked feature but not one task, use tracked-feature-scoped context.
+5. If the diff does not clearly belong to one tracked feature, use repo-scoped context.
 
-A strong task diff match means one task is clearly favored by the actual changes, such as:
+A strong task diff match means one task is clearly favored by actual changes, such as:
 
 - the user explicitly names the task
 - the changed files or modules line up cleanly with one task
@@ -59,6 +75,91 @@ A strong task diff match means one task is clearly favored by the actual changes
 A clear tracked-feature match means the work belongs to one tracked feature overall even if it does not map cleanly to one task.
 
 Explicit tracked-feature selectors may override the active tracked feature for follow-up commit context. This does not change tracked-feature state, does not switch branches, and does not authorize implementation on that tracked feature by itself.
+
+If two or more tasks remain plausible after applying the rules above, do not infer. Ask the user to choose.
+
+If two or more plausible tracked-feature mappings remain for tracked-feature-scoped context, do not infer.
+
+Present the strongest candidate task or tracked-feature contexts briefly and ask the user to choose before proposing a commit.
+
+If the diff appears to span multiple tasks, multiple tracked features, or unrelated work, surface that clearly and ask the user how to scope the commit.
+
+### Feature-state gates
+
+Apply these gates when Step 2 selects the commit mode and selected context.
+
+- When task-scoped or tracked-feature-scoped context may apply, read `/ai-work/00-workflow-config.md` and `/ai-work/00-feature-status.md`, and follow the feature-state contract in `/ai-work/00-feature-status.md`.
+- If `/ai-work/00-workflow-config.md` is needed and missing, ask whether `branch_mode` should be `required` or `optional`, write the file, and then continue
+- Use the active tracked feature as the default tracked-feature context unless the user explicitly identifies another tracked feature for follow-up commit labeling, or the commit is repo-scoped
+- Main-task commits and task-scoped or tracked-feature-scoped ad hoc `feat` commits require an active tracked feature
+- If `branch_mode: required`, main-task commits and task-scoped or tracked-feature-scoped ad hoc `feat` commits require the current branch to match the active tracked-feature branch; if `branch_mode: optional`, do not reject solely because the current branch differs
+- Do not prepare main-task commits or task-scoped/tracked-feature-scoped ad hoc `feat` commits for paused or completed tracked features unless the user explicitly asks for an exception
+- For `management`, an explicit tracked-feature selector may reference a `planned`, non-active, or completed tracked feature without activating it
+- Non-`mgmt` follow-up prefixes may reference a non-active or completed tracked feature as commit context when the rule otherwise permits that scope
+- Repo-scoped follow-up commits and repo-scoped ad hoc `feat` commits do not require an active tracked feature or task list
+
+## Step 2 - Select prefix and commit mode
+
+Choose the commit prefix for the final message before constructing the commit tag or message body.
+
+### Select prefix
+
+Available prefixes are:
+
+- `feat` - feature or implementation work. When the user does not request a prefix, treat `feat` as the implicit default for the main task-completion commit. When the user explicitly requests `feat`, treat it as an ad hoc feature commit instead.
+- `fix` - corrects a bug or unintended behavior
+- `tweak` - small targeted adjustments with no structural change: config values, tuning parameters, threshold adjustments, minor wording fixes
+- `docs` - changes to purely informational content (READMEs, architecture docs, inline comments) that have no effect on behavior; skill files, CLAUDE.md, and command files are not `docs` - use `feat`, `fix`, or `tweak` depending on the nature of the change
+- `style` - formatting, naming, or whitespace with no behavior change
+- `tidy` - non-functional codebase cleanup within product/application code: dead code removal, internal reorganization, refactors with no behavior change, and maintenance dependency updates
+- `mgmt` - repository/workflow management outside product code: `ai-work/`, rule/guideline files, planning notes, board/status files, `.gitignore`, and repository config
+
+### Commit Modes
+
+Do not blur requested prefix, selected commit prefix, commit mode, and context mode. They are separate decisions.
+
+The available commit modes are:
+
+- `main-task`: the normal task-completion commit for implemented work tied to a real task
+- `ad-hoc-feat`: focused feature or implementation work that should not be treated as the main task-completion commit
+- `follow-up`: a bug fix, polish pass, documentation-only update, style change, cleanup, or small tweak that builds on existing work
+- `management`: repository or workflow management outside product implementation work
+
+Map prefixes to commit modes like this:
+
+- implicit main `feat` -> `main-task`
+- explicit `feat` -> `ad-hoc-feat`
+- `fix`, `tidy`, `style`, `docs`, and `tweak` -> `follow-up`
+- `mgmt` -> `management`
+
+The explicit `fix`, `tidy`, `style`, `docs`, and `tweak` prefixes use follow-up mode because they build on existing work rather than representing the main task-completion commit.
+
+### Prefix selection precedence
+
+Use this precedence to choose or validate the selected commit prefix:
+
+1. Use the user's requested prefix when provided, unless it clearly conflicts with the scoped diff intent.
+2. Determine primary intent from the full scoped diff and apply the existing prefix definitions in this rule.
+3. Use changed-file mix as secondary evidence to confirm the intent decision.
+4. If multiple prefixes remain plausible after this check, do not infer; ask the user to choose.
+
+If a requested prefix conflicts with the strongest scoped intent, present the mismatch and ask the user whether to keep the requested prefix or switch.
+
+### Mode-specific context validation
+
+Validate commit mode against allowed context modes as follows. Alert the user if the commit mode is not allowed for the candidate context:
+
+- `main-task`: `task-scoped` only
+- `ad-hoc-feat`: `task-scoped`, `tracked-feature-scoped`, or `repo-scoped`
+- `follow-up`: `task-scoped`, `tracked-feature-scoped`, or `repo-scoped`
+- `management`: `tracked-feature-scoped` or `repo-scoped`; never `task-scoped` unless the rule is explicitly revised later
+
+After the candidate context passes that validation, apply these mode-specific refinements and record the result as the selected context:
+
+- `main-task`: if the user does not provide a task ID, identify the task that best matches the current diff before considering the narrow recency fallback.
+- `ad-hoc-feat`: keep the candidate context after it passes validation.
+- `follow-up`: keep the candidate context after it passes validation.
+- `management`: never infer a task. Keep tracked-feature-scoped context only when the candidate context clearly belongs to one tracked feature; otherwise use repo-scoped context.
 
 A `narrow recency fallback` means the assistant may use the most recently completed task as the commit's task context only when all of the following are true:
 
@@ -76,129 +177,18 @@ Do not use the narrow recency fallback when any of the following are true:
 - the work is only tracked-feature-scoped or repo-scoped
 - the fallback would create a fake task relationship based only on recency
 
-If two or more tasks remain plausible after applying the rules above, do not infer. Ask the user to choose.
-
-### Step 1 execution checks
-
-- If the user says only `run 8`, assume the active tracked feature
-- Read `/ai-work/00-workflow-config.md` and `/ai-work/00-feature-status.md` when task-scoped or tracked-feature-scoped context may apply
-- If `/ai-work/00-workflow-config.md` is needed and missing, ask whether `branch_mode` should be `required` or `optional`, write the file, and then continue
-- Use the active tracked feature as the default tracked-feature context unless the user explicitly identifies another tracked feature for follow-up commit labeling, or the commit is repo-scoped
-- Do not prepare main task commits when no tracked feature is active, even if the repository is still checked out on an old feature branch
-- Do not prepare task-scoped or tracked-feature-scoped ad hoc `feat` commits when no tracked feature is active
-- If `branch_mode: required`, use the active branch as an additional required source of truth for main task mode and for ad hoc `feat` when the selected context is task-scoped or tracked-feature-scoped
-- If `branch_mode: required`, do not prepare main task commits or task-scoped or tracked-feature-scoped ad hoc `feat` commits when the current branch does not match the active tracked-feature branch
-- If `branch_mode: optional`, do not reject implementation commit preparation solely because the current branch differs from any recorded tracked-feature branch
-- If the user provides a task ID, use task-scoped context unless the commit mode forbids task-scoped use
-- If the user provides a tracked-feature selector without a task ID, use tracked-feature-scoped context unless the diff clearly supports repo-scoped context and the user explicitly prefers that
-- For `main-task`, if the user does not provide a task ID, identify the task that best matches the current diff before considering the narrow recency fallback
-- For `ad-hoc-feat`, if the user does not provide a task ID, prefer task-scoped context when the diff strongly matches one task, otherwise prefer tracked-feature-scoped context when one tracked feature is clear, otherwise use repo-scoped context
-- For `follow-up`, prefer task-scoped context when the match is strong, otherwise prefer tracked-feature-scoped context when one tracked feature is clear, otherwise use repo-scoped context
-- For `management`, never infer a task; prefer repo-scoped context, and use tracked-feature-scoped context only when the work clearly belongs to one tracked feature
-- For `management`, an explicit tracked-feature selector may reference a `planned`, non-active, or completed tracked feature without activating it
-- Do not prepare main task commits or task-scoped or tracked-feature-scoped ad hoc `feat` commits for a paused tracked feature until it has been switched back to active
-- Do not prepare new main task commits or task-scoped or tracked-feature-scoped ad hoc `feat` commits for completed tracked features unless the user explicitly asks for an exception
-- Non-`mgmt` follow-up prefixes may reference a non-active or completed tracked feature as commit context when the rule otherwise permits that scope
-- Repo-scoped follow-up commits and repo-scoped ad hoc `feat` commits may be prepared even when no tracked feature is active
-- In main task mode only, if no clear task match exists after that and there is one obvious most recently completed task, use that task as the narrow last-resort fallback
-- If the selected context is repo-scoped, use the reserved context marker `repo-0+`
-- If two or more plausible tracked-feature mappings remain for tracked-feature-scoped context, do not infer
-- Present the strongest candidate task or tracked-feature contexts briefly and ask the user to choose before proposing a commit
-- If the diff appears to span multiple tasks, multiple tracked features, or unrelated work, surface that clearly and ask the user how to scope the commit
-
-## Step 2 - Select prefix
-
-Choose the commit prefix token before constructing the commit tag or message body.
-
-### Terminology
-
-Use these terms consistently:
-
-- `commit prefix`: the literal prefix token from the command, such as `feat`, `fix`, or `mgmt`; the main task commit has an implicit main `feat` prefix even when the user does not spell it out
-- `commit mode`: the behavior class inferred from the commit prefix
-- `context mode`: what the commit is attached to: `task-scoped`, `tracked-feature-scoped`, or `repo-scoped`
-
-### Follow-Up Commit Prefixes
-
-The following explicit follow-up prefixes are also allowed when the user is preparing a commit that builds on existing work rather than representing the main task-completion commit:
-
-- `tweak` - small targeted adjustments with no structural change: config values, tuning parameters, threshold adjustments, minor wording fixes
-- `fix` - corrects a bug or unintended behavior
-- `docs` - changes to purely informational content (READMEs, architecture docs, inline comments) that have no effect on behavior; skill files, CLAUDE.md, and command files are not `docs` - use `feat`, `fix`, or `tweak` depending on the nature of the change
-- `style` - formatting, naming, or whitespace with no behavior change
-- `tidy` - non-functional codebase cleanup within product/application code: dead code removal, internal reorganization, refactors with no behavior change, and maintenance dependency updates
-- `mgmt` - repository/workflow management outside product code: `ai-work/`, rule/guideline files, planning notes, board/status files, `.gitignore`, and repository config
-
-### Prefix-To-Mode Mapping
-
-Do not blur commit prefix, commit mode, and context mode. They are separate decisions.
-
-Use this mapping:
-
-- implicit main `feat` -> `main-task`
-- explicit `feat` -> `ad-hoc-feat`
-- `fix`, `tidy`, `style`, `docs`, and `tweak` -> `follow-up`
-- `mgmt` -> `management`
-
-Map commit mode to allowed context modes like this:
-
-- `main-task`: `task-scoped` only
-- `ad-hoc-feat`: `task-scoped`, `tracked-feature-scoped`, or `repo-scoped`
-- `follow-up`: `task-scoped`, `tracked-feature-scoped`, or `repo-scoped`
-- `management`: `tracked-feature-scoped` or `repo-scoped`; never `task-scoped` unless the rule is explicitly revised later
-
-### Prefix Selection Precedence
-
-Use this precedence to choose or validate the commit prefix:
-
-1. Use the user's explicit prefix when provided, unless it clearly conflicts with the scoped diff intent.
-2. Determine primary intent from the full scoped diff and apply the existing prefix definitions in this rule.
-3. Use changed-file mix as secondary evidence to confirm the intent decision.
-4. If multiple prefixes remain plausible after this check, do not infer; ask the user to choose.
-
-If an explicit prefix conflicts with the strongest scoped intent, present the mismatch and ask the user whether to keep the explicit prefix or switch.
-
-### Invocation Parsing
-
-After recognizing rule 8, parse trailing tokens in this order:
-
-1. reserved rule-8 arguments
-2. explicit task identifiers
-3. explicit tracked-feature selectors such as `feature <tag>`, plus planned-feature selectors such as `for planned feature <tag>` when the commit mode permits planned tracked-feature context, currently `mgmt`
-4. remaining free-form description text
-
-Reserved rule-8 arguments are:
-
-- `tidy`
-- `style`
-- `fix`
-- `docs`
-- `mgmt`
-- `tweak`
-- `feat`
-- `approve`
-- `approved`
-
-If a token matches both a reserved rule-8 argument and a possible feature alias, treat it as the reserved rule-8 argument unless the user explicitly identifies a feature.
-
-### Step 2 execution checks
-
-- Parse the commit prefix from the user's command
-- Map the commit prefix to the commit mode using the prefix-to-mode mapping above
-- If the requested prefix conflicts with the strongest scoped diff intent, do not silently remap it; present the mismatch and ask the user whether to keep the requested prefix or switch
-
 ## Step 3 - Prepare tag
 
-Prepare the tag segment that follows the prefix using selected context and mode.
+Prepare the tag segment that follows the selected prefix using the selected context and commit mode.
 
 Allowed tag shapes:
 
 - `<feature-tag>-<task id>` for main task commits
 - `<feature-tag>-<task id>+` for task-scoped follow-up and ad hoc feature commits
-- `<feature-tag>-0+` for tracked-feature-scoped follow-up commits
-- `repo-0+` for repo-scoped follow-up commits
+- `<feature-tag>-0+` for tracked-feature-scoped follow-up and ad hoc feature commits
+- `repo-0+` for repo-scoped follow-up and ad hoc feature commits
 
-Use Step 1 context rules and Step 2 prefix/mode rules together when selecting the tag.
+Use the selected context, selected prefix, and commit mode from Step 2 when selecting the tag.
 
 The literal `repo` is a reserved context marker meaning the commit is not tied to one specific tracked feature.
 
@@ -206,63 +196,36 @@ Use `0+` only for tracked-feature-scoped or repo-scoped contexts, not for `main-
 
 ## Step 4 - Commit message
 
-Construct the full message in the required format and ensure the description matches the scoped diff.
+Construct the full message from the selected prefix, the Step 3 tag, and a description that matches the scoped diff.
 
-### Required Commit Message Formats
-
-```text
-feat: <feature-tag>-<task id> - <description>
-```
-
-Ad hoc feature commits are also allowed when the user wants to make a focused feature addition without treating it as the main task-completion commit.
-
-Ad hoc feature format:
+### Required Commit Message Format
 
 ```text
-feat: <feature-tag>-<task id>+ - <description>
+<prefix>: <step-3-tag> - <description>
 ```
 
-Repo-scoped ad hoc feature format:
+### Scope checks
 
-```text
-feat: repo-0+ - <description>
-```
+- Review the current Git status.
+- Identify only the files related to the selected task, tracked feature, or repo-scoped support change.
+- Exclude unrelated or unfinished work; surface unrelated changes clearly instead of silently bundling them.
+- Prefer a narrow, task-aligned commit over a broad convenience commit.
+- If there are no changes in the selected scope, do not propose a commit.
 
-Follow-up format:
+### Task-context checks
 
-```text
-<prefix>: <feature-tag>-<task id>+ - <description>
-```
+- When using task-scoped context, a task list should exist at `/ai-work/{feature-tag}-tasks.md`.
+- Read `/ai-work/{feature-tag}-tasks.md` only when using task-scoped context.
+- The relevant task should already be implemented when using task-scoped context.
 
-Tracked-feature-scoped follow-up format:
+### Description rules
 
-```text
-<prefix>: <feature-tag>-0+ - <description>
-```
-
-Repo-scoped follow-up format:
-
-```text
-<prefix>: repo-0+ - <description>
-```
-
-### Step 4 execution checks
-
-- Read `/ai-work/{feature-tag}-tasks.md` only when using task-scoped context
-- Use the task wording as the basis for the description when a real task id is being used
-- If the selected context is tracked-feature-scoped `0+` or repo-scoped `repo-0+`, base the description on the scoped diff and the user's wording instead of pretending a completed task exists
-- For `mgmt`, do not rewrite the description as if the commit were task delivery or bug-fix work tied to one numbered task
-- Review the current Git status
-- Identify only the files related to the selected task, tracked feature, or repo-scoped support change
-- Exclude unrelated or unfinished work
-- For follow-up prefixes and ad hoc `feat`, treat the candidate commit message as a summary of the full scoped diff since `HEAD`, not just the most recent user request in the conversation
-- If multiple related changes have accumulated since the last commit, make the description reflect the combined result at the chosen scope
-- Keep the description concise and specific
-- Prefer a narrow, task-aligned commit over a broad convenience commit
-- For follow-up prefixes and ad hoc `feat`, summarize all known in-scope changes since the last commit that will be included in the proposed commit
-- For `run 8 tidy`, `run 8 style`, `run 8 fix`, `run 8 docs`, `run 8 mgmt`, `run 8 feat`, and `run 8 tweak`, write the description to match the full scoped set of uncommitted changes since the last commit
-- Surface unrelated changes clearly instead of silently bundling them
-- If there are no changes, do not propose a commit
+- Use the task wording as the basis for the description when a real task id is being used.
+- If the Step 3 tag is tracked-feature-scoped `<feature-tag>-0+` or repo-scoped `repo-0+`, base the description on the scoped diff and the user's wording instead of pretending a completed task exists.
+- For `mgmt`, do not rewrite the description as if the commit were task delivery or bug-fix work tied to one numbered task.
+- For follow-up prefixes, ad hoc `feat`, and explicit invocations such as `run 8 tidy`, `run 8 fix`, or `run 8 mgmt`, write the description to summarize the full in-scope diff since `HEAD`, not just the most recent user request in the conversation.
+- If multiple related changes have accumulated since the last commit, make the description reflect the combined result at the chosen scope.
+- Keep the description concise and specific.
 
 ## Step 5 - Confirm with user
 
@@ -273,8 +236,8 @@ Repo-scoped follow-up format:
 
 ## Step 6 - Create commit and report
 
-1. Still inspect the chosen context and changed files first.
-2. If the diff is clearly scoped to one task, one feature, or one repo-scoped support change under the context rules above, create the commit after preparing the message and file scope without asking a second approval question.
+1. Still inspect the selected context and changed files first.
+2. If the diff is clearly scoped to the selected task, tracked feature, or repo-scoped support change, create the commit after preparing the message and file scope without asking a second approval question.
 3. If the diff is ambiguous, spans multiple tasks, or includes unrelated work, stop and ask for clarification instead of using preapproval blindly.
 4. After committing, report the commit message and resulting repository state.
 
