@@ -1,6 +1,6 @@
 # CSS Toolset Notes
 
-Use this overlay when the downstream project relies on custom CSS authoring conventions.
+Use this fragment when the downstream project relies on custom CSS authoring conventions.
 
 ## Toolset Expectations
 

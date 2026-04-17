@@ -6,7 +6,7 @@ Each profile is explicit shorthand for:
 
 - one target agent
 - one target environment
-- zero or more toolset overlays
+- zero or more toolset fragments
 
 ## Profile 1
 

@@ -2,13 +2,13 @@
 
 This file is the shared base for downstream agent guidelines.
 
-At deployment time, combine this file with exactly one agent-specific file from `downstream/guidelines/models/` and exactly one environment-specific file from `downstream/guidelines/environments/`.
+At deployment time, combine this file with exactly one agent-specific file from `downstream/guidelines/agents/` and exactly one environment-specific file from `downstream/guidelines/environments/`.
 
-When needed, you may also append one or more technology-specific overlays from `downstream/guidelines/toolsets/`.
+When needed, you may also append one or more technology-specific fragments from `downstream/guidelines/toolsets/`.
 
 ## Project Workflow
 
-- Do not apply root repository rules (e.g., `ai-rules/rule-*`) in downstream projects; use only the downstream rules and overlays provided here.
+- Do not apply root repository rules (e.g., `ai-rules/rule-*`) in downstream projects; use only the downstream rules and fragments provided here.
 <include src="../../shared-snippets/explicit-request-before-implementation.md" />
 <include src="../../shared-snippets/clarification-line.md" />
 - Work step-by-step and avoid combining unrelated changes in a single pass.

@@ -1,6 +1,6 @@
 # Windows Environment Notes
 
-Use this overlay when the downstream project is being run from a Windows shell environment.
+Use this fragment when the downstream project is being run from a Windows shell environment.
 
 This means native Windows shell usage, not WSL, unless the target repository explicitly says otherwise.
 

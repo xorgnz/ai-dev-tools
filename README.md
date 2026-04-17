@@ -33,7 +33,7 @@ Downstream artifacts intended for use in other projects:
 
 - `downstream/rules/` contains the shared downstream rules used by multiple agents.
 - `downstream/guidelines/shared.md` contains the shared downstream guideline base.
-- `downstream/guidelines/models/` contains agent-specific guideline overlays.
+- `downstream/guidelines/agents/` contains agent-specific guideline fragments.
 - downstream deployment files are not stored yet and can be assembled later from the shared rules and guideline sources.
 
 ## Current Status
@@ -43,7 +43,7 @@ The repository is in an early organization phase.
 Current downstream content includes:
 
 - a shared downstream ruleset under `downstream/rules/`
-- a shared downstream guideline base plus agent-specific overlays under `downstream/guidelines/`
+- a shared downstream guideline base plus agent-specific fragments under `downstream/guidelines/`
 
 There is also an `ai-work/` folder containing planning artifacts related to improving and restructuring the rule system.
 

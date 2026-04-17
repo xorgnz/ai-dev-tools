@@ -1,6 +1,6 @@
 # WSL Environment Notes
 
-Use this overlay when the downstream project is being run from WSL on Windows.
+Use this fragment when the downstream project is being run from WSL on Windows.
 
 ## Commands And Paths
 

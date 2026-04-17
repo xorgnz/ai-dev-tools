@@ -2,7 +2,7 @@
 
 ## Goal
 
-To guide an agent in generating a clean downstream export bundle for one specific agent by merging the shared downstream guidelines with that agent's downstream guideline overlay, one required environment-specific guideline overlay, any requested toolset-specific guideline overlays, and replacing the contents of `downstream/export/` with the resulting bundle.
+To guide an agent in generating a clean downstream export bundle for one specific agent by merging the shared downstream guidelines with that agent's downstream guideline fragment, one required environment-specific guideline fragment, any requested toolset-specific guideline fragments, and replacing the contents of `downstream/export/` with the resulting bundle.
 
 This rule also supports saved export profiles so the user can reuse a previously recorded export target without restating every export input each time.
 
@@ -43,9 +43,9 @@ Do not infer the target agent from the current session agent. The export target 
 Use these source locations:
 
 - `downstream/guidelines/shared.md`
-- `downstream/guidelines/models/codex.md`
-- `downstream/guidelines/models/claude.md`
-- `downstream/guidelines/models/junie.md`
+- `downstream/guidelines/agents/codex.md`
+- `downstream/guidelines/agents/claude.md`
+- `downstream/guidelines/agents/junie.md`
 - `downstream/guidelines/environments/`
 - `downstream/guidelines/toolsets/`
 - `downstream/rules/`
@@ -54,7 +54,7 @@ Use these source locations:
 
 When a change is specific to an environment or technology stack, prefer updating `downstream/guidelines/environments/` or `downstream/guidelines/toolsets/` rather than pushing that guidance into rules.
 
-If it seems necessary to put environment-specific or toolset-specific behavior into a rule instead of an overlay, ask the user before doing so.
+If it seems necessary to put environment-specific or toolset-specific behavior into a rule instead of a fragment, ask the user before doing so.
 
 ## Export Profiles
 
@@ -65,7 +65,7 @@ Each saved profile should define:
 - a profile identifier
 - one explicit target agent
 - one explicit target environment
-- zero or more explicit toolset overlays
+- zero or more explicit toolset fragments
 
 A named saved profile counts as explicit export input when the user names that profile.
 
@@ -73,11 +73,11 @@ If the user asks to save or update a profile, write the resolved profile values 
 
 If the user names both a saved profile and separate export values and they conflict, do not silently merge or override them. Ask the user which source of truth to use.
 
-## Environment Overlays
+## Environment Fragments
 
 Environment-specific guidance lives under `downstream/guidelines/environments/`.
 
-One environment overlay is required for every export.
+One environment fragment is required for every export.
 
 The supported environment targets are:
 
@@ -87,15 +87,15 @@ The supported environment targets are:
 
 Do not infer the environment from the current session agent or shell. The export environment must come from the user's request or a clarification response.
 
-## Toolset Overlays
+## Toolset Fragments
 
 Toolset-specific guidance lives under `downstream/guidelines/toolsets/`.
 
-Each toolset overlay is technology-specific rather than agent-specific and may be combined with any supported agent export.
+Each toolset fragment is technology-specific rather than agent-specific and may be combined with any supported agent export.
 
-Include toolset overlays only when the user explicitly asks for them or when an approved export already specifies them.
+Include toolset fragments only when the user explicitly asks for them or when an approved export already specifies them.
 
-If the user asks to export with toolset-specific guidance but does not identify the toolset, ask which toolset overlay to include.
+If the user asks to export with toolset-specific guidance but does not identify the toolset, ask which toolset fragment to include.
 
 ## Export Layout
 
@@ -131,11 +131,11 @@ If any source section contains snippet include tags such as `<include src="../..
 3. If a profile is named, read `ai-rules/export-profiles.md` and resolve the profile values from there.
 4. Identify the requested target agent.
 5. Identify the requested target environment.
-6. Identify any requested toolset overlays.
+6. Identify any requested toolset fragments.
 7. If no specific target agent is provided directly or through a named profile, ask which agent to export.
 8. If no specific target environment is provided directly or through a named profile, ask which environment to export: `windows`, `wsl`, or `linux`.
 9. Read the shared downstream guideline file, the selected agent-specific downstream guideline file, and the selected environment-specific guideline file.
-10. Read any selected toolset-specific guideline files.
+10. Read any selected toolset-specific guideline fragment files.
 11. Read the downstream `rules/` set that will be copied into the export bundle.
 12. Inspect the current contents of `downstream/export/` if the folder already exists.
 
@@ -147,14 +147,14 @@ If any source section contains snippet include tags such as `<include src="../..
 16. If the request includes an export run, write the merged guideline file to the correct agent-specific export path.
 17. If the request includes an export run, copy the full downstream `rules/` directory into `downstream/export/ai-rules/`.
 18. If the request includes an export run, resolve any snippet include tags in the merged guideline content before finalizing the output file.
-19. If the request includes an export run, ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset overlays.
+19. If the request includes an export run, ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset fragments.
 
 ### Report
 
 20. Report which profile was used, created, or updated, if any.
 21. Report which agent was exported.
 22. Report which environment was exported.
-23. Report which toolset overlays were included, if any.
+23. Report which toolset fragments were included, if any.
 24. Report which guideline file was generated.
 25. Report that `downstream/export/` was replaced with the new export bundle when an export run occurred.
 
@@ -162,14 +162,14 @@ If any source section contains snippet include tags such as `<include src="../..
 
 - If the user says `root rule 4`, treat that as a direct instruction to run this rule.
 - If the user asks to export by profile, use the named profile as the explicit source of agent, environment, and toolset values.
-- If the user asks to save or update a profile, require one explicit agent and one explicit environment for that profile, and record any explicit toolset overlays.
+- If the user asks to save or update a profile, require one explicit agent and one explicit environment for that profile, and record any explicit toolset fragments.
 - If the user asks to export but does not name an agent directly or through a profile, ask which one: `codex`, `claude`, or `junie`.
 - If the user asks to export but does not name an environment directly or through a profile, ask which one: `windows`, `wsl`, or `linux`, and do not proceed until the user answers.
-- If the user asks to export with toolset-specific guidance but does not name the toolset, ask which toolset overlay to include.
+- If the user asks to export with toolset-specific guidance but does not name the toolset, ask which toolset fragment to include.
 - If the export folder already contains files, replace them as part of the export for the requested agent.
 - If the export folder does not exist yet, create it as part of the export run.
 - If the named profile does not exist, stop and report the missing profile instead of inferring a fallback.
-- If the selected agent, selected environment, or requested toolset overlay does not have a source file, stop and report the missing source instead of inferring a fallback.
+- If the selected agent, selected environment, or requested toolset fragment does not have a source file, stop and report the missing source instead of inferring a fallback.
 
 ## Final Instructions
 

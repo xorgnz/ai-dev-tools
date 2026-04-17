@@ -1,6 +1,6 @@
 # Linux Environment Notes
 
-Use this overlay when the downstream project is being run from a native Linux shell environment.
+Use this fragment when the downstream project is being run from a native Linux shell environment.
 
 ## Commands And Paths
 

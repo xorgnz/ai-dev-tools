@@ -1,6 +1,6 @@
 # TypeScript Toolset Notes
 
-Use this overlay when the downstream project is primarily built with TypeScript.
+Use this fragment when the downstream project is primarily built with TypeScript.
 
 ## Toolset Expectations
 

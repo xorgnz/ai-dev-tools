@@ -1,6 +1,6 @@
 # SvelteKit Toolset Notes
 
-Use this overlay when the downstream project is primarily built with SvelteKit.
+Use this fragment when the downstream project is primarily built with SvelteKit.
 
 ## Toolset Expectations
 

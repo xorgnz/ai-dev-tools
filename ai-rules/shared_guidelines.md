@@ -16,7 +16,7 @@ The specific root rules live alongside this file in `ai-rules/`.
 - "Downstream rules" means the rules authored in this project for use elsewhere.
 - In this repository, downstream artifacts live under `downstream/`.
 - The shared downstream rules live in `downstream/rules/`.
-- The shared downstream guideline base lives in `downstream/guidelines/shared.md` and agent-specific guideline overlays live in `downstream/guidelines/models/`.
+- The shared downstream guideline base lives in `downstream/guidelines/shared.md` and agent-specific guideline fragments live in `downstream/guidelines/agents/`.
 - Deployment-specific downstream agent files are not stored as source artifacts unless explicitly added later.
 
 ## Repository Role
@@ -51,9 +51,9 @@ If the user says `root rule 1`, `root rule 2`, `root rule 3`, or `root rule 4`, 
 
 - `downstream/rules/` contains the shared downstream rules.
 - `downstream/guidelines/shared.md` contains the shared downstream guideline base.
-- `downstream/guidelines/models/` contains agent-specific guideline overlays.
-- `downstream/guidelines/environments/` contains environment-specific downstream guideline overlays that must be included during export.
-- `downstream/guidelines/toolsets/` contains technology-specific downstream guideline overlays that can be included during export.
+- `downstream/guidelines/agents/` contains agent-specific guideline fragments.
+- `downstream/guidelines/environments/` contains environment-specific downstream guideline fragments that must be included during export.
+- `downstream/guidelines/toolsets/` contains technology-specific downstream guideline fragments that can be included during export.
 - `downstream/export/` is the generated export target for one agent-specific downstream bundle at a time.
 - Deployment-specific downstream agent files can be assembled later from these shared sources when needed.
 
@@ -65,7 +65,7 @@ In this repository, downstream rules should only be consulted when the task is t
 
 Environment-specific and toolset-specific guidance should normally be authored in `downstream/guidelines/environments/` or `downstream/guidelines/toolsets/`, not embedded into root rules or downstream `ai-rules/`.
 
-If an agent thinks environment-specific or toolset-specific behavior truly belongs in a rule rather than an overlay, it should ask the user before making that change.
+If an agent thinks environment-specific or toolset-specific behavior truly belongs in a rule rather than a fragment, it should ask the user before making that change.
 
 ## Root Work Tracking Layout
 
@@ -90,7 +90,7 @@ When a root-level effort is completed or explicitly retired, move its plan docum
 - Use clear language that another agent can follow without hidden context.
 - State whether new guidance is a root rule or a downstream rule.
 - Do not mix root rules into downstream rules by accident.
-- Do not put environment-specific or toolset-specific guidance into rules when an overlay is the better fit.
+- Do not put environment-specific or toolset-specific guidance into rules when a fragment is the better fit.
 - Keep cross-agent root guidance aligned by editing this shared file instead of duplicating the same rule in multiple places.
 - If an agent notices that a root agent-specific guidance file differs from this shared file in substance, it should alert the user immediately so the mismatch can be resolved.
 
