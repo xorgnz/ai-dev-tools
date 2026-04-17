@@ -50,6 +50,10 @@ Plans stored in `ai-work/archive/` are historical records and should not be exec
 - Do not silently move to the next task.
 - Keep the work focused on root rules, root docs, planning artifacts, repository structure, or other approved root-level maintenance.
 
+#### Approval Policy
+
+`@shared-snippets/approval-policy.md`
+
 ## Progress Tracking
 
 As each approved work item or sub-task is completed in planned work:

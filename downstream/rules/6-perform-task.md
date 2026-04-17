@@ -1,6 +1,6 @@
 ---
-version: 1.2.4
-timestamp: 2026-04-13 00:00
+version: 1.2.5
+timestamp: 2026-04-17 09:24
 ---
 # Rule: Performing a Task for the Active Feature
 
@@ -50,11 +50,13 @@ Use the active feature from `/ai-work/00-feature-status.md` as the default and e
 
 1. **With Task Number**
    - When given a specific task number, begin work on that task for the active feature after confirming the request is explicit
+   - Treat an explicit execution request for that task as approval to start it; do not ask a second generic approval question unless scope remains ambiguous
 
 2. **Without Task Number**
    - Review the active feature task list
    - Identify the next unchecked task
    - Present it to the user
+   - State the exact task id and title being approved
    - Ask `Approve this? Y/N.` before proceeding
 
 3. **If the User Also Names a Feature**
@@ -67,6 +69,7 @@ Use the active feature from `/ai-work/00-feature-status.md` as the default and e
 - Never start work on any task without explicit user approval
 - Complete only the approved task
 - Do not silently move to the next task
+- Do not ask extra approval prompts beyond task-start approval; routine in-task edits under normal workspace permissions do not require additional approval requests
 - Before implementation, read `/ai-work/00-master-techstack.md` when it exists and apply any relevant shared technology decisions alongside the PRD and task list
 
 ## Progress Tracking

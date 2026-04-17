@@ -205,6 +205,10 @@ If any source section contains snippet include tags such as `<include src="../..
 - If the named profile does not exist, stop and report the missing profile instead of inferring a fallback.
 - If the selected agent, selected environment, or requested toolset fragment does not have a source file, stop and report the missing source instead of inferring a fallback.
 
+#### Approval Policy
+
+`@shared-snippets/approval-policy.md`
+
 ## Final Instructions
 
 1. Require one explicit target agent before exporting, either directly or through a named saved profile.

@@ -1,6 +1,6 @@
 ---
-version: 1.9.1
-timestamp: 2026-04-08 15:25
+version: 1.9.2
+timestamp: 2026-04-17 09:25
 ---
 # Rule: Prepare a Commit for Approval
 
@@ -33,6 +33,7 @@ The AI must not commit automatically when using this rule unless the user explic
 - determine whether the commit is task-scoped, tracked-feature-scoped, or repo-scoped
 - propose a commit message in the required format
 - ask `Approve this? Y/N.` for the commit message and scope unless approval was already included in the command
+- when asking for approval, name the exact commit message and exact file scope being approved
 
 ## Required Commit Message Formats
 
@@ -233,6 +234,7 @@ If a token matches both a reserved rule-8 argument and a possible feature alias,
 5. **Propose the Commit**
    - Present the proposed message and file list
    - Ask `Approve this? Y/N.` unless the user already provided preapproval in the same command
+   - The approval question must clearly bind to that exact message and that exact scoped file set
 
 ### Execute and Report
 

@@ -27,6 +27,7 @@ When needed, you may also append one or more technology-specific fragments from 
 ## Approval Style
 
 <include src="../../shared-snippets/approval-style-question.md" />
+<include src="../../shared-snippets/approval-policy.md" />
 
 ## Scope Discipline
 

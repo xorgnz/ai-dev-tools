@@ -65,6 +65,10 @@ If multiple plausible active plans exist, do not infer. Ask the user which plan 
 8. Keep the proposed planning focused on root-level repository work, not downstream feature implementation.
 9. If approval is needed before writing the plan, present the proposed update and then ask `Approve this? Y/N.`
 
+#### Approval Policy
+
+`@shared-snippets/approval-policy.md`
+
 ### Execute
 
 10. Create a new dated and numbered plan file in `ai-work/active/` when no suitable active plan exists, or update the existing active plan when it does.

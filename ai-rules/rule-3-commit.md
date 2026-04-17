@@ -40,6 +40,10 @@ All commits prepared under this rule are management commits for this repository 
 8. Present the proposed message together with a short summary of the changes being committed.
 9. Ask `Approve this? Y/N.` unless the user already included approval in the same request.
 
+#### Approval Policy
+
+`@shared-snippets/approval-policy.md`
+
 ### Execute And Report
 
 10. Create the commit only after approval is available.

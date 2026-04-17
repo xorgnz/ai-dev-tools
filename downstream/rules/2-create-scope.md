@@ -1,6 +1,6 @@
 ---
-version: 1.3.2
-timestamp: 2026-04-13 00:00
+version: 1.3.3
+timestamp: 2026-04-17 09:22
 ---
 # Rule: Creating a High-Level Project Scope
 
@@ -45,6 +45,7 @@ To guide an AI assistant in working with the user to create a concise, high-leve
 
 5. **Wait for Explicit Approval**
    - Do not write `/ai-work/{feature-tag}-scope.md` until the user explicitly approves the summary or draft
+   - Make the approval target explicit: approving writes the shown scope content to `/ai-work/{feature-tag}-scope.md`
    - Ask `Approve this? Y/N.` after presenting the summary or draft
 
 ### Execute and Report

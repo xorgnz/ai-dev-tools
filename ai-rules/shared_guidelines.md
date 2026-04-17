@@ -119,6 +119,8 @@ Present the proposed plan, task, or commit scope first, then ask that question u
 
 `@shared-snippets/approval-style-question.md`
 
+`@shared-snippets/approval-policy.md`
+
 ## Default Decision Rule
 
 If it is unclear where a rule belongs, resolve it by asking:

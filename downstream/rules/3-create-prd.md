@@ -1,6 +1,6 @@
 ---
-version: 1.6.1
-timestamp: 2026-04-13 00:00
+version: 1.6.2
+timestamp: 2026-04-17 09:22
 ---
 # Rule: Generating a Product Requirements Document (PRD)
 
@@ -50,6 +50,7 @@ To guide an AI assistant in creating a clear, implementation-relevant Product Re
 5. **Wait for Explicit Approval**
    - Refine the proposal with the user as needed
    - Do not write `/ai-work/{feature-tag}-prd.md` until the user explicitly approves the proposal
+   - Make the approval target explicit: approving writes the shown PRD content to `/ai-work/{feature-tag}-prd.md`
    - Ask `Approve this? Y/N.` when the proposal is ready to write
 
 ### Execute and Report
