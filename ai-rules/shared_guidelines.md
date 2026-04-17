@@ -45,6 +45,8 @@ If a rule is meant to be copied into other repositories, it is a downstream rule
 
 When working in this repository, apply this shared guidance together with the relevant root rule files.
 
+By default, do not open or read root rule files unless the user explicitly directs that behavior for the current task.
+
 If the user says `root rule 1`, `root rule 2`, `root rule 3`, or `root rule 4`, treat that as an instruction to run the corresponding root rule rather than merely describing it.
 
 ## Downstream Layout
