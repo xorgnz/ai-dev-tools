@@ -97,6 +97,31 @@ Include toolset fragments only when the user explicitly asks for them or when an
 
 If the user asks to export with toolset-specific guidance but does not identify the toolset, ask which toolset fragment to include.
 
+## Structured Selection Prompt
+
+If the user does not provide a profile and does not provide a complete export selection set, ask for missing selections in one structured prompt.
+
+Use this menu format:
+
+```text
+Select export fragments:
+1 Agent: A) codex  B) claude  C) junie
+2 Environment: A) windows  B) wsl  C) linux
+3 Toolsets (optional, combine letters): A) typescript  B) sveltekit  C) css
+Reply with shorthand like: 1A 2B 3AB
+```
+
+Parsing rules:
+
+- `1` selects the target agent and accepts one letter.
+- `2` selects the target environment and accepts one letter.
+- `3` selects optional toolset fragments and may contain multiple letters in one token, such as `3AB`.
+- Tokens may be separated by spaces, commas, or both.
+- Letter matching is case-insensitive.
+- If a required selector (`1` or `2`) is missing or invalid, ask again with the same structured menu.
+- If `3` is omitted, treat toolset selection as empty.
+- If any token is ambiguous, ask the user to restate using the same shorthand format.
+
 ## Export Layout
 
 Write the generated bundle into `downstream/export/`.
@@ -138,41 +163,43 @@ If any source section contains snippet include tags such as `<include src="../..
 4. Identify the requested target agent.
 5. Identify the requested target environment.
 6. Identify any requested toolset fragments.
-7. If no specific target agent is provided directly or through a named profile, ask which agent to export.
-8. If no specific target environment is provided directly or through a named profile, ask which environment to export: `windows`, `wsl`, or `linux`.
-9. Read the shared downstream guideline file, the selected agent-specific downstream guideline file, and the selected environment-specific guideline file.
-10. Read any selected toolset-specific guideline fragment files.
-11. Read the downstream `rules/` set that will be copied into the export bundle.
-12. Inspect the current contents of `downstream/export/` if the folder already exists.
+7. If the user did not provide a profile and any required selection is missing, ask one structured selection prompt and parse the shorthand response.
+8. If no specific target agent is provided directly, through a named profile, or through parsed shorthand, ask again using the structured selection prompt.
+9. If no specific target environment is provided directly, through a named profile, or through parsed shorthand, ask again using the structured selection prompt.
+10. Read the shared downstream guideline file, the selected agent-specific downstream guideline file, and the selected environment-specific guideline file.
+11. Read any selected toolset-specific guideline fragment files.
+12. Read the downstream `rules/` set that will be copied into the export bundle.
+13. Inspect the current contents of `downstream/export/` if the folder already exists.
 
 ### Execute
 
-13. If the user asked to save or update a profile, write the resolved profile entry to `ai-rules/export-profiles.md`.
-14. If the request includes an export run and `downstream/export/` already exists, remove the existing files and directories inside it.
-15. If the request includes an export run, create the export folder structure needed for the selected agent.
-16. If the request includes an export run, write the merged guideline file to the correct agent-specific export path.
-17. If the request includes an export run, copy the full downstream `rules/` directory into `downstream/export/ai-rules/`.
-18. If the request includes an export run, resolve any snippet include tags in the merged guideline content before finalizing the output file.
-19. If the request includes an export run, ensure each selected fragment is emitted under its own non-top-level section header and normalize fragment heading levels to match merged file hierarchy.
-20. If the request includes an export run, ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset fragments.
+14. If the user asked to save or update a profile, write the resolved profile entry to `ai-rules/export-profiles.md`.
+15. If the request includes an export run and `downstream/export/` already exists, remove the existing files and directories inside it.
+16. If the request includes an export run, create the export folder structure needed for the selected agent.
+17. If the request includes an export run, write the merged guideline file to the correct agent-specific export path.
+18. If the request includes an export run, copy the full downstream `rules/` directory into `downstream/export/ai-rules/`.
+19. If the request includes an export run, resolve any snippet include tags in the merged guideline content before finalizing the output file.
+20. If the request includes an export run, ensure each selected fragment is emitted under its own non-top-level section header and normalize fragment heading levels to match merged file hierarchy.
+21. If the request includes an export run, ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset fragments.
 
 ### Report
 
-21. Report which profile was used, created, or updated, if any.
-22. Report which agent was exported.
-23. Report which environment was exported.
-24. Report which toolset fragments were included, if any.
-25. Report which guideline file was generated.
-26. Report that `downstream/export/` was replaced with the new export bundle when an export run occurred.
+22. Report which profile was used, created, or updated, if any.
+23. Report which agent was exported.
+24. Report which environment was exported.
+25. Report which toolset fragments were included, if any.
+26. Report which guideline file was generated.
+27. Report that `downstream/export/` was replaced with the new export bundle when an export run occurred.
 
 ## Default Behavior
 
 - If the user says `root rule 4`, treat that as a direct instruction to run this rule.
 - If the user asks to export by profile, use the named profile as the explicit source of agent, environment, and toolset values.
 - If the user asks to save or update a profile, require one explicit agent and one explicit environment for that profile, and record any explicit toolset fragments.
-- If the user asks to export but does not name an agent directly or through a profile, ask which one: `codex`, `claude`, or `junie`.
-- If the user asks to export but does not name an environment directly or through a profile, ask which one: `windows`, `wsl`, or `linux`, and do not proceed until the user answers.
-- If the user asks to export with toolset-specific guidance but does not name the toolset, ask which toolset fragment to include.
+- If no profile is provided and one or more selections are missing, ask once using the structured selection prompt and parse shorthand like `1A 2B 3AB`.
+- If the user asks to export but does not name an agent directly, through a profile, or through valid shorthand, do not proceed until agent selection is resolved.
+- If the user asks to export but does not name an environment directly, through a profile, or through valid shorthand, do not proceed until environment selection is resolved.
+- If the user asks to export with toolset-specific guidance but does not name toolsets directly or through valid shorthand, ask again using the structured selection prompt.
 - If the export folder already contains files, replace them as part of the export for the requested agent.
 - If the export folder does not exist yet, create it as part of the export run.
 - If the named profile does not exist, stop and report the missing profile instead of inferring a fallback.

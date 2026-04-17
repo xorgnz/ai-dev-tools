@@ -15,3 +15,4 @@ Each profile is explicit shorthand for:
 - toolsets:
   - `typescript`
   - `sveltekit`
+  - `css`
