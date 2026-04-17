@@ -22,7 +22,7 @@ The agent should:
 
 - require one specific target agent before exporting
 - require one specific target environment before exporting
-- build the export from `downstream/guidelines/shared.md`, one agent-specific downstream guideline file, one environment-specific guideline file, any explicitly requested toolset-specific guideline files, and the current downstream `ai-rules/`
+- build the export from `downstream/guidelines/shared.md`, one agent-specific downstream guideline file, one environment-specific guideline file, any explicitly requested toolset-specific guideline files, and the current downstream `rules/`
 - allow a named saved export profile to supply that explicit target data
 - treat `downstream/export/` as generated output rather than source content
 - replace the existing contents of `downstream/export/` with the new bundle for that one agent
@@ -43,16 +43,16 @@ Do not infer the target agent from the current session agent. The export target 
 Use these source locations:
 
 - `downstream/guidelines/shared.md`
-- `downstream/guidelines/codex.md`
-- `downstream/guidelines/claude.md`
-- `downstream/guidelines/junie.md`
-- `downstream/environments/`
-- `downstream/toolsets/`
-- `downstream/ai-rules/`
+- `downstream/guidelines/models/codex.md`
+- `downstream/guidelines/models/claude.md`
+- `downstream/guidelines/models/junie.md`
+- `downstream/guidelines/environments/`
+- `downstream/guidelines/toolsets/`
+- `downstream/rules/`
 - `shared-snippets/`
 - `ai-rules/export-profiles.md`
 
-When a change is specific to an environment or technology stack, prefer updating `downstream/environments/` or `downstream/toolsets/` rather than pushing that guidance into rules.
+When a change is specific to an environment or technology stack, prefer updating `downstream/guidelines/environments/` or `downstream/guidelines/toolsets/` rather than pushing that guidance into rules.
 
 If it seems necessary to put environment-specific or toolset-specific behavior into a rule instead of an overlay, ask the user before doing so.
 
@@ -75,7 +75,7 @@ If the user names both a saved profile and separate export values and they confl
 
 ## Environment Overlays
 
-Environment-specific guidance lives under `downstream/environments/`.
+Environment-specific guidance lives under `downstream/guidelines/environments/`.
 
 One environment overlay is required for every export.
 
@@ -89,7 +89,7 @@ Do not infer the environment from the current session agent or shell. The export
 
 ## Toolset Overlays
 
-Toolset-specific guidance lives under `downstream/toolsets/`.
+Toolset-specific guidance lives under `downstream/guidelines/toolsets/`.
 
 Each toolset overlay is technology-specific rather than agent-specific and may be combined with any supported agent export.
 
@@ -109,7 +109,7 @@ The export must contain:
    - `codex` -> `downstream/export/AGENTS.md`
    - `claude` -> `downstream/export/CLAUDE.md`
    - `junie` -> `downstream/export/.junie/guidelines.md`
-2. A full copy of `downstream/ai-rules/` under `downstream/export/ai-rules/`
+2. A full copy of `downstream/rules/` under `downstream/export/ai-rules/`
 
 The merged guideline file should consist of:
 
@@ -136,7 +136,7 @@ If any source section contains snippet include tags such as `<include src="../..
 8. If no specific target environment is provided directly or through a named profile, ask which environment to export: `windows`, `wsl`, or `linux`.
 9. Read the shared downstream guideline file, the selected agent-specific downstream guideline file, and the selected environment-specific guideline file.
 10. Read any selected toolset-specific guideline files.
-11. Read the downstream `ai-rules/` set that will be copied into the export bundle.
+11. Read the downstream `rules/` set that will be copied into the export bundle.
 12. Inspect the current contents of `downstream/export/` if the folder already exists.
 
 ### Execute
@@ -145,7 +145,7 @@ If any source section contains snippet include tags such as `<include src="../..
 14. If the request includes an export run and `downstream/export/` already exists, remove the existing files and directories inside it.
 15. If the request includes an export run, create the export folder structure needed for the selected agent.
 16. If the request includes an export run, write the merged guideline file to the correct agent-specific export path.
-17. If the request includes an export run, copy the full downstream `ai-rules/` directory into `downstream/export/ai-rules/`.
+17. If the request includes an export run, copy the full downstream `rules/` directory into `downstream/export/ai-rules/`.
 18. If the request includes an export run, resolve any snippet include tags in the merged guideline content before finalizing the output file.
 19. If the request includes an export run, ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset overlays.
 
@@ -179,6 +179,6 @@ If any source section contains snippet include tags such as `<include src="../..
 4. Treat a named saved profile as explicit export input, not as inferred context.
 5. Include toolset-specific guidance only when the user explicitly asks for it or the approved export or saved profile already names it.
 6. Replace the contents of `downstream/export/` on each export run.
-7. Export exactly one merged guideline file and one `ai-rules/` copy for the selected agent.
+7. Export exactly one merged guideline file and one rules copy at `downstream/export/ai-rules/` for the selected agent.
 8. Do not mix artifacts for multiple agents in the same export folder.
 9. Treat `downstream/export/` as generated output and do not preserve its contents in git.

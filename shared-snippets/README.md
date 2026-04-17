@@ -32,4 +32,4 @@ Current Snippets
 - `editing-expectations.md` - Canonical editing and validation expectations.
 
 Notes
-- If a snippet needs environment- or toolset-specific detail, that detail likely belongs in an overlay under `downstream/environments/` or `downstream/toolsets/`, not in the snippet itself.
+- If a snippet needs environment- or toolset-specific detail, that detail likely belongs in an overlay under `downstream/guidelines/environments/` or `downstream/guidelines/toolsets/`, not in the snippet itself.

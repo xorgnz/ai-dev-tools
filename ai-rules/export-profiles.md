@@ -13,4 +13,5 @@ Each profile is explicit shorthand for:
 - agent: `codex`
 - environment: `windows`
 - toolsets:
-  - `typescript-sveltekit`
+  - `typescript`
+  - `sveltekit`

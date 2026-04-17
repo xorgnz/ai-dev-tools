@@ -15,8 +15,8 @@ The specific root rules live alongside this file in `ai-rules/`.
 - "Root rules" means the rules intended to be applied in this project while working in this repository.
 - "Downstream rules" means the rules authored in this project for use elsewhere.
 - In this repository, downstream artifacts live under `downstream/`.
-- The shared downstream rules live in `downstream/ai-rules/`.
-- The shared downstream guideline base and agent-specific guideline overlays live in `downstream/guidelines/`.
+- The shared downstream rules live in `downstream/rules/`.
+- The shared downstream guideline base lives in `downstream/guidelines/shared.md` and agent-specific guideline overlays live in `downstream/guidelines/models/`.
 - Deployment-specific downstream agent files are not stored as source artifacts unless explicitly added later.
 
 ## Repository Role
@@ -49,10 +49,11 @@ If the user says `root rule 1`, `root rule 2`, `root rule 3`, or `root rule 4`, 
 
 ## Downstream Layout
 
-- `downstream/ai-rules/` contains the shared downstream rules.
-- `downstream/guidelines/` contains the shared downstream guideline base and agent-specific guideline overlays.
-- `downstream/environments/` contains environment-specific downstream guideline overlays that must be included during export.
-- `downstream/toolsets/` contains technology-specific downstream guideline overlays that can be included during export.
+- `downstream/rules/` contains the shared downstream rules.
+- `downstream/guidelines/shared.md` contains the shared downstream guideline base.
+- `downstream/guidelines/models/` contains agent-specific guideline overlays.
+- `downstream/guidelines/environments/` contains environment-specific downstream guideline overlays that must be included during export.
+- `downstream/guidelines/toolsets/` contains technology-specific downstream guideline overlays that can be included during export.
 - `downstream/export/` is the generated export target for one agent-specific downstream bundle at a time.
 - Deployment-specific downstream agent files can be assembled later from these shared sources when needed.
 
@@ -62,7 +63,7 @@ Agents working in this repository should not execute downstream rules as if this
 
 In this repository, downstream rules should only be consulted when the task is to review, edit, reorganize, or otherwise work on those downstream rules themselves.
 
-Environment-specific and toolset-specific guidance should normally be authored in `downstream/environments/` or `downstream/toolsets/`, not embedded into root rules or downstream `ai-rules/`.
+Environment-specific and toolset-specific guidance should normally be authored in `downstream/guidelines/environments/` or `downstream/guidelines/toolsets/`, not embedded into root rules or downstream `ai-rules/`.
 
 If an agent thinks environment-specific or toolset-specific behavior truly belongs in a rule rather than an overlay, it should ask the user before making that change.
 
