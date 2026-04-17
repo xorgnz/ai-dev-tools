@@ -52,12 +52,12 @@ feat: <feature-tag>-<task id>+ - <description>
 
 The following explicit follow-up prefixes are also allowed when the user is preparing a commit that builds on existing work rather than representing the main task-completion commit:
 
-- `tidy`
-- `style`
-- `fix`
-- `docs`
-- `mgmt`
-- `tweak`
+- `tweak` - small targeted adjustments with no structural change: config values, tuning parameters, threshold adjustments, minor wording fixes
+- `fix` - corrects a bug or unintended behavior
+- `docs` - changes to purely informational content (READMEs, architecture docs, inline comments) that have no effect on behavior; skill files, CLAUDE.md, and command files are not `docs` - use `feat`, `fix`, or `tweak` depending on the nature of the change
+- `style` - formatting, naming, or whitespace with no behavior change
+- `tidy` - non-functional codebase cleanup within product/application code: dead code removal, internal reorganization, refactors with no behavior change, and maintenance dependency updates
+- `mgmt` - repository/workflow management outside product code: `ai-work/`, rule/guideline files, planning notes, board/status files, `.gitignore`, and repository config
 
 Follow-up format:
 
@@ -110,6 +110,17 @@ Map commit mode to allowed context modes like this:
 - `ad-hoc-feat`: `task-scoped`, `tracked-feature-scoped`, or `repo-scoped`
 - `follow-up`: `task-scoped`, `tracked-feature-scoped`, or `repo-scoped`
 - `management`: `tracked-feature-scoped` or `repo-scoped`; never `task-scoped` unless the rule is explicitly revised later
+
+## Prefix Selection Precedence
+
+Use this precedence to choose or validate the commit prefix:
+
+1. Use the user's explicit prefix when provided, unless it clearly conflicts with the scoped diff intent.
+2. Determine primary intent from the full scoped diff and apply the existing prefix definitions in this rule.
+3. Use changed-file mix as secondary evidence to confirm the intent decision.
+4. If multiple prefixes remain plausible after this check, do not infer; ask the user to choose.
+
+If an explicit prefix conflicts with the strongest scoped intent, present the mismatch and ask the user whether to keep the explicit prefix or switch.
 
 ## Context Selection Rules
 
@@ -195,7 +206,7 @@ If a token matches both a reserved rule-8 argument and a possible feature alias,
    - For `management`, an explicit tracked-feature selector may reference a `planned` tracked feature without activating it
    - In main task mode only, if no clear task match exists after that and there is one obvious most recently completed task, use that task as the narrow last-resort fallback
    - If the selected context is repo-scoped, use the reserved context marker `repo-0+`
-   - If `mgmt` is requested but the diff is clearly task-oriented, do not force a task mapping; ask whether the user wants a different prefix instead
+   - If the requested prefix conflicts with the strongest scoped diff intent, do not silently remap it; present the mismatch and ask the user whether to keep the requested prefix or switch
    - If two or more plausible task mappings remain, do not infer
    - If two or more plausible tracked-feature mappings remain for tracked-feature-scoped context, do not infer
    - Present the strongest candidate task or tracked-feature contexts briefly and ask the user to choose before proposing a commit
