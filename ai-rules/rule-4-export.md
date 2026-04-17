@@ -49,6 +49,7 @@ Use these source locations:
 - `downstream/environments/`
 - `downstream/toolsets/`
 - `downstream/ai-rules/`
+- `shared-snippets/`
 - `ai-rules/export-profiles.md`
 
 When a change is specific to an environment or technology stack, prefer updating `downstream/environments/` or `downstream/toolsets/` rather than pushing that guidance into rules.
@@ -119,6 +120,8 @@ The merged guideline file should consist of:
 
 Keep clear separation between each section in the merged guideline file.
 
+If any source section contains snippet include tags such as `<include src="../../shared-snippets/<file>.md" />`, resolve those includes by inlining the referenced snippet text in the merged export file.
+
 ## Process
 
 ### Inspect
@@ -143,16 +146,17 @@ Keep clear separation between each section in the merged guideline file.
 15. If the request includes an export run, create the export folder structure needed for the selected agent.
 16. If the request includes an export run, write the merged guideline file to the correct agent-specific export path.
 17. If the request includes an export run, copy the full downstream `ai-rules/` directory into `downstream/export/ai-rules/`.
-18. If the request includes an export run, ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset overlays.
+18. If the request includes an export run, resolve any snippet include tags in the merged guideline content before finalizing the output file.
+19. If the request includes an export run, ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset overlays.
 
 ### Report
 
-19. Report which profile was used, created, or updated, if any.
-20. Report which agent was exported.
-21. Report which environment was exported.
-22. Report which toolset overlays were included, if any.
-23. Report which guideline file was generated.
-24. Report that `downstream/export/` was replaced with the new export bundle when an export run occurred.
+20. Report which profile was used, created, or updated, if any.
+21. Report which agent was exported.
+22. Report which environment was exported.
+23. Report which toolset overlays were included, if any.
+24. Report which guideline file was generated.
+25. Report that `downstream/export/` was replaced with the new export bundle when an export run occurred.
 
 ## Default Behavior
 

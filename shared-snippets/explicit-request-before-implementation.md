@@ -1,0 +1,1 @@
+- Do not begin implementation or multi-step work without an explicit user request.

@@ -32,3 +32,14 @@ Use this overlay when the downstream project is primarily built with TypeScript 
 ## Validation
 
 - When practical, prefer targeted checks that fit the stack, such as TypeScript checking, Svelte checks, or focused test runs already defined by the target repository.
+
+## JavaScript Style
+
+- Use 4-space indentation. Do not use tabs for indentation.
+- Put opening braces on a new line for functions, methods, conditionals, loops, and classes unless an existing file clearly follows a different local convention.
+- Prefer simple functions and methods where practical.
+- Favor straightforward control flow and small units of logic over clever or densely abstracted code.
+- Add brief comments before each logical block of code to orient the reader.
+- Keep comments short and directional. Do not restate obvious code behavior unless an obscure or complex algorithm needs explanation.
+- Precede standalone comments with a blank line.
+- End-of-line comments are acceptable in short declaration blocks. Align those comments to a consistent visual column so they remain tidy.

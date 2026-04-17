@@ -1,11 +1,15 @@
-# Junie-Specific Downstream Notes
+# Overview
 
-This file is for Junie. If you are a different agent, ignore this file and look for your own guidelines file instead. If your guidelines file does not exist in this project, report that to the user before proceeding.
+This file is the Junie-specific mix-in used to build downstream guidelines.
 
-Combine this file with `downstream/guidelines/shared.md` at deployment time.
+Any agent working in this repository may read or edit it.
 
-Environment-specific shell and path behavior should come from the selected file in `downstream/environments/`.
+Combine it with `downstream/guidelines/shared.md` during export.
 
-## Junie-Specific Execution Rules
+All text in the `Mix-In Content` section is copied verbatim into the downstream export file.
 
+## Mix-In Content
+
+- This file is for Junie. If you are a different agent, ignore this file and look for your own guidelines file instead. If your guidelines file does not exist in this project, report that to the user before proceeding.
+- The deployment target for Junie uses `.junie/guidelines.md`.
 - Always set `MARKER_JUNIE_TERMINAL=1` before executing bash commands.

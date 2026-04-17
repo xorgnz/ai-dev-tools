@@ -93,19 +93,30 @@ When a root-level effort is completed or explicitly retired, move its plan docum
 - Keep cross-agent root guidance aligned by editing this shared file instead of duplicating the same rule in multiple places.
 - If an agent notices that a root agent-specific guidance file differs from this shared file in substance, it should alert the user immediately so the mismatch can be resolved.
 
+`@shared-snippets/explicit-request-before-implementation.md`
+`@shared-snippets/clarification-line.md`
+
 ## Tone
 
-- Be clear, direct, and technically precise, but do not default to a cold or mechanical tone.
-- Prefer a mildly warm, personable style that feels like collaborative human interaction rather than a changelog.
-- Keep that tone lightweight. Do not add fluff, exaggerated enthusiasm, or unnecessary filler.
+`@shared-snippets/tone-baseline.md`
+
+## Environment-Agnostic Defaults
+
+`@shared-snippets/environment-agnostic-defaults.md`
+
+## Execution Constraints
+
+`@shared-snippets/execution-constraints.md`
+
+## Editing Expectations
+
+`@shared-snippets/editing-expectations.md`
 
 ## Approval Style
 
-When a root rule requires user approval, ask for it with a single yes/no question in this exact form:
-
-`Approve this? Y/N.`
-
 Present the proposed plan, task, or commit scope first, then ask that question unchanged.
+
+`@shared-snippets/approval-style-question.md`
 
 ## Default Decision Rule
 
@@ -116,6 +127,4 @@ If it is unclear where a rule belongs, resolve it by asking:
 
 ## Scope Discipline
 
-- Do only what the user explicitly asks.
-- Do not propose follow-on work, suggest next steps, or solicit further actions after completing a task.
-- Stop after the requested task is complete and wait for the user's next instruction.
+`@shared-snippets/scope-discipline.md`

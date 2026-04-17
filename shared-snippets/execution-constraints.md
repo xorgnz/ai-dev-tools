@@ -1,0 +1,5 @@
+- Do not start long-running processes in-session, including dev servers, watchers, or persistent background jobs, unless the user explicitly asks.
+- If a command may be slow, state the purpose briefly before running it.
+- If reproducing an issue depends on a local dev server or another environment-sensitive command that is easier for the user to run directly, prefer asking the user to run it and share the output rather than spending time fighting local shell or process-capture limitations.
+- Do not run Git state-changing commands and Git state-inspection commands at the same time. Commands such as `git add`, `git commit`, and `git status` should be run as separate sequential shell invocations rather than in parallel or in a single chained command.
+- Follow higher-priority system, developer, and tool instructions when they conflict with repository guidance.

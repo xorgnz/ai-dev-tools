@@ -8,8 +8,9 @@ When needed, you may also append one or more technology-specific overlays from `
 
 ## Project Workflow
 
-- Do not begin implementation or multi-step work without an explicit user request.
-- If the target feature or task is unclear, ask one concise clarification before proceeding.
+- Do not apply root repository rules (e.g., `ai-rules/rule-*`) in downstream projects; use only the downstream rules and overlays provided here.
+<include src="../../shared-snippets/explicit-request-before-implementation.md" />
+<include src="../../shared-snippets/clarification-line.md" />
 - Work step-by-step and avoid combining unrelated changes in a single pass.
 - Prefer repo-aware tools and minimal, traceable edits over broad rewrites.
 - You may refer to repository files directly with `@` file references when the UI supports them.
@@ -25,40 +26,24 @@ When needed, you may also append one or more technology-specific overlays from `
 
 ## Approval Style
 
-- When a downstream rule requires user approval, ask for it with this exact question: `Approve this? Y/N.`
+<include src="../../shared-snippets/approval-style-question.md" />
+
+## Scope Discipline
+
+<include src="../../shared-snippets/scope-discipline.md" />
 
 ## Tone
 
-- Be clear, direct, and technically precise, but do not default to a cold or mechanical tone.
-- Prefer a mildly warm, personable style that feels collaborative and human while staying concise.
-- Keep that tone lightweight. Do not add fluff, exaggerated enthusiasm, or unnecessary filler.
+<include src="../../shared-snippets/tone-baseline.md" />
 
 ## Environment-Agnostic Defaults
 
-- Keep commands non-interactive when feasible.
-- Consider the consequences of running commands in parallel before attempting to do so.
+<include src="../../shared-snippets/environment-agnostic-defaults.md" />
 
 ## Execution Constraints
 
-- Do not start long-running processes in-session, including dev servers, watchers, or persistent background jobs, unless the user explicitly asks.
-- If a command may be slow, state the purpose briefly before running it.
-- If reproducing an issue depends on a local dev server or another environment-sensitive command that is easier for the user to run directly, prefer asking the user to run it and share the output rather than spending time fighting local shell or process-capture limitations.
-- Do not run Git state-changing commands and Git state-inspection commands at the same time. Commands such as `git add`, `git commit`, and `git status` should be run as separate sequential shell invocations rather than in parallel or in a single chained command.
-- Follow higher-priority system, developer, and tool instructions when they conflict with repository guidance.
+<include src="../../shared-snippets/execution-constraints.md" />
 
 ## Editing Expectations
 
-- Prefer small, focused changes that match the existing codebase patterns.
-- Preserve unrelated user changes in the worktree.
-- When practical, validate changes with targeted checks or tests that do not require long-running processes.
-
-## JavaScript Style
-
-- Use 4-space indentation. Do not use tabs for indentation.
-- Put opening braces on a new line for functions, methods, conditionals, loops, and classes unless an existing file clearly follows a different local convention.
-- Prefer simple functions and methods where practical.
-- Favor straightforward control flow and small units of logic over clever or densely abstracted code.
-- Add brief comments before each logical block of code to orient the reader.
-- Keep comments short and directional. Do not restate obvious code behavior unless an obscure or complex algorithm needs explanation.
-- Precede standalone comments with a blank line.
-- End-of-line comments are acceptable in short declaration blocks. Align those comments to a consistent visual column so they remain tidy.
+<include src="../../shared-snippets/editing-expectations.md" />

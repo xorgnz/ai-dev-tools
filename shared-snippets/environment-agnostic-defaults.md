@@ -1,0 +1,2 @@
+- Keep commands non-interactive when feasible.
+- Consider the consequences of running commands in parallel before attempting to do so.

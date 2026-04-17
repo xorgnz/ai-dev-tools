@@ -1,0 +1,3 @@
+- Prefer small, focused changes that match the existing codebase patterns.
+- Preserve unrelated user changes in the worktree.
+- When practical, validate changes with targeted checks or tests that do not require long-running processes.

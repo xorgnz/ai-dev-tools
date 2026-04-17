@@ -1,9 +1,15 @@
-# Claude-Specific Downstream Notes
+# Overview
 
-This file is for Claude. If you are a different agent, ignore this file and look for your own guidelines file instead. If your guidelines file does not exist in this project, report that to the user before proceeding.
+This file is the Claude-specific mix-in used to build downstream guidelines.
 
-Combine this file with `downstream/guidelines/shared.md` at deployment time.
+Any agent working in this repository may read or edit it.
 
-The deployment target for Claude uses `CLAUDE.md`.
+Combine it with `downstream/guidelines/shared.md` during export.
 
-There are currently no Claude-specific behavior overrides beyond the shared downstream guidance.
+All text in the `Mix-In Content` section is copied verbatim into the downstream export file.
+
+## Mix-In Content
+
+- This file is for Claude. If you are a different agent, ignore this file and look for your own guidelines file instead. If your guidelines file does not exist in this project, report that to the user before proceeding.
+
+- The deployment target for Claude uses `CLAUDE.md`.
