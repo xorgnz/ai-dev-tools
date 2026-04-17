@@ -120,6 +120,12 @@ The merged guideline file should consist of:
 
 Keep clear separation between each section in the merged guideline file.
 
+In the merged guideline file, each selected fragment must appear under its own section header.
+
+Do not preserve fragment heading levels verbatim when that would break the merged file hierarchy. Normalize heading levels so fragment content fits cleanly under its section header in the merged output.
+
+Because the merged file already has top-level structure, fragment section headers should not be emitted as top-level (`#`) headings in the merged output.
+
 If any source section contains snippet include tags such as `<include src="../../shared-snippets/<file>.md" />`, resolve those includes by inlining the referenced snippet text in the merged export file.
 
 ## Process
@@ -147,16 +153,17 @@ If any source section contains snippet include tags such as `<include src="../..
 16. If the request includes an export run, write the merged guideline file to the correct agent-specific export path.
 17. If the request includes an export run, copy the full downstream `rules/` directory into `downstream/export/ai-rules/`.
 18. If the request includes an export run, resolve any snippet include tags in the merged guideline content before finalizing the output file.
-19. If the request includes an export run, ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset fragments.
+19. If the request includes an export run, ensure each selected fragment is emitted under its own non-top-level section header and normalize fragment heading levels to match merged file hierarchy.
+20. If the request includes an export run, ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset fragments.
 
 ### Report
 
-20. Report which profile was used, created, or updated, if any.
-21. Report which agent was exported.
-22. Report which environment was exported.
-23. Report which toolset fragments were included, if any.
-24. Report which guideline file was generated.
-25. Report that `downstream/export/` was replaced with the new export bundle when an export run occurred.
+21. Report which profile was used, created, or updated, if any.
+22. Report which agent was exported.
+23. Report which environment was exported.
+24. Report which toolset fragments were included, if any.
+25. Report which guideline file was generated.
+26. Report that `downstream/export/` was replaced with the new export bundle when an export run occurred.
 
 ## Default Behavior
 

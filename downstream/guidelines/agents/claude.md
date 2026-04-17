@@ -6,7 +6,7 @@ Any agent working in this repository may read or edit it.
 
 Combine it with `downstream/guidelines/shared.md` during export.
 
-All text in the `Fragment Content` section is copied verbatim into the downstream export file.
+All text in the `Fragment Content` section is included in the downstream export file. During export, heading levels are adjusted to fit the merged document hierarchy, and this fragment is placed under its own section header.
 
 ## Fragment Content
 

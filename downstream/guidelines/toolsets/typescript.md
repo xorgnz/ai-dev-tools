@@ -1,8 +1,20 @@
-# TypeScript Toolset Notes
+# Overview
+
+This file is the TypeScript toolset fragment used to build downstream guidelines.
+
+Any agent working in this repository may read or edit it.
+
+Combine it with `downstream/guidelines/shared.md` during export.
+
+All text in the `Fragment Content` section is included in the downstream export file. During export, heading levels are adjusted to fit the merged document hierarchy, and this fragment is placed under its own section header.
+
+## Fragment Content
+
+### TypeScript Toolset Notes
 
 Use this fragment when the downstream project is primarily built with TypeScript.
 
-## Toolset Expectations
+#### Toolset Expectations
 
 - Prefer TypeScript over plain JavaScript for application and library code unless the target repository clearly uses JavaScript in the relevant area.
 - Follow the existing `tsconfig.json` and formatter/linter settings in the target repository rather than imposing new defaults.
@@ -10,14 +22,14 @@ Use this fragment when the downstream project is primarily built with TypeScript
 - Treat free-standing global functions as the exception rather than the default.
 - Treat anonymous object literals as short-lived transport values, not as substitutes for named domain objects that carry behavior, invariants, or lifecycle.
 
-## TypeScript
+#### TypeScript
 
 - Prefer explicit types where they materially improve readability or catch edge cases, especially for exported functions, public interfaces, and complex data shapes.
 - Avoid introducing broad `any` usage unless the surrounding code already relies on it and tightening types is outside the requested scope.
 - Do not spread related behavior across ad hoc exported helpers unless the code is genuinely tiny, stateless, and local in scope.
 - Keep helper types readable; avoid type-level cleverness unless the existing codebase already uses that style.
 
-## JavaScript Style
+#### JavaScript Style
 
 - Use 4-space indentation. Do not use tabs for indentation.
 - Put opening braces on a new line for functions, methods, conditionals, loops, and classes unless an existing file clearly follows a different local convention.
@@ -28,6 +40,6 @@ Use this fragment when the downstream project is primarily built with TypeScript
 - Precede standalone comments with a blank line.
 - End-of-line comments are acceptable in short declaration blocks. Align those comments to a consistent visual column so they remain tidy.
 
-## Validation
+#### Validation
 
 - When practical, prefer targeted checks that fit the stack, such as TypeScript checking or focused test runs already defined by the target repository.
