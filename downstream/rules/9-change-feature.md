@@ -4,19 +4,6 @@ timestamp: 2026-04-05 18:56
 ---
 # Rule: Switch, Activate, Pause, or Close a Feature
 
-## Goal
-
-To guide an AI assistant in changing the current working feature by updating `/ai-work/00-feature-status.md` and, when required by configuration, updating Git branches, while enforcing the rule that only one feature may be active at a time.
-
-## When to Use
-
-Use this rule when the user wants to:
-
-- switch to another existing feature
-- activate a planned feature
-- close a feature after it has been merged or otherwise completed
-- use a convenience command to create and activate a feature in one flow
-
 ## Source of Truth
 
 Use `/ai-work/00-feature-status.md` as the authoritative record for:

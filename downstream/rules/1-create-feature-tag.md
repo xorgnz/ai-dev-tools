@@ -4,14 +4,6 @@ timestamp: 2026-04-17 09:22
 ---
 # Rule: Creating a Feature Tag
 
-## Goal
-
-To guide an AI assistant in creating a unique, descriptive feature tag that will be used to organize all documentation, optional branch naming, and implementation artifacts for a feature throughout its lifecycle.
-
-## When to Use
-
-Use this rule before creating scope, PRD, tasks, or implementation work for a new feature.
-
 ## Single-Feature Workflow
 
 This project supports only one active feature at a time.

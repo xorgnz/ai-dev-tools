@@ -4,12 +4,6 @@ timestamp: 2026-04-17 10:35
 ---
 # Rule: Prepare a Commit for Approval
 
-## Overview. 
-
-This rule guides an AI assistant in preparing commits to git. To execute, parse the invocation in Step 0, then work through steps 1 through 6 in order.
-
-Use this rule when the user explicitly asks to run rule 8 or otherwise asks to prepare a commit.
-
 ## Core Principle
 
 The AI must not commit automatically when using this rule unless the user explicitly includes approval in the same request.

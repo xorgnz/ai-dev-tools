@@ -4,14 +4,6 @@ timestamp: 2026-04-17 09:23
 ---
 # Rule: Technology Stack Selection and Documentation
 
-## Goal
-
-To guide an AI assistant in evaluating technical requirements from the active feature PRD or an explicitly selected planned feature PRD, proposing appropriate technology options, facilitating user decision-making, and documenting shared technology choices with minimal duplication.
-
-## When to Use
-
-Use this rule after creating the PRD and before creating the task list.
-
 ## Prerequisites
 
 - A feature tag must exist

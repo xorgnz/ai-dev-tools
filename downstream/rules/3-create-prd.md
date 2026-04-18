@@ -4,10 +4,6 @@ timestamp: 2026-04-17 09:22
 ---
 # Rule: Generating a Product Requirements Document (PRD)
 
-## Goal
-
-To guide an AI assistant in creating a clear, implementation-relevant Product Requirements Document in Markdown format for the active feature or an explicitly selected planned feature, based on the scope and the user's clarifications.
-
 ## Prerequisites
 
 - A feature tag must exist

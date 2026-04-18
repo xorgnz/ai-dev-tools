@@ -4,10 +4,6 @@ timestamp: 2026-04-17 09:22
 ---
 # Rule: Creating a High-Level Project Scope
 
-## Goal
-
-To guide an AI assistant in working with the user to create a concise, high-level scope document that captures why a feature exists and where its boundaries are before detailed requirements are written.
-
 ## Prerequisites
 
 - A feature tag must already exist

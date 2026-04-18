@@ -4,10 +4,6 @@ timestamp: 2026-04-13 00:00
 ---
 # Rule: Generating a Task List from User Requirements
 
-## Goal
-
-To guide an AI assistant in creating a concise, implementation-ready task list in Markdown format for the active feature or an explicitly selected planned feature.
-
 ## Prerequisites
 
 - A feature tag must exist

@@ -4,10 +4,6 @@ timestamp: 2026-04-17 09:24
 ---
 # Rule: Performing a Task for the Active Feature
 
-## Goal
-
-To guide an AI assistant in executing development tasks from structured task lists while maintaining proper environment configuration, approval protocols, any required branch alignment, and accurate progress tracking.
-
 ## Prerequisites
 
 - `/ai-work/00-workflow-config.md` should exist
