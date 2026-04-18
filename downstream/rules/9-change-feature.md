@@ -32,6 +32,7 @@ This rule does **not** independently create new features.
 
 - Feature creation belongs to rule `1-create-feature-tag.md`
 - This rule handles working-state changes: `switch`, `activate`, and `close`
+- Do not offer standalone `pause` as a primary workflow action; use `switch` to leave a feature paused, or `close` to end active work without selecting a replacement
 - If the user says `create and activate`, treat that as a convenience flow:
   1. invoke rule 1 to create the feature tag and feature entry
   2. then continue with activation under this rule
@@ -155,15 +156,3 @@ AI: [Reads 00-feature-status.md]
 AI: [Marks 02-vchannel-mgmt completed]
 AI: "Feature `02-vchannel-mgmt` is now completed. No feature is currently active until you activate or switch to another feature."
 ```
-
-## Final Instructions
-
-1. `/ai-work/00-feature-status.md` is the feature-state source of truth
-2. `/ai-work/00-workflow-config.md` is the branch-workflow source of truth
-3. Only one feature may be active at a time
-4. If `branch_mode: required`, align active feature state and branch state when a feature is active
-5. If `branch_mode: optional`, allow feature-state changes without requiring branch creation or branch switching
-6. Treat paused features as resumable but inactive
-7. Treat completed features as read-only by default
-8. Do not offer standalone `pause` as a primary workflow action; use `switch` to leave a feature paused, or `close` to end active work without selecting a replacement
-9. If the request is ambiguous across multiple valid feature-state transitions, ask instead of inferring

@@ -85,15 +85,3 @@ As each task or sub-task is completed:
 6. Do not run long-running application servers unless explicitly asked
 7. Follow `AGENTS.md` for command, style, and environment conventions
 
-## Final Instructions
-
-1. Never start tasks without explicit user approval
-2. Always use the active feature in `/ai-work/00-feature-status.md`
-3. Use `/ai-work/00-workflow-config.md` as the source of truth for branch workflow mode
-4. A feature argument is optional and must not override the active feature
-5. If no feature is active, refuse implementation work until the user activates or switches to a feature
-6. Treat paused features as inactive until switched back in
-7. Refuse routine edits to completed features
-8. Read `/ai-work/00-master-techstack.md` before implementation when that file exists
-9. Always update task checkboxes immediately upon completion
-10. Check off the parent task when its last sub-task is done and the task itself is actually complete

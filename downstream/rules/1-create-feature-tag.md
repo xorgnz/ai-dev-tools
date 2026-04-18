@@ -100,12 +100,3 @@ If `branch_mode: required` or the user otherwise chooses to use a feature branch
 
 - **Format:** Plain text
 - **Example:** `03-user-auth`
-
-## Final Instructions
-
-1. Offer feature-tag creation only when no valid target feature already exists for the requested scope, PRD, or task work
-2. Only one feature may be active at a time
-3. Use `/ai-work/00-feature-status.md` as the source of truth for feature state
-4. Use `/ai-work/00-workflow-config.md` as the source of truth for branch workflow mode
-5. Do not activate the feature branch from this rule; use the feature-change rule for that
-6. Do not proceed to create the scope document unless explicitly asked

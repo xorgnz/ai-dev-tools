@@ -40,11 +40,3 @@ The task list must include:
 The task list may also include supporting sections such as `## Relevant Files` when they add real value.
 
 Tasks must use markdown checkboxes. Use hierarchical numbering only when it improves readability.
-
-## Final Instructions
-
-1. All task tracking occurs inside `/ai-work/{feature-tag}-tasks.md`
-2. Generate the full task list in one pass unless the user explicitly asks for a staged draft-first workflow
-3. Keep the task list focused on concrete implementation work rather than template filler
-4. Do not generate or revise task lists for paused or completed features
-5. Allow task generation for an explicitly selected planned feature without activating it

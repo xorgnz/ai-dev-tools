@@ -107,13 +107,3 @@ AI: [Summarizes the scope]
 AI: [Shows a draft for approval]
 AI: "Feature `03-user-auth` remains planned. I can write the approved scope without activating it."
 ```
-
-## Final Instructions
-
-1. Keep the scope high-level
-2. Focus on what and why, not how
-3. Treat the scope as the upstream planning document rather than the implementation-facing source of truth
-4. Expect the later PRD to carry forward the important boundary content in implementation-ready form
-5. Do not create or update scope files for paused or completed features unless the user explicitly asks to make an exception
-6. Require explicit approval before writing the scope file
-7. Do not proceed to create a PRD unless explicitly asked
