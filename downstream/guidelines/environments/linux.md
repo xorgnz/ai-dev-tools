@@ -8,16 +8,12 @@ This `Header` section is source-only metadata and must not be copied into downst
 
 # Content
 
-### Linux Environment Notes
-
-Use this fragment when the downstream project is being run from a native Linux shell environment.
-
-#### Commands And Paths
+## Commands And Paths
 
 - Use POSIX/Linux commands such as `ls`, `grep`, `cat`, and `export`.
 - Prefer forward slashes in paths such as `ai-work/` and standard POSIX flags.
 - Keep commands non-interactive. Add flags such as `-y` or `--yes` where applicable.
 
-#### Runtime Assumptions
+## Runtime Assumptions
 
 - Treat the execution environment as native Linux shell behavior rather than Windows or WSL-specific shell behavior.

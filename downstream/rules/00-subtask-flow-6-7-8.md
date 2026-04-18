@@ -6,7 +6,7 @@ timestamp: 2026-04-17 09:21
 
 ## Goal
 
-To define a reusable shorthand for processing the subtasks of a parent task one at a time using the existing downstream task execution, validation, and commit rules.
+To define a reusable shorthand for processing the subtasks of a parent task one at a time using the existing task execution, validation, and commit rules.
 
 ## Shortcut Phrase
 

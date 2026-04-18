@@ -1,21 +1,22 @@
-# Shared Downstream Guidelines
+# Header
 
-This file is the shared base for downstream agent guidelines.
+This file is the shared base used to build downstream guidelines.
 
-At deployment time, combine this file with exactly one agent-specific file from `downstream/guidelines/agents/` and exactly one environment-specific file from `downstream/guidelines/environments/`.
+Any agent working in this repository may read or edit it.
 
-When needed, you may also append one or more technology-specific fragments from `downstream/guidelines/toolsets/`.
+This `Header` section is source-only metadata and must not be copied into downstream export files.
+
+# Content
 
 ## Project Workflow
 
-- Do not apply root repository rules (e.g., `ai-rules/rule-*`) in downstream projects; use only the downstream rules and fragments provided here.
 <include src="../../shared-snippets/explicit-request-before-implementation.md" />
 <include src="../../shared-snippets/clarification-line.md" />
 - Work step-by-step and avoid combining unrelated changes in a single pass.
 - Prefer repo-aware tools and minimal, traceable edits over broad rewrites.
 - You may refer to repository files directly with `@` file references when the UI supports them.
 - For rule-driven work, prefer short requests such as `Rule: @ai-rules/5-create-tasks.md` and `Feature: 01-some-feature`.
-- If the user says `rule 1`, `rule 2`, `rule 3`, and so on, treat that as an instruction to run the corresponding downstream rule rather than merely describing it.
+- If the user says `rule 1`, `rule 2`, `rule 3`, and so on, treat that as an instruction to run the corresponding rule rather than merely describing it.
 - Any time the user asks you to execute a rule, look through the relevant instructions in `ai-rules/` before proceeding.
 - After recognizing a numbered rule invocation, parse the remaining tokens against that rule's documented arguments before applying generic feature, task, branch, or free-form inference.
 - If a token matches both a reserved rule argument and a possible feature alias, branch name, task label, or free-form description, prefer the reserved rule argument unless the user explicitly identifies the other target, for example with `feature <tag>`.
