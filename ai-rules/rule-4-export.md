@@ -138,14 +138,20 @@ The export must contain:
 
 The merged guideline file should consist of:
 
-1. the shared downstream guidelines
-2. the selected agent-specific downstream guideline file
-3. the selected environment-specific guideline file
-4. any selected toolset-specific guideline files
+1. the `Content` section from the shared downstream guideline file
+2. the `Content` section from the selected agent-specific downstream guideline file, if non-empty
+3. the `Content` section from the selected environment-specific guideline file
+4. the `Content` section from any selected toolset-specific guideline files
 
 Keep clear separation between each section in the merged guideline file.
 
-In the merged guideline file, each selected fragment must appear under its own section header.
+Do not add export metadata to the merged guideline file. The file must not include profile names, selected source inputs, generated-output labels, or headings such as `Downstream Guidelines Export` or `Shared Downstream Guidelines`.
+
+The shared guideline `Content` should appear directly under the merged guideline file title without an extra `Shared` wrapper heading.
+
+In the merged guideline file, each selected non-empty fragment must appear under its own section header.
+
+Use reader-facing section headers such as `Windows`, `TypeScript`, `SvelteKit`, and `CSS`; do not include source assembly labels such as `Fragment`, `Toolset`, or `Environment` in emitted section headers.
 
 Do not preserve fragment heading levels verbatim when that would break the merged file hierarchy. Normalize heading levels so each fragment's `Content` section fits cleanly under its section header in the merged output.
 
@@ -179,7 +185,7 @@ If any source section contains snippet include tags such as `<include src="../..
 17. If the request includes an export run, write the merged guideline file to the correct agent-specific export path.
 18. If the request includes an export run, copy the full downstream `rules/` directory into `downstream/export/ai-rules/`.
 19. If the request includes an export run, resolve any snippet include tags in the merged guideline content before finalizing the output file.
-20. If the request includes an export run, ensure each selected fragment is emitted under its own non-top-level section header and normalize fragment heading levels to match merged file hierarchy.
+20. If the request includes an export run, ensure each selected non-empty fragment is emitted under its own non-top-level reader-facing section header and normalize fragment heading levels to match merged file hierarchy.
 21. If the request includes an export run, ensure the export contains only artifacts for the selected agent, the selected environment, and any explicitly selected toolset fragments.
 
 ### Report
