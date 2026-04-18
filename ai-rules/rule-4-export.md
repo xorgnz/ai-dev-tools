@@ -147,7 +147,7 @@ Keep clear separation between each section in the merged guideline file.
 
 In the merged guideline file, each selected fragment must appear under its own section header.
 
-Do not preserve fragment heading levels verbatim when that would break the merged file hierarchy. Normalize heading levels so fragment content fits cleanly under its section header in the merged output.
+Do not preserve fragment heading levels verbatim when that would break the merged file hierarchy. Normalize heading levels so each fragment's `Content` section fits cleanly under its section header in the merged output.
 
 Because the merged file already has top-level structure, fragment section headers should not be emitted as top-level (`#`) headings in the merged output.
 
