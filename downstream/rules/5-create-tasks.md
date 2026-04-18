@@ -9,8 +9,8 @@ timestamp: 2026-04-13 00:00
 - A feature tag must exist
 - `/ai-work/00-feature-status.md` must identify the feature as `active` or an explicitly selected `planned` feature
 - The feature must not be marked `paused` or `completed`
-- A PRD should exist at `/ai-work/{feature-tag}-prd.md`
-- The master tech stack should exist at `/ai-work/00-master-techstack.md` if technology decisions have already been documented
+- A PRD must exist at `/ai-work/{feature-tag}-prd.md`
+- The master tech stack must exist at `/ai-work/00-master-techstack.md`
 
 ## Output
 

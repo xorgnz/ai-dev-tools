@@ -6,11 +6,9 @@ timestamp: 2026-04-17 09:24
 
 ## Prerequisites
 
-- `/ai-work/00-workflow-config.md` should exist
 - `/ai-work/00-feature-status.md` must exist
 - A feature must be marked `active`
 - A task list must exist at `/ai-work/{feature-tag}-tasks.md`
-- `/ai-work/00-master-techstack.md` is the shared technology source of truth if it exists
 
 ## Active Feature Protocol
 

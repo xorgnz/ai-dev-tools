@@ -9,8 +9,7 @@ timestamp: 2026-04-17 09:22
 - A feature tag must exist
 - `/ai-work/00-feature-status.md` must identify the feature as `active` or an explicitly selected `planned` feature
 - The feature must not be marked `paused` or `completed`
-- A scope file should exist at `/ai-work/{feature-tag}-scope.md`
-- Follow the shared feature-state contract in `/ai-work/00-feature-status.md`
+- A scope file must exist at `/ai-work/{feature-tag}-scope.md`
 
 ## Process
 

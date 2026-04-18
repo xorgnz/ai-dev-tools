@@ -8,8 +8,6 @@ timestamp: 2026-04-17 09:22
 
 - A feature tag must already exist
 - `/ai-work/00-feature-status.md` must identify the feature as the current active feature or an explicitly selected planned feature
-- The feature must not be marked `paused` or `completed` unless the user explicitly asks for an exception
-- Follow the shared feature-state contract in `/ai-work/00-feature-status.md`
 
 ## Process
 

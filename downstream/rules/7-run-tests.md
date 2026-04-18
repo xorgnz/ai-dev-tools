@@ -4,13 +4,6 @@ timestamp: 2026-04-18 00:00
 ---
 # Rule: Running Project Validation And Tests
 
-## Prerequisites
-
-- Follow the repository guidance in `AGENTS.md`
-- Review the relevant task file at `/ai-work/{feature-tag}-tasks.md` when working against a specific feature
-- Review `/ai-work/00-master-techstack.md` if it exists
-- Inspect the repository's available scripts, documented commands, and test tooling before choosing commands
-
 ## Core Principle
 
 Run the smallest meaningful validation set that matches the user's request and the scope of the change.
@@ -38,6 +31,8 @@ Run the smallest meaningful validation set that matches the user's request and t
         - `/ai-work/00-master-techstack.md`
         - `/ai-work/{feature-tag}-tasks.md` when applicable
         - project-specific README or tooling docs
+    - When validating a specific feature or task, review the relevant task file before choosing commands.
+    - Review `/ai-work/00-master-techstack.md` when it exists.
     - Identify only commands that are actually available in the current repository.
 
 3. **Choose Commands**
