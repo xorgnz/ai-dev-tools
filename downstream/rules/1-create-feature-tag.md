@@ -9,18 +9,8 @@ timestamp: 2026-04-17 09:22
 This project supports only one active feature at a time.
 
 - The active feature must be tracked in `/ai-work/00-feature-status.md`
-- Branch requirements are controlled by `/ai-work/00-workflow-config.md`
 - Other unfinished features may exist in a `paused` state, but they are not the current working feature
 - If another feature is already active, do not create a new working feature until the user explicitly switches or closes the current one using the feature-change workflow
-
-## Workflow Config
-
-Use `/ai-work/00-workflow-config.md` as the source of truth for:
-
-- `branch_mode: required`
-- `branch_mode: optional`
-
-If the file is missing, ask the user which mode to use, write the file, and then continue.
 
 ## Feature Tag Format
 
@@ -40,8 +30,6 @@ Examples:
 ## Process
 
 1. **Check Feature Status**
-   - Read `/ai-work/00-workflow-config.md` if it exists
-   - If it does not exist, ask whether `branch_mode` should be `required` or `optional`, then write `/ai-work/00-workflow-config.md`
    - Read `/ai-work/00-feature-status.md` if it exists
    - If it shows an active feature, do not create a new working feature without explicit user direction to change or close features first
 
@@ -66,7 +54,6 @@ Examples:
    - After approval, add the feature to `/ai-work/00-feature-status.md`
    - Mark the feature as `planned`
    - Activation happens through the feature-change rule
-   - Branch creation also happens through the feature-change rule when `branch_mode: required`
 
 ## Identifier Guidelines
 
@@ -91,10 +78,6 @@ Once created, the feature tag is used to name all related files:
 - `{feature-tag}-scope.md`
 - `{feature-tag}-prd.md`
 - `{feature-tag}-tasks.md`
-
-If `branch_mode: required` or the user otherwise chooses to use a feature branch, the branch should be:
-
-- `feature/{feature-tag}`
 
 ## Output
 

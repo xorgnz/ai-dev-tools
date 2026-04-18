@@ -16,12 +16,7 @@ timestamp: 2026-04-17 09:24
 
 - Use `/ai-work/00-feature-status.md` as the source of truth for:
   - the active feature
-  - the active branch
   - whether a feature is planned, active, paused, or completed
-
-- Use `/ai-work/00-workflow-config.md` as the source of truth for whether `branch_mode` is `required` or `optional`
-
-- If `/ai-work/00-workflow-config.md` is missing, ask the user whether `branch_mode` should be `required` or `optional`, write the file, and then continue
 
 ### Non-Active Features
 
@@ -30,13 +25,6 @@ timestamp: 2026-04-17 09:24
 - Tell the user to switch features first by using the feature-change workflow if they want to resume a paused feature
 - Treat completed features as read-only by default
 - Refuse to modify scope, PRD, tasks, or implementation for a completed feature unless the user explicitly asks for an exception
-
-### Branch Alignment
-
-- If `branch_mode: required` and the current branch does not match the active feature branch, do not proceed with implementation
-- If `branch_mode: required`, tell the user to switch features first by using the feature-change workflow
-- If `branch_mode: optional`, do not block implementation solely because the current branch does not match the active feature branch
-- If `branch_mode: optional`, treat branch use as advisory unless the user explicitly asks to work on a specific branch
 
 ## Task Selection Process
 
