@@ -24,7 +24,7 @@ Also follow the shared feature-state contract in `/ai-work/00-feature-status.md`
 
 This rule does **not** independently create new features.
 
-- Feature creation belongs to rule `1-create-feature-tag.md`
+- Feature creation belongs to rule `01-create-feature-tag.md`
 - This rule handles working-state changes: `switch`, `activate`, and `close`
 - Do not offer standalone `pause` as a primary workflow action; use `switch` to leave a feature paused, or `close` to end active work without selecting a replacement
 - If the user says `create and activate`, treat that as a convenience flow:
@@ -62,7 +62,7 @@ This rule does **not** independently create new features.
 
 Use this only when the user explicitly asks for both actions together.
 
-1. Invoke rule `1-create-feature-tag.md`
+1. Invoke rule `01-create-feature-tag.md`
 2. Confirm the new feature now exists in `/ai-work/00-feature-status.md` as `planned`
 3. Continue with the activation flow in this rule
 

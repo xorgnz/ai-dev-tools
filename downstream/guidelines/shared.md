@@ -15,7 +15,7 @@ This `Header` section is source-only metadata and must not be copied into downst
 - Work step-by-step and avoid combining unrelated changes in a single pass.
 - Prefer repo-aware tools and minimal, traceable edits over broad rewrites.
 - You may refer to repository files directly with `@` file references when the UI supports them.
-- For rule-driven work, prefer short requests such as `Rule: @ai-rules/5-create-tasks.md` and `Feature: 01-some-feature`.
+- For rule-driven work, prefer short requests such as `Rule: @ai-rules/05-create-tasks.md` and `Feature: 01-some-feature`.
 - If the user says `rule 1`, `rule 2`, `rule 3`, and so on, treat that as an instruction to run the corresponding rule rather than merely describing it.
 - Any time the user asks you to execute a rule, look through the relevant instructions in `ai-rules/` before proceeding.
 - After recognizing a numbered rule invocation, parse the remaining tokens against that rule's documented arguments before applying generic feature, task, or free-form inference.
