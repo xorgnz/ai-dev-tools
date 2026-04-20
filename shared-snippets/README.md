@@ -25,7 +25,7 @@ Current Snippets
 - `scope-discipline.md` - Canonical scope-discipline sentence used in root and downstream.
 - `approval-style-question.md` - Canonical approval question string.
 - `clarification-line.md` - Canonical one-line clarification guidance.
-- `explicit-request-before-implementation.md` - Canonical explicit-request requirement before implementation work.
+- `explicit-instruction-required.md` - Canonical requirement that agents do work only when explicitly instructed.
 - `tone-baseline.md` - Canonical shared tone bullets for root and downstream guidance.
 - `environment-agnostic-defaults.md` - Canonical command execution defaults.
 - `execution-constraints.md` - Canonical constraints for process and Git command execution.

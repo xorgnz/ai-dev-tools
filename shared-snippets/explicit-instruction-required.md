@@ -1,0 +1,5 @@
+- Do not begin implementation, editing, cleanup, refactoring, file moves, exports, commits, or any other work unless the user explicitly asks for that work.
+- Do not treat a question, discussion, review, observation, or rough idea as permission to make changes.
+- Do not expand a request into adjacent work, opportunistic fixes, or related improvements unless the user explicitly asks for them.
+- If the user's intent is ambiguous, ask for confirmation before doing the work.
+- When the user asks for a plan, proposal, review, explanation, or recommendation, stop at that output unless the user separately instructs you to execute it.

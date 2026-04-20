@@ -96,7 +96,7 @@ When a root-level effort is completed or explicitly retired, move its plan docum
 - Keep cross-agent root guidance aligned by editing this shared file instead of duplicating the same rule in multiple places.
 - If an agent notices that a root agent-specific guidance file differs from this shared file in substance, it should alert the user immediately so the mismatch can be resolved.
 
-`@shared-snippets/explicit-request-before-implementation.md`
+`@shared-snippets/explicit-instruction-required.md`
 `@shared-snippets/clarification-line.md`
 
 ## Tone

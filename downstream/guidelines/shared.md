@@ -10,7 +10,7 @@ This `Header` section is source-only metadata and must not be copied into downst
 
 ## Project Workflow
 
-<include src="../../shared-snippets/explicit-request-before-implementation.md" />
+<include src="../../shared-snippets/explicit-instruction-required.md" />
 <include src="../../shared-snippets/clarification-line.md" />
 - Work step-by-step and avoid combining unrelated changes in a single pass.
 - Prefer repo-aware tools and minimal, traceable edits over broad rewrites.
