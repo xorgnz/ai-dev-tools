@@ -1,6 +1,6 @@
 ---
-version: 1.3.3
-timestamp: 2026-04-17 09:22
+version: 1.3.4
+timestamp: 2026-04-19 00:00
 ---
 # Rule: Creating a High-Level Project Scope
 
@@ -17,7 +17,7 @@ timestamp: 2026-04-17 09:22
    - Read `/ai-work/00-feature-status.md`
    - Use the active feature by default
    - If the user names a different feature and it is `planned`, scope creation may proceed without activating that feature
-   - If the user names a different feature and it is `paused` or `completed`, only proceed if they explicitly ask for an exception
+   - If the user names a different feature and it is `paused`, `completed`, or `archived`, only proceed if they explicitly ask for an exception
    - Only require the feature-change workflow when the user wants a different feature to become the active working feature
 
 2. **Ask Discovery Questions**

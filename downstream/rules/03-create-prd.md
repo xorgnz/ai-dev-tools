@@ -1,6 +1,6 @@
 ---
-version: 1.6.2
-timestamp: 2026-04-17 09:22
+version: 1.6.3
+timestamp: 2026-04-19 00:00
 ---
 # Rule: Generating a Product Requirements Document (PRD)
 
@@ -8,7 +8,7 @@ timestamp: 2026-04-17 09:22
 
 - A feature tag must exist
 - `/ai-work/00-feature-status.md` must identify the feature as `active` or an explicitly selected `planned` feature
-- The feature must not be marked `paused` or `completed`
+- The feature must not be marked `paused`, `completed`, or `archived`
 - A scope file must exist at `/ai-work/{feature-tag}-scope.md`
 
 ## Process
@@ -19,7 +19,7 @@ timestamp: 2026-04-17 09:22
    - Read `/ai-work/00-feature-status.md`
    - Use the active feature as the default source of truth
    - If the user names a different feature and it is `planned`, PRD creation may proceed without activating that feature
-   - If the user names a different feature and it is `paused` or `completed`, stop and tell the user rule 3 does not run on that feature state
+   - If the user names a different feature and it is `paused`, `completed`, or `archived`, stop and tell the user rule 3 does not run on that feature state
    - Only require the feature-change workflow when the user wants a different feature to become the active working feature
 
 2. **Read the Scope**

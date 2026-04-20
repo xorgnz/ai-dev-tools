@@ -1,6 +1,6 @@
 ---
-version: 1.2.1
-timestamp: 2026-04-17 09:23
+version: 1.2.2
+timestamp: 2026-04-19 00:00
 ---
 # Rule: Technology Stack Selection and Documentation
 
@@ -14,7 +14,7 @@ timestamp: 2026-04-17 09:23
 1. Read `/ai-work/00-feature-status.md`
 2. Use the active feature by default
 3. If the user names a different feature and it is `planned`, tech-stack work may proceed without activating that feature
-4. If the user names a different feature and it is `paused` or `completed`, stop and tell the user rule 4 does not run on that feature state
+4. If the user names a different feature and it is `paused`, `completed`, or `archived`, stop and tell the user rule 4 does not run on that feature state
 5. Review the selected feature PRD
 6. If `/ai-work/00-master-techstack.md` exists, treat it as the application-wide technology source of truth and compare needs against it
 7. Identify only the technology decision points that actually matter

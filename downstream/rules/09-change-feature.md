@@ -1,8 +1,8 @@
 ---
-version: 1.5.1
-timestamp: 2026-04-05 18:56
+version: 1.7.0
+timestamp: 2026-04-19 00:00
 ---
-# Rule: Switch, Activate, Pause, or Close a Feature
+# Rule: Switch, Activate, Pause, Close, or Archive a Feature
 
 ## Source of Truth
 
@@ -11,12 +11,15 @@ Use `/ai-work/00-feature-status.md` as the authoritative record for:
 - the current active feature
 - feature status values
 
+Use `/ai-work/archive/` as the historical location for archived feature planning documents.
+
 Allowed status values:
 
 - `planned`
 - `active`
 - `paused`
 - `completed`
+- `archived`
 
 Also follow the shared feature-state contract in `/ai-work/00-feature-status.md`.
 
@@ -25,7 +28,8 @@ Also follow the shared feature-state contract in `/ai-work/00-feature-status.md`
 This rule does **not** independently create new features.
 
 - Feature creation belongs to rule `01-create-feature-tag.md`
-- This rule handles working-state changes: `switch`, `activate`, and `close`
+- This rule handles feature-state changes: `switch`, `activate`, `close`, and `archive`
+- Archiving is a state change that also moves the archived feature's planning documents
 - Do not offer standalone `pause` as a primary workflow action; use `switch` to leave a feature paused, or `close` to end active work without selecting a replacement
 - If the user says `create and activate`, treat that as a convenience flow:
   1. invoke rule 1 to create the feature tag and feature entry
@@ -36,8 +40,10 @@ This rule does **not** independently create new features.
 1. Only one feature may be `active` at a time
 2. `paused` means previously active, unfinished, and resumable
 3. `planned` means defined but not yet started as the active working feature
-4. Completed features are read-only by default
+4. Completed and archived features are read-only by default
 5. Closing a feature should mark it `completed` and clear it as the active feature
+6. Archiving a feature should mark it `archived`, clear it as the active feature, and move its feature-scoped planning documents to `/ai-work/archive/`
+7. Global planning records such as `/ai-work/00-feature-status.md` and `/ai-work/00-master-techstack.md` must remain in `/ai-work/`
 
 ## Process
 
@@ -47,7 +53,7 @@ This rule does **not** independently create new features.
 
 1. Read `/ai-work/00-feature-status.md`
 2. Identify the requested feature
-3. Confirm the feature already exists and is not `completed`
+3. Confirm the feature already exists and is not `completed` or `archived`
 4. If another feature is active, mark that feature `paused`
 5. Update `/ai-work/00-feature-status.md` so the selected feature is the only active one
 
@@ -76,16 +82,36 @@ Use this when the user explicitly asks to close the feature.
 4. Record the completion date
 5. Clear it as the active feature if it was active
 
+#### Process for Archiving a Feature
+
+Use this when the user explicitly asks to archive a feature.
+
+1. Read `/ai-work/00-feature-status.md`
+2. Confirm which feature is being archived
+3. Confirm the feature exists and is not already `archived`
+4. Identify existing feature-scoped planning documents matching `/ai-work/{feature-tag}-*.md`
+   - This includes expected files such as `/ai-work/{feature-tag}-scope.md`, `/ai-work/{feature-tag}-prd.md`, and `/ai-work/{feature-tag}-tasks.md`
+   - Also include additional feature-scoped planning notes or supporting documents that use the same `{feature-tag}-*.md` naming pattern
+   - Do not include global files such as `/ai-work/00-feature-status.md` or `/ai-work/00-master-techstack.md`
+5. Ensure `/ai-work/archive/` exists
+6. If an archive destination already exists for any file, stop before changing status or moving files and ask the user how to resolve the conflict
+7. Mark the feature as `archived`
+8. Record the archive date
+9. Clear it as the active feature if it was active
+10. Move the identified feature-scoped planning documents to `/ai-work/archive/`
+11. If no matching planning documents exist, report that the feature was archived and no file move was needed
+
 ### Propose
 
 1. If the user's request could reasonably mean more than one state change, do not infer
 2. Present the valid options briefly and ask the user to choose before changing feature state
 3. Explain the expected feature-state result before executing when the flow is not obvious from the request
+4. When archiving a feature, report which planning documents will be moved before changing status or moving files
 
 ### Execute and Report
 
 1. Apply the selected feature-state changes in the required order
-2. Report the previous active feature, the new active feature if any, and whether any feature was paused or completed
+2. Report the previous active feature, the new active feature if any, whether any feature was paused, completed, or archived, and which files were moved
 
 ## Output Expectations
 
@@ -95,6 +121,8 @@ When using this rule, report:
 - the new active feature, if any
 - whether a prior feature was paused
 - whether a feature was marked completed
+- whether a feature was marked archived
+- any feature-scoped planning documents moved to `/ai-work/archive/`
 
 ## Example Interaction Flow
 
@@ -129,4 +157,13 @@ User: "Close feature 02-vchannel-mgmt"
 AI: [Reads 00-feature-status.md]
 AI: [Marks 02-vchannel-mgmt completed]
 AI: "Feature `02-vchannel-mgmt` is now completed. No feature is currently active until you activate or switch to another feature."
+```
+
+```text
+User: "Archive feature 02-vchannel-mgmt"
+
+AI: [Reads 00-feature-status.md]
+AI: [Marks 02-vchannel-mgmt archived]
+AI: [Moves 02-vchannel-mgmt planning documents to ai-work/archive/]
+AI: "Feature `02-vchannel-mgmt` is now archived. Archived `02-vchannel-mgmt` planning documents to `ai-work/archive/`."
 ```

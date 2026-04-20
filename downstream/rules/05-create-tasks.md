@@ -1,6 +1,6 @@
 ---
-version: 1.4.1
-timestamp: 2026-04-13 00:00
+version: 1.4.2
+timestamp: 2026-04-19 00:00
 ---
 # Rule: Generating a Task List from User Requirements
 
@@ -8,7 +8,7 @@ timestamp: 2026-04-13 00:00
 
 - A feature tag must exist
 - `/ai-work/00-feature-status.md` must identify the feature as `active` or an explicitly selected `planned` feature
-- The feature must not be marked `paused` or `completed`
+- The feature must not be marked `paused`, `completed`, or `archived`
 - A PRD must exist at `/ai-work/{feature-tag}-prd.md`
 - The master tech stack must exist at `/ai-work/00-master-techstack.md`
 
@@ -23,7 +23,7 @@ timestamp: 2026-04-13 00:00
 1. Read `/ai-work/00-feature-status.md`
 2. Use the active feature by default
 3. If the user names a different feature and it is `planned`, task generation may proceed without activating that feature
-4. If the user names a different feature and it is `paused` or `completed`, stop and tell the user rule 5 does not run on that feature state
+4. If the user names a different feature and it is `paused`, `completed`, or `archived`, stop and tell the user rule 5 does not run on that feature state
 5. Only require the feature-change workflow when the user wants a different feature to become the active working feature
 6. Analyze the PRD and master tech stack
    - Treat the PRD as the implementation-facing boundary and requirements document

@@ -1,6 +1,6 @@
 ---
-version: 1.2.3
-timestamp: 2026-04-17 09:22
+version: 1.2.4
+timestamp: 2026-04-19 00:00
 ---
 # Rule: Creating a Feature Tag
 
@@ -35,7 +35,7 @@ Examples:
 
 2. **Determine the Next Sequence Number**
    - Review existing feature-tagged files in `/ai-work`
-   - Use the next available number based on all known features, including paused and completed ones
+   - Use the next available number based on all known features, including paused, completed, and archived ones
 
 3. **Create the Identifier**
    - Base it on the user's request
