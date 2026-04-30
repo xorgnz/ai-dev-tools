@@ -23,7 +23,9 @@ This `Header` section is source-only metadata and must not be copied into downst
 - If a token matches both a reserved rule argument and a possible feature alias, task label, or free-form description, prefer the reserved rule argument unless the user explicitly identifies the other target, for example with `feature <tag>`.
 - Shortcut workflow phrases documented in `ai-rules/` may also be used directly. For example, `Run the 6-7-8 subtask flow for task 3` refers to the workflow defined in `@ai-rules/00-subtask-flow-6-7-8.md`.
 - A project may have `ai-work/00-project-overview.md` as an overview document. If this document exists, consult it at the beginning of the session and whenever the user directs that behavior.
+- A project may have `ai-work/00-architecture.md` as an architecture record. If this document exists, consult it at the beginning of the session and whenever the user directs that behavior.
 - Do not automatically consult `ai-work/00-project-overview.md` later in an already-started session merely because you are consulting guidelines again.
+- Do not automatically consult `ai-work/00-architecture.md` later in an already-started session merely because you are consulting guidelines again.
 
 ## Approval Style
 

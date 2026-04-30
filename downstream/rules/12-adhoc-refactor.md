@@ -1,5 +1,5 @@
 ---
-version: 1.0.0
+version: 1.1.0
 timestamp: 2026-04-30 00:00
 ---
 # Rule: Ad Hoc Refactoring and Tidying
@@ -26,6 +26,7 @@ Do not use this rule to start new feature work or broad architectural rewrites.
 ### Inspect
 
 1. Inspect the codebase to identify a small number of plausible tidying or refactoring tasks
+   - If `/ai-work/00-architecture.md` exists, read it first and use it to judge whether code structure aligns with the intended architecture
 2. Prefer candidates that are:
    - small enough to complete in one focused pass
    - low risk
@@ -53,18 +54,19 @@ Do not use this rule to start new feature work or broad architectural rewrites.
 9. Keep the implementation narrowly scoped to the selected change
 10. Validate the change appropriately for its risk and scope
 11. Do not silently expand into neighboring cleanup unless the user approves that added scope
+12. If the selected refactor materially clarifies or changes architectural boundaries, update `/ai-work/00-architecture.md` as part of the same work
 
 ### Review Handoff
 
-12. When implementation is done, tell the user the refactoring task is complete
-13. Ask the user to review the code before committing
-14. Do not proceed to commit until the user has had that review handoff
+13. When implementation is done, tell the user the refactoring task is complete
+14. Ask the user to review the code before committing
+15. Do not proceed to commit until the user has had that review handoff
 
 ### Commit
 
-15. After the review handoff, use rule `08-prepare-commit.md` to prepare the commit
-16. Default to a `tidy` commit unless the actual diff clearly fits a different rule-8 prefix better
-17. Follow rule 8's normal scope inspection and approval behavior before committing
+16. After the review handoff, use rule `08-prepare-commit.md` to prepare the commit
+17. Default to a `tidy` commit unless the actual diff clearly fits a different rule-8 prefix better
+18. Follow rule 8's normal scope inspection and approval behavior before committing
 
 ## Candidate Selection Guidance
 
