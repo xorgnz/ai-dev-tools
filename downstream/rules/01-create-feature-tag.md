@@ -1,6 +1,6 @@
 ---
-version: 1.4.0
-timestamp: 2026-04-19 00:00
+version: 1.5.0
+timestamp: 2026-04-30 00:00
 ---
 # Rule: Creating a Feature Tag
 
@@ -19,7 +19,7 @@ This project supports only one active feature at a time.
 A normal feature tag consists of two parts:
 
 - **Sequence Number:** 2 digits, such as `01`, `02`, `15`
-- **Identifier:** Up to 16 characters, lowercase with hyphens
+- **Identifier:** Up to 24 characters, lowercase with hyphens
 
 **Format:** `{NN}-{identifier}`
 
@@ -71,17 +71,18 @@ Examples:
 
 ### Good Identifiers
 
-- `user-auth-system` (14 chars, clear purpose)
+- `user-auth-system` (16 chars, clear purpose)
 - `payment-gateway` (15 chars, specific feature)
 - `admin-dashboard` (15 chars, clear scope)
 - `file-upload` (11 chars, simple and clear)
+- `account-recovery-flow` (21 chars, still concise and specific)
 
 ### Poor Identifiers
 
 - `new-feature` (too vague)
 - `update-system` (not descriptive)
 - `fix-bugs` (too broad)
-- `very-long-identifier-name` (exceeds 16 characters)
+- `very-long-identifier-name` (25 chars, exceeds 24 characters)
 
 ## Usage Throughout Workflow
 
