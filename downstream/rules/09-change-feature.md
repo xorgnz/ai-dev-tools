@@ -1,6 +1,6 @@
 ---
-version: 1.9.0
-timestamp: 2026-04-19 00:00
+version: 1.10.0
+timestamp: 2026-05-02 00:00
 ---
 # Rule: Switch, Activate, Pause, Close, or Archive a Feature
 
@@ -42,7 +42,7 @@ This rule does **not** independently create new features.
 1. Only one feature may be `active` at a time
 2. `future` means tagged as `fNN-{identifier}`, optional to pursue, and not ready for normal planning or execution
 3. `paused` means previously active, unfinished, and resumable
-4. `planned` means defined but not yet started as the active working feature
+4. `planned` means normal queued work that is defined but not yet started
 5. Completed and archived features are read-only by default
 6. Closing a feature should mark it `completed` and clear it as the active feature
 7. Archiving a feature should mark it `archived`, clear it as the active feature, and move its feature-scoped planning documents to `/ai-work/archive/`
