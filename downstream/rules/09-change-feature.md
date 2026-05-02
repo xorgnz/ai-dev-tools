@@ -1,5 +1,5 @@
 ---
-version: 1.10.0
+version: 1.11.0
 timestamp: 2026-05-02 00:00
 ---
 # Rule: Switch, Activate, Pause, Close, or Archive a Feature
@@ -23,6 +23,19 @@ Allowed status values:
 - `archived`
 
 Also follow the shared feature-state contract in `/ai-work/00-feature-status.md`.
+
+When maintaining the feature list in `/ai-work/00-feature-status.md`, use colored spot emojis to make feature states easy to scan.
+
+Suggested markers:
+
+- `planned` -> `🟡`
+- `future` -> `🟣`
+- `active` -> `🟠`
+- `paused` -> `🔴`
+- `completed` -> `🟢`
+- `archived` -> `🔵`
+
+Approximate colors are acceptable. Keep the meaning consistent within the file.
 
 ## Scope of This Rule
 

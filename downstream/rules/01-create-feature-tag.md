@@ -1,5 +1,5 @@
 ---
-version: 1.6.0
+version: 1.7.0
 timestamp: 2026-05-02 00:00
 ---
 # Rule: Creating a Feature Tag
@@ -62,6 +62,7 @@ Examples:
    - After approval, add the feature to `/ai-work/00-feature-status.md`
    - Mark normal features as `planned`
    - Mark explicitly requested future features as `future`
+   - Use the status emoji convention defined for `/ai-work/00-feature-status.md` so the new entry is visually consistent with the rest of the feature list
    - Activation happens through the feature-change rule
 
 ## Identifier Guidelines
