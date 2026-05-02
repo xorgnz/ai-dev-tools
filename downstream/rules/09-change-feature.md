@@ -1,5 +1,5 @@
 ---
-version: 1.11.0
+version: 1.12.0
 timestamp: 2026-05-02 00:00
 ---
 # Rule: Switch, Activate, Pause, Close, or Archive a Feature
@@ -36,6 +36,13 @@ Suggested markers:
 - `archived` -> `🔵`
 
 Approximate colors are acceptable. Keep the meaning consistent within the file.
+
+Keep the feature list in `/ai-work/00-feature-status.md` sorted in this order:
+
+1. Normal numeric feature tags first, sorted by feature tag
+2. Future feature tags last, sorted by feature tag
+
+Do not reorder entries by status. The stable ordering should come from the tag groups above.
 
 ## Scope of This Rule
 
@@ -143,7 +150,8 @@ Use this when the user explicitly asks to archive a feature.
 ### Execute and Report
 
 1. Apply the selected feature-state changes in the required order
-2. Report the previous active feature, the new active feature if any, whether any feature was paused, promoted, completed, or archived, and which files were moved or renamed
+2. Re-sort `/ai-work/00-feature-status.md` after the change so numeric feature tags remain first and future feature tags remain last
+3. Report the previous active feature, the new active feature if any, whether any feature was paused, promoted, completed, or archived, and which files were moved or renamed
 
 ## Output Expectations
 
