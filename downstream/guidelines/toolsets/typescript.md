@@ -36,6 +36,7 @@ This `Header` section is source-only metadata and must not be copied into downst
 - When a query returns a one-off aggregate or projection rather than a real domain object, keep that result shape local to the persistence or service layer unless it is reused meaningfully elsewhere.
 - Keep names aligned across layers unless there is a real boundary reason to translate them.
 - Prefer test builders, fixtures, or named helpers over repeating large ad hoc object literals across tests.
+- Use explicit suffixes when they clarify role: prefer \*DAO` for persistence boundaries, `*Service` for orchestration, `*Fields` for plain entity field-value shapes, and `*ViewModel` for UI-facing projection types.`
 
 ## JavaScript Style
 
