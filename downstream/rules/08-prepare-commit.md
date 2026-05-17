@@ -1,6 +1,6 @@
 ---
-version: 1.14.0
-timestamp: 2026-05-13 00:00
+version: 1.16.0
+timestamp: 2026-05-17 00:00
 ---
 # Rule: Prepare a Commit for Approval
 
@@ -13,9 +13,8 @@ The AI must not commit automatically when using this rule unless the user explic
 - Step 2 selects the commit prefix, determines the commit mode, and validates the candidate context into a selected context.
 - Step 3 prepares the tag from the selected context, selected prefix, and commit mode.
 - Step 4 builds the full commit message from the prefix, tag, and scoped diff.
-- Step 5 decides whether to ignore the change for stakeholder tracking, add a new bullet to the stakeholder change list, or revise an existing bullet.
-- Step 6 confirms the exact message, file scope, and stakeholder change-list outcome with the user.
-- Step 7 applies any approved stakeholder change-list update, creates the commit, and reports the result.
+- Step 5 confirms the exact message and file scope with the user.
+- Step 6 creates the commit and reports the result.
 
 ## Step 0 - Parse invocation
 
@@ -220,75 +219,22 @@ Construct the full message from the selected prefix, the Step 3 tag, and a descr
 - If multiple related changes have accumulated since the last commit, make the description reflect the combined result at the chosen scope.
 - Keep the description concise and specific.
 
-## Step 5 - Stakeholder change list handling
-
-Decide whether the commit should be ignored for stakeholder change tracking, recorded as a new markdown bullet, or folded into a prior bullet in `/changes/changelog.md`.
-
-### Change list file contract
-
-- Use the repository-root path `/changes/changelog.md`.
-- Treat the file as a markdown bullet list for stakeholder-facing change notes.
-- Use one top-level bullet per entry.
-- If `/changes/` does not exist, create it.
-- If `/changes/changelog.md` does not exist, create it as an empty file or with the first approved bullet entry.
-- Do not use JSON, commit ids, or machine-oriented metadata in this file.
-
-### Outcome choices
-
-Choose exactly one outcome for each commit:
-
-1. `ignore`
-   - Use this when the scoped diff is not worth recording for stakeholders.
-2. `add`
-   - Use this when the commit should create a new stakeholder-facing bullet.
-3. `revise`
-   - Use this when updating a prior bullet is a better representation than adding another one, for example when the current commit materially refines, completes, or clarifies the same stakeholder-facing change already listed.
-
-### Inclusion rules
-
-- Record a change only when the scoped diff represents work that project stakeholders are likely to care about at deploy time.
-- Ignore clearly administrative or agent-facing work such as:
-  - rule or guideline maintenance
-  - planning or board/status updates
-  - AI workflow or prompt-file updates
-  - repository-only housekeeping with no meaningful product or operational effect for stakeholders
-- Do not record an ignored change unless the user explicitly asks for an exception.
-
-### Change message rules
-
-- When the outcome is `add` or `revise`, write the bullet text for non-technical project stakeholders first, while keeping concrete product or operational detail where practical.
-- Describe what changed, where it matters, and any important user-visible or operational effect without falling back to vague engineering shorthand.
-- Do not simply copy the commit description. Expand it into stakeholder-readable language when the commit message is too terse to stand alone.
-- Keep the entry to one concise sentence unless two short sentences are clearly needed.
-- Do not prefix every entry mechanically with feature tags or task ids.
-- Mention feature tags, feature names, task ids, or task wording in the text when they are useful for clarity, traceability, or release communication.
-- When the outcome is `revise`, preserve the intent of the earlier bullet while updating it to reflect the newer combined state more accurately.
-
-## Step 6 - Confirm with user
+## Step 5 - Confirm with user
 
 1. Present the proposed message and file list.
-2. Present the stakeholder change-list outcome:
-   - `ignore`, with a brief reason
-   - `add`, with the proposed bullet text
-   - `revise`, with the target prior bullet and the proposed replacement text
-3. Ask `Approve this? Y/N.` unless the user already provided preapproval in the same command.
-4. The approval question must clearly bind to that exact message, that exact scoped file set, and the stated stakeholder change-list outcome.
-5. If the user's rule invocation already includes `approve` or `approved`, treat that as approval for the proposed task-scoped, tracked-feature-scoped, or repo-scoped commit and its stated stakeholder change-list outcome, unless scope is still ambiguous.
+2. Ask `Approve this? Y/N.` unless the user already provided preapproval in the same command.
+3. The approval question must clearly bind to that exact message and that exact scoped file set.
+4. If the user's rule invocation already includes `approve` or `approved`, treat that as approval for the proposed task-scoped, tracked-feature-scoped, or repo-scoped commit unless scope is still ambiguous.
 
-## Step 7 - Update change list, create commit, and report
+## Step 6 - Create commit and report
 
 1. Still inspect the selected context and changed files first.
-2. If the diff is clearly scoped to the selected task, tracked feature, or repo-scoped support change, continue with the approved message, file scope, and stakeholder change-list outcome without asking a second approval question.
+2. If the diff is clearly scoped to the selected task, tracked feature, or repo-scoped support change, continue with the approved message and file scope without asking a second approval question.
 3. If the diff is ambiguous, spans multiple tasks, or includes unrelated work, stop and ask for clarification instead of using preapproval blindly.
-4. If the approved outcome is `add`, append the approved bullet to `/changes/changelog.md`.
-5. If the approved outcome is `revise`, update the approved existing bullet in `/changes/changelog.md` with the approved replacement text.
-6. If the approved outcome is `ignore`, do not modify `/changes/changelog.md`.
-7. When the approved outcome is `add` or `revise`, treat `/changes/changelog.md` as part of the approved commit scope so that the change-list update is included in the commit.
-8. Create the commit after any required change-list update is written.
-9. After commit creation, report the commit message, final commit id, change-list path when applicable, and resulting repository state.
-10. If no change-list entry was written or updated, report that clearly alongside the commit result.
+4. Create the commit.
+5. After commit creation, report the commit message, final commit id, and resulting repository state.
 
-Step 7 command sequencing rules:
+Step 6 command sequencing rules:
 
 - Do not rely on shell chaining semantics to serialize Git commit workflow steps across platforms
 - Do not issue `git add`, `git commit`, or `git status` simultaneously through parallel tool calls
