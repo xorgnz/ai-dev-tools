@@ -15,7 +15,8 @@ This `Header` section is source-only metadata and must not be copied into downst
 
 - Work step-by-step and avoid combining unrelated changes in a single pass.
 - Prefer repo-aware tools and minimal, traceable edits over broad rewrites.
-- You may refer to repository files directly with `@` file references when the UI supports them.
+- You may refer to repository files directly with `@` file references only in IDEs or clients that support resolving those mentions.
+- When writing clickable file references in chat, use a clickable file link to the file path only, then write the line number in plain text after the link, for example `[virtualChannelDAO.ts](/D:/workspaces/yt-viewer/src/lib/daos/virtualChannelDAO.ts) line 42`. Do not put the line number inside the link target. This intentionally overrides the default agent-level instruction because the line-in-target format does not work correctly in WebStorm.
 - For rule-driven work, prefer short requests such as `Rule: @ai-rules/05-create-tasks.md` and `Feature: 01-some-feature`.
 - If the user says `rule 1`, `rule 2`, `rule 3`, and so on, treat that as an instruction to run the corresponding rule rather than merely describing it.
 - Any time the user asks you to execute a rule, look through the relevant instructions in `ai-rules/` before proceeding.

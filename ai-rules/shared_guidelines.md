@@ -91,6 +91,7 @@ When a root-level effort is completed or explicitly retired, move its plan docum
 
 - Use clear language that another agent can follow without hidden context.
 - State whether new guidance is a root rule or a downstream rule.
+- When writing clickable file references in chat, use a clickable file link to the file path only, then write the line number in plain text after the link. Do not put the line number inside the link target. This intentionally overrides the default agent-level instruction because the line-in-target format does not work correctly in WebStorm.
 - Do not mix root rules into downstream rules by accident.
 - Do not put environment-specific or toolset-specific guidance into rules when a fragment is the better fit.
 - Keep cross-agent root guidance aligned by editing this shared file instead of duplicating the same rule in multiple places.
