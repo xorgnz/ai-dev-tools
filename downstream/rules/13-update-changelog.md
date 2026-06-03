@@ -1,6 +1,6 @@
 ---
-version: 2.2.0
-timestamp: 2026-05-17 00:00
+version: 2.3.0
+timestamp: 2026-06-02 00:00
 ---
 # Rule: Summarize Recent Changes Into the Changelog
 
@@ -116,6 +116,8 @@ When the outcome is `add` or `revise`, choose exactly one changelog category for
 - Use commit subjects, scoped diffs, and surrounding commit context to compare committed work against existing changelog bullets.
 - Allow one changelog bullet to represent multiple closely related commits when that gives the clearest stakeholder-facing summary.
 - Look for opportunities to merge discontiguous but related commits into one changelog bullet when they clearly describe the same stakeholder-facing change, even if unrelated commits appear in between.
+- If a related commit cluster clearly represents one large feature with multiple distinct stakeholder-visible elements, do not collapse it into one vague sentence when that would hide the important shape of the feature.
+- For those larger feature clusters, prefer a grouped changelog representation that names the feature and then calls out its key elements separately.
 - A later bug fix, polish pass, follow-up tweak, or completion step may justify revising an earlier bullet instead of adding another one when the combined story is clearer for stakeholders.
 - Allow a `revise` action to move an existing bullet from one category to another when the current category no longer matches the stronger release story.
 - Do not require feature tags or task ids in every bullet, but use them as supporting evidence when they are present.
@@ -137,6 +139,18 @@ When the outcome is `add` or `revise`, choose exactly one changelog category for
 - Do not prefix every entry mechanically with feature tags or task ids.
 - Mention feature tags, feature names, task ids, or task wording in the text when they are useful for clarity, traceability, or release communication.
 - When the outcome is `revise`, preserve the intent of the earlier bullet while updating it to reflect the newer combined state more accurately.
+
+### Major Feature Blocks
+
+- When one commit cluster represents a major new feature or a major feature expansion, prefer a lead bullet with nested sub-bullets over one catch-all sentence.
+- A major feature block should usually be used when the grouped work includes multiple distinct stakeholder-visible capabilities, workflows, or surfaces that would be obscured by a single summary line.
+- Format the block as:
+  - one lead bullet that names the feature in stakeholder-facing terms, using bold text like `**Major new feature:** ...`
+  - followed by 2 to 5 nested sub-bullets that call out the key elements, flows, or capabilities
+- Keep each bullet concise and concrete. Do not turn the block into implementation notes.
+- Keep all bullets in the block under the same changelog category.
+- Put the `changelog-commits` marker on the lead bullet line for the block. Do not repeat the same marker on each sub-bullet unless the user explicitly wants that format.
+- Treat a feature block with the same covered commit set as one grouped changelog unit when considering later `revise` actions.
 
 ## Process
 
@@ -166,25 +180,28 @@ When the outcome is `add` or `revise`, choose exactly one changelog category for
    - the relevant commit or commit cluster, including discontiguous related commits when applicable
    - the reason for the action
    - the proposed category
-   - the proposed bullet text
+   - the proposed bullet text, or the full proposed feature block when using a major feature block
    - the resulting covered commit ids
-12. If any mapping remains ambiguous, say so clearly instead of forcing a cleanup decision.
-13. Ask `Approve this? Y/N.` before modifying `/ai-work/changes/changes-input.md`, unless the user already provided preapproval in the same command.
-14. The approval question must clearly bind to the exact proposed changelog actions.
+12. When proposing a major feature block, label it explicitly as a major feature using bold lead text and list the key elements as sub-bullets instead of summarizing the entire cluster in one sentence.
+13. If any mapping remains ambiguous, say so clearly instead of forcing a cleanup decision.
+14. Ask `Approve this? Y/N.` before modifying `/ai-work/changes/changes-input.md`, unless the user already provided preapproval in the same command.
+15. The approval question must clearly bind to the exact proposed changelog actions.
 
 ### Execute
 
-15. Apply only the approved changelog edits.
-16. If the approved outcome is `add`, add the approved bullet under the approved category heading in `/ai-work/changes/changes-input.md` and append the approved `changelog-commits` marker on that line.
-17. If the approved outcome is `revise`, update the approved existing bullet with the approved replacement text, move it to the approved category if needed, and update its `changelog-commits` marker to include the full approved covered set.
-18. If the approved outcome is `ignore`, do not modify `/ai-work/changes/changes-input.md`.
-19. Preserve the categorized changelog structure unless the user explicitly asks for broader reformatting.
-20. Do not rewrite unaffected bullets for style alone.
+16. Apply only the approved changelog edits.
+17. If the approved outcome is `add`, add the approved bullet under the approved category heading in `/ai-work/changes/changes-input.md` and append the approved `changelog-commits` marker on that line.
+18. If the approved outcome is `add` and the approved format is a major feature block, add the full approved bullet-and-sub-bullet block under the approved category heading and append the approved `changelog-commits` marker on the lead bullet line.
+19. If the approved outcome is `revise`, update the approved existing bullet with the approved replacement text, move it to the approved category if needed, and update its `changelog-commits` marker to include the full approved covered set.
+20. If the approved outcome is `revise` and the approved format is a major feature block, update the full approved block consistently, including category placement and the covered commit marker on the lead bullet line.
+21. If the approved outcome is `ignore`, do not modify `/ai-work/changes/changes-input.md`.
+22. Preserve the categorized changelog structure unless the user explicitly asks for broader reformatting.
+23. Do not rewrite unaffected bullets for style alone.
 
 ### Report
 
-21. Report the commit range that was reviewed.
-22. Report how many bullets were added, revised, or removed.
-23. Report which commits were newly marked as covered.
-24. Report whether any ambiguous or unresolved review items remain.
-25. Report whether `/ai-work/changes/changes-input.md` was updated.
+24. Report the commit range that was reviewed.
+25. Report how many bullets were added, revised, or removed.
+26. Report which commits were newly marked as covered.
+27. Report whether any ambiguous or unresolved review items remain.
+28. Report whether `/ai-work/changes/changes-input.md` was updated.
