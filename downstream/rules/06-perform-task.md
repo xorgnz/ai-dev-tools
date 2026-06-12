@@ -1,6 +1,6 @@
 ---
-version: 1.5.0
-timestamp: 2026-04-30 00:00
+version: 1.6.0
+timestamp: 2026-06-12 00:00
 ---
 # Rule: Performing a Task for the Active Feature
 
@@ -56,6 +56,15 @@ Use the active feature from `/ai-work/00-feature-status.md` as the default and e
 - Before implementation, read `/ai-work/00-master-techstack.md` when it exists and apply any relevant shared technology decisions alongside the PRD and task list
 - Before implementation, if `/ai-work/00-architecture.md` exists, read it once as part of the initial task context
 - After that initial read, do not keep re-reading `/ai-work/00-architecture.md` during normal task execution unless the user explicitly asks for that or the flow of work clearly requires revisiting the document
+- Before writing code for a non-trivial change, perform an architectural placement check
+  - Identify the narrowest existing module, class, component, service, package, or layer that should own the behavior
+  - Prefer placing behavior where the responsibility naturally belongs rather than where inputs happen to be available
+  - Consider whether the cleanest implementation is to:
+    - extend an existing boundary that already owns the concern
+    - extract behavior into a new helper, service, module, hook, or component
+    - keep the work in a higher-level coordinator because orchestration is genuinely that module's job
+  - Choose the option that best preserves cohesion, encapsulation, and dependency direction
+  - If the obvious implementation location is architecturally wrong, prefer a small structural improvement over adding more logic to the wrong layer
 - If implementation materially changes architecture, clarifies a structural decision, or reveals that the architecture record is stale, update `/ai-work/00-architecture.md` as part of the task work
 
 ## Progress Tracking
@@ -69,11 +78,19 @@ As each task or sub-task is completed:
 
 ## General Working Principles
 
-1. Prefer editing existing files over creating new ones unless creation is required
+1. Prefer editing existing files when they already own the responsibility; do not force new behavior into an existing file when doing so weakens cohesion or turns it into a grab-bag module
 2. Use the PRD as the implementation-facing feature document, the master tech stack as the shared technology baseline when it exists, and the architecture document as the shared structural baseline when it exists
-3. Run validation as appropriate using the testing rule
-4. Ask clarifying questions if task requirements are ambiguous
-5. Do not expand scope without approval
-6. Do not run long-running application servers unless explicitly asked
-7. Follow `AGENTS.md` for command, style, and environment conventions
-
+3. Keep domain logic close to domain-owned modules, persistence concerns close to persistence boundaries, presentation logic close to presentation layers, and orchestration in coordinating layers
+4. Treat the following as architectural warning signs that should trigger a placement rethink or a small extraction:
+   - adding more unrelated logic to a high-level god class, god component, controller, page, or manager
+   - placing logic at the call site because it is convenient rather than because it belongs there
+   - mixing orchestration, business rules, validation, persistence, transport, and presentation concerns in one unit
+   - leaking low-level implementation details across abstraction boundaries
+   - growing generic utility files instead of using clearer domain ownership
+   - adding mode flags, branching, or duplicate logic where a better boundary would simplify the design
+5. When a file, class, or component is already overloaded, treat "add one more thing here" as a code smell and consider extraction or a better ownership boundary
+6. Run validation as appropriate using the testing rule
+7. Ask clarifying questions if task requirements are ambiguous
+8. Do not expand scope without approval
+9. Do not run long-running application servers unless explicitly asked
+10. Follow `AGENTS.md` for command, style, and environment conventions

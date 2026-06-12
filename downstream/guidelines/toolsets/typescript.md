@@ -26,6 +26,7 @@ This `Header` section is source-only metadata and must not be copied into downst
 
 - Prefer explicit types where they materially improve readability or catch edge cases, especially for exported functions, public interfaces, and complex data shapes.
 - Avoid introducing broad `any` usage unless the surrounding code already relies on it and tightening types is outside the requested scope.
+- Prefer `enum` declarations over string union types when modeling a closed set of named options.
 - Do not spread related behavior across ad hoc exported helpers unless the code is genuinely tiny, stateless, and local in scope.
 - Keep helper types readable; avoid type-level cleverness unless the existing codebase already uses that style.
 - Avoid anonymous object types wherever practical. Prefer named types for reusable payloads, public contracts, cross-module boundaries, and any non-trivial data shape.

@@ -1,6 +1,6 @@
 ---
-version: 1.8.0
-timestamp: 2026-05-02 00:00
+version: 1.9.0
+timestamp: 2026-06-12 00:00
 ---
 # Rule: Generating a Task List from User Requirements
 
@@ -30,10 +30,29 @@ timestamp: 2026-05-02 00:00
 8. Analyze the PRD and master tech stack
    - Treat the PRD as the implementation-facing boundary and requirements document
    - If `/ai-work/00-architecture.md` exists, read it and use it to shape task boundaries, sequencing, and integration expectations
-9. Generate the task list in one pass, using parent tasks and sub-tasks only where they improve execution clarity
-10. Identify relevant files and tests when that context will materially help implementation
-11. Include architecture-related tasks when the feature requires structural work, boundary changes, or updates to the architectural record
-12. Save the completed task list to `/ai-work/{feature-tag}-tasks.md`
+9. Perform an architectural analysis before writing tasks
+   - Identify which existing modules, layers, services, components, or packages should own the new behavior
+   - For non-trivial features, consider whether the work is best handled by:
+     - extending an existing boundary that already owns the responsibility
+     - extracting or introducing a new boundary
+     - coordinating behavior across multiple boundaries
+   - Prefer task breakdowns that preserve cohesion, encapsulation, and clear dependency direction rather than merely reflecting the easiest implementation order
+   - Watch for likely architectural failure modes such as:
+     - adding more logic to a high-level god class, god component, god service, page, or controller
+     - placing logic where inputs are convenient instead of where responsibility belongs
+     - mixing orchestration, business rules, persistence, transport, and presentation concerns in one place
+     - leaking low-level details across abstraction boundaries
+     - smearing one feature across many layers without a clear owner
+     - extending generic utility files when a domain-owned module would be clearer
+   - If the likely implementation requires structural improvement for the feature to land cleanly, include that structural work explicitly in the tasks rather than leaving it implicit
+10. Generate the task list in one pass, using parent tasks and sub-tasks only where they improve execution clarity
+11. Use tasks to set up good implementation decisions, not just to describe output behavior
+   - Separate architectural preparation, implementation, and validation work when that separation will help rule 6 execute cleanly
+   - When structural work is needed, prefer a task order that establishes boundaries before feature logic is added on top of them
+   - Call out the intended ownership boundary in task wording when doing so will materially reduce the chance of dumping logic into a high-level coordinator
+12. Identify relevant files and tests when that context will materially help implementation
+13. Include architecture-related tasks when the feature requires structural work, boundary changes, extraction from an overloaded module, or updates to the architectural record
+14. Save the completed task list to `/ai-work/{feature-tag}-tasks.md`
 
 ## Output Format
 
